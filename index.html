@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Денис Волошин – фотограф | Главная</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;family=Unbounded:wght@200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <style>*{margin:0;padding:0;box-sizing:border-box;user-select:none;-webkit-tap-highlight-color:transparent}html,body{height:100%}body{background:#000;font-family:'Manrope',sans-serif;overflow:hidden;transition:background-color .35s ease;min-height:100vh}.no-scroll{overflow:hidden!important;position:fixed;width:100%;height:100%}.main-slider{cursor:pointer}.gallery-screen:not(.miniature-screen){cursor:ew-resize}.miniature-screen{cursor:default}.grid-item,.main-slider,.lightbox-overlay,.lightbox-img{cursor:pointer}.main-slider{position:fixed;top:0;left:0;width:100%;height:100%;background:#1a1a1a;transform:translateY(0);transition:transform .5s cubic-bezier(.25,.46,.45,.94),background-color .3s ease;z-index:10;overflow:hidden}.main-slider.slide-up{transform:translateY(-100%)}.slider-container{width:100%;height:100%;overflow:hidden;position:relative}.slides-wrapper{display:flex;width:100%;height:100%;transition:transform .5s cubic-bezier(.25,.46,.45,.94);will-change:transform}.slide{flex:0 0 100%;height:100%;background-size:cover;background-position:center}.logo{position:fixed;top:12px;left:10px;font-family:'Unbounded',sans-serif;font-size:16px;font-weight:700;letter-spacing:.03em;color:#fff;z-index:31;cursor:pointer;transition:opacity .2s,visibility .2s,border-bottom-color .2s,color .3s ease;border-bottom:1px dotted rgba(255,255,255,.4);line-height:1.2}.logo:hover{border-bottom-color:#fff}.logo.hidden{opacity:0;visibility:hidden;pointer-events:none;border-bottom-color:transparent}.close-info-btn,.close-miniature-btn,.lightbox-close{position:fixed;background:0 0;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;width:32px;height:32px;transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .2s,visibility .2s;color:#fff;z-index:210}.close-info-btn{top:12px;right:14px;opacity:0;visibility:hidden;pointer-events:none}.close-info-btn.visible,.close-miniature-btn.visible{opacity:1;visibility:visible;pointer-events:auto}.close-miniature-btn{top:12px;right:14px;opacity:0;visibility:hidden;pointer-events:none}.lightbox-close{position:relative;top:auto;right:auto;width:32px;height:32px}.close-info-btn:hover,.close-miniature-btn:hover,.lightbox-close:hover{transform:rotate(90deg) scale(1.1)}.close-info-btn svg,.close-miniature-btn svg,.lightbox-close svg{width:20px;height:20px;stroke:currentColor;stroke-width:2;fill:none;display:block}.scroll-arrow{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);font-size:24px;font-family:monospace;color:#fff;cursor:pointer;z-index:35;text-shadow:0 0 6px rgba(255,255,255,.3);animation:bounce 3s infinite ease-in-out;transition:color .3s ease,text-shadow .3s ease}.scroll-arrow.hidden{opacity:0;visibility:hidden;pointer-events:none}@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}.gallery-screen{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:15;opacity:0;visibility:hidden;transition:opacity .4s cubic-bezier(.23,1,.32,1),visibility 0s linear .4s,background-color .3s ease;overflow-y:auto;overflow-x:hidden}.gallery-screen.visible{opacity:1;visibility:visible;transition:opacity .4s cubic-bezier(.23,1,.32,1),visibility 0s linear 0s}.blur-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(60px);z-index:1;opacity:0;transition:opacity .4s cubic-bezier(.23,1,.32,1);pointer-events:none}.blur-bg.visible{opacity:1}.blur-bg.instant{transition:none}.blur-bg::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);pointer-events:none;z-index:1}#colorGallery .image-track,#streetColorGallery .image-track,#placesGallery .image-track,#mainGallery .image-track,#continuousSpectrumGallery .image-track{position:relative;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:2}.color-main-img{display:block;max-width:90%;max-height:70vh;width:auto;height:auto;object-fit:contain;margin:0 auto;transition:opacity .2s cubic-bezier(.2,.9,.4,1.1);opacity:1;cursor:inherit;pointer-events:auto}#bwGallery,#streetColorGallery,#placesGallery,#mainGallery,#continuousSpectrumGallery{display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;background:#000;transition:background-color .3s ease}#bwGallery .image-track,#streetColorGallery .image-track,#placesGallery .image-track,#mainGallery .image-track,#continuousSpectrumGallery .image-track{position:relative;width:auto;max-width:90%;height:auto;z-index:2;text-align:center;margin:0 auto}#bwGallery .bw-img,#streetColorGallery .street-img,#placesGallery .places-img,#mainGallery .main-img,#continuousSpectrumGallery .spectrum-img{display:block;max-width:100%;max-height:70vh;width:auto;height:auto;object-fit:contain;cursor:inherit;transition:opacity .2s cubic-bezier(.2,.9,.4,1.1);margin:0 auto;pointer-events:auto}.bw-text-wrapper{display:flex;flex-direction:column;align-items:center;width:100%}.bw-description,.bw-year{text-align:center;font-family:'Manrope',sans-serif;font-weight:200;font-size:.85rem;letter-spacing:.03em;color:rgba(255,255,255,.9);text-shadow:0 1px 3px rgba(0,0,0,.5);pointer-events:none;z-index:25;padding:0 20px;line-height:1.5;max-width:90%;width:auto;background:0 0;transition:color .3s ease,text-shadow .3s ease}.bw-description{margin-top:20px;margin-bottom:20px}.bw-year{margin:0}.main-copyright{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-family:'Manrope',sans-serif;font-size:12px;letter-spacing:.03em;color:rgba(255,255,255,.6);z-index:20;pointer-events:none;transition:color .3s ease}body.light-theme .main-copyright{color:rgba(0,0,0,.6)}.nav-buttons{position:fixed;top:50%;left:10px;transform:translateY(-50%);display:flex;flex-direction:column;align-items:flex-start;gap:0;z-index:30;transition:opacity .3s,bottom .3s;pointer-events:auto}.nav-buttons.hidden{opacity:0;visibility:hidden;pointer-events:none}.nav-item-with-submenu{position:relative;display:flex;flex-direction:column;align-items:flex-start}.nav-btn{font-family:'Manrope',sans-serif;font-size:16px;font-weight:500;letter-spacing:.03em;padding:1px 16px 1px 0;cursor:pointer;background:0 0;border:none;color:#fff;transition:transform .2s,color .3s ease;text-align:left;white-space:nowrap;display:flex;align-items:center;gap:6px}.nav-btn:hover{transform:translateX(4px)}.nav-btn .bullet{display:inline-block;width:auto;height:auto;opacity:0;transition:opacity .1s ease;order:1}.nav-btn.active .bullet{opacity:1}.nav-text{border-bottom:1px dotted transparent;transition:border-bottom-color .2s}.nav-btn.active .nav-text{border-bottom-color:rgba(255,255,255,.4)}.nav-item-with-submenu .nav-btn .bullet{opacity:1}.nav-item-with-submenu .nav-btn .bullet::before{content:">";font-family:monospace;font-size:14px;font-weight:400;color:#fff;display:inline-block;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}.submenu.open~.nav-btn .bullet::before,.nav-item-with-submenu.open .nav-btn .bullet::before{transform:rotate(90deg)}.submenu{display:flex;flex-direction:column;align-items:flex-start;margin-left:10px;margin-top:2px;max-height:0;overflow:hidden;opacity:0;transition:max-height .3s cubic-bezier(.4,0,.2,1),opacity .25s ease,margin .2s;pointer-events:none}.submenu.open{max-height:300px;opacity:1;margin-top:8px;pointer-events:auto}.submenu-btn{font-family:'Manrope',sans-serif;font-size:14px;font-weight:400;letter-spacing:.02em;padding:4px 0 4px 24px;cursor:pointer;background:0 0;border:none;color:#fff;transition:transform .2s,color .3s ease;text-align:left;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;width:auto;position:relative}.submenu-btn:hover{transform:translateX(4px);color:#ddd}.submenu-btn .bullet{display:inline-block;width:5px;height:5px;background-color:#fff;border-radius:50%;opacity:0;transition:opacity .1s ease;margin-left:6px}.submenu-btn.active .bullet{opacity:0}.submenu-btn span:first-child{border-bottom:1px dotted transparent;transition:border-bottom-color .2s}.submenu-btn.active span:first-child{border-bottom-color:rgba(255,255,255,.4)}.right-menu{position:fixed;top:50%;right:10px;transform:translateY(-50%);display:flex;flex-direction:column;align-items:flex-end;gap:0;z-index:30;transition:opacity .3s,visibility .3s;pointer-events:auto}.right-menu.hidden{opacity:0;visibility:hidden;pointer-events:none}.right-menu-item{font-family:'Manrope',sans-serif;font-size:16px;font-weight:500;letter-spacing:.03em;padding:4px 0;background:0 0;border:none;color:#fff;cursor:default;white-space:nowrap;border-bottom:1px dotted rgba(255,255,255,.4);transition:border-bottom-color .2s,color .3s ease;display:inline-flex;align-items:center;gap:6px;line-height:1.2}.right-menu-item .arrow{display:inline-block;transition:transform .3s ease;font-size:12px}.right-menu-item.clickable{cursor:pointer}.right-menu-item.clickable:hover{border-bottom-color:#fff}.right-menu-item.clickable:hover .arrow{transform:translateX(4px)}@media(max-width:1300px){.right-menu{position:fixed!important;top:auto!important;bottom:12px!important;right:10px!important;left:auto!important;transform:none!important;width:auto!important;z-index:35!important;background:0 0!important;pointer-events:auto!important}.right-menu-item{display:inline-flex!important;padding:4px 0!important;font-size:16px!important;font-weight:500!important;white-space:nowrap!important;text-align:right!important;width:auto!important;min-width:max-content!important;cursor:default!important;pointer-events:auto!important;z-index:35!important;position:relative!important;border-bottom:1px dotted rgba(255,255,255,.4)!important;background:0 0!important;line-height:1.2!important;gap:6px!important}.right-menu-item .arrow{font-size:11px!important}.right-menu-item.clickable{cursor:pointer!important}}@media(max-width:768px){.right-menu{bottom:12px!important;right:10px!important;z-index:35!important}.right-menu-item{padding:4px 0!important;font-size:16px!important;font-weight:500!important;z-index:35!important}.right-menu-item .arrow{font-size:11px!important}}.gallery-toggle{position:fixed;bottom:50px;left:50%;transform:translateX(-50%);z-index:31;background:0 0;border:none;cursor:pointer;transition:transform .2s ease,color .3s ease,opacity .2s,visibility .2s;line-height:1;padding:0;display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;backdrop-filter:blur(2px);color:#fff}.gallery-toggle svg{width:20px;height:20px;display:block;transition:color .3s ease}.gallery-toggle.hidden{opacity:0;visibility:hidden;pointer-events:none}.gallery-toggle:hover{transform:translateX(-50%) scale(1.1)}.gallery-toggle::after{content:"Галерея";position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:rgba(0,0,0,.75);backdrop-filter:blur(8px);color:#fff;font-family:'Manrope',sans-serif;font-size:12px;font-weight:500;letter-spacing:.03em;padding:6px 12px;border-radius:5px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s ease,transform .2s ease;z-index:100;border:.5px solid rgba(255,255,255,.2);text-align:center;line-height:1}.gallery-toggle:hover::after{opacity:1;transform:translateX(-50%) translateY(-2px)}.theme-toggle,.mobile-theme-button{position:fixed;top:12px;right:10px;z-index:31;background:0 0;border:none;cursor:pointer;transition:transform .2s ease,color .3s ease,opacity .2s,visibility .2s;line-height:1;padding:0;display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;backdrop-filter:blur(2px);color:#fff}.theme-toggle svg,.mobile-theme-button svg{width:20px;height:20px;display:block;transition:color .3s ease}.theme-toggle.hidden,.mobile-theme-button.hidden{opacity:0;visibility:hidden;pointer-events:none}.theme-toggle:hover,.mobile-theme-button:hover{transform:scale(1.1)}.mobile-theme-button{z-index:221}.mobile-theme-button.shifted{right:45px}.burger-btn{position:fixed;top:12px;right:10px;width:28px;height:28px;flex-direction:column;justify-content:space-between;align-items:center;cursor:pointer;z-index:220;background:0 0;border:none;padding:6px 4px;transition:opacity .2s,visibility .2s;display:none}.burger-btn span{display:block;width:20px;height:2px;background-color:#fff;border-radius:2px;transition:.25s ease}.burger-btn.active span{background-color:#fff}body.light-theme .burger-btn span{background-color:#111}body.light-theme .burger-btn.active span{background-color:#111}.burger-btn.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}.burger-btn.active span:nth-child(2){opacity:0}.burger-btn.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}.burger-btn.hidden{opacity:0;visibility:hidden;pointer-events:none}.mobile-theme-button.hidden,.burger-btn.hidden{display:none!important}@media(min-width:1301px){.mobile-theme-button,.burger-btn{display:none!important}}@media(max-width:1300px){.mobile-theme-button{display:flex!important}.burger-btn{display:flex!important}.theme-toggle{display:none!important}}body.miniature-mode .theme-toggle{display:none!important}body.miniature-mode .mobile-theme-button{display:flex!important;right:45px!important;z-index:220!important}.lightbox-top-right{position:fixed;top:12px;right:10px;display:flex;gap:.8rem;z-index:1010;background:0 0;align-items:center}.lightbox-counter{position:fixed;top:12px;left:10px;font-family:'Manrope',sans-serif;font-weight:300;font-size:18px;letter-spacing:.03em;color:#fff;background:0 0;z-index:1010;pointer-events:none;white-space:nowrap;transition:color .3s ease;line-height:32px}.lightbox-nav-fixed{position:fixed;bottom:20px;right:20px;display:flex;gap:1rem;z-index:1010;background:0 0;pointer-events:auto;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}.lightbox-overlay.visible .lightbox-nav-fixed{opacity:1;visibility:visible}@media(max-width:768px){.lightbox-top-right{top:12px;right:10px;gap:.6rem}.lightbox-counter{top:12px;left:10px;font-size:16px;line-height:28px}.close-miniature-btn,.close-info-btn{right:14px}body.miniature-mode .mobile-theme-button{right:45px!important}}body.light-theme .mobile-theme-button{color:#111}.mobile-menu-overlay{background:#2a2a2a;z-index:205}body.light-theme .mobile-menu-overlay{background:#f0f0f0}.info-modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:200;display:flex;align-items:center;justify-content:center;overflow-y:auto;padding:20px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .35s cubic-bezier(.2,.9,.4,1.1),visibility 0s linear .35s,background .3s ease}.info-modal.visible{opacity:1;visibility:visible;transition:opacity .35s cubic-bezier(.2,.9,.4,1.1),visibility 0s linear 0s}.info-modal.dark-bg{background:rgba(0,0,0,.6);backdrop-filter:blur(20px)}body.light-theme .info-modal.dark-bg{background:rgba(255,255,255,.6)}.info-modal-title{position:fixed;top:12px;left:10px;font-family:'Unbounded',sans-serif;font-size:16px;font-weight:700;letter-spacing:.03em;color:#fff;border-bottom:1px dotted rgba(255,255,255,.4);padding-bottom:2px;line-height:1.2;z-index:201;display:inline-block;transition:color .3s ease,border-bottom-color .3s ease}body.light-theme .info-modal-title{color:#111;border-bottom-color:rgba(0,0,0,.4)}.info-modal-content{max-width:800px;width:100%;margin:0 auto;background:0 0;cursor:default;opacity:0;transition:opacity .3s cubic-bezier(.2,.9,.4,1.1);will-change:opacity;padding:60px 20px 20px}.info-modal.visible .info-modal-content{opacity:1}.info-text{text-align:left;font-family:'Manrope',sans-serif;font-weight:200;font-size:1rem;letter-spacing:.02em;line-height:1.55;color:rgba(255,255,255,.92);transform:translateZ(0);backface-visibility:hidden;transition:color .3s ease}.info-text p{margin-bottom:1.5rem}.info-text .contacts{margin-top:1.8rem;font-weight:400;letter-spacing:.03em;font-size:.95rem}.info-text .social{margin-top:0;font-weight:400;letter-spacing:.03em;font-size:.95rem}.info-text a{color:rgba(255,255,255,.92)!important;text-decoration:none!important;border-bottom:1px dotted rgba(255,255,255,.5)!important;transition:border-color .2s,color .3s ease;cursor:pointer}.info-text a:hover{border-bottom-color:#fff!important;color:#fff!important}.info-location-wrapper{display:flex;flex-direction:row;justify-content:space-between;align-items:baseline;margin-top:1.8rem;width:100%;flex-wrap:wrap;gap:8px 16px}.info-location{font-family:'Manrope',sans-serif;font-weight:400;font-size:.95rem;letter-spacing:.03em;color:rgba(255,255,255,.7);transition:color .3s ease;text-align:left;font-style:italic}.info-contacts-wrapper{display:flex;flex-direction:row;justify-content:space-between;align-items:baseline;margin-top:0.5rem;width:100%;flex-wrap:wrap;gap:8px 16px}.info-contacts-left{font-family:'Manrope',sans-serif;font-weight:400;font-size:.95rem;letter-spacing:.03em;color:rgba(255,255,255,.7);transition:color .3s ease;text-align:left}.info-contacts-right{font-family:'Manrope',sans-serif;font-weight:400;font-size:.95rem;letter-spacing:.03em;color:rgba(255,255,255,.7);transition:color .3s ease;text-align:right}body.light-theme .info-contacts-left{color:rgba(0,0,0,.6)}body.light-theme .info-contacts-right{color:rgba(0,0,0,.6)}.project-gallery-link{font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:500;letter-spacing:.03em;color:#fff;border-bottom:1px dotted rgba(255,255,255,.4);padding-bottom:2px;line-height:1.2;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:color .3s ease,border-bottom-color .3s ease;text-decoration:none;background:0 0;flex-shrink:0}.project-gallery-link:hover{border-bottom-color:#fff}.project-gallery-link .arrow{display:inline-block;transition:transform .3s ease;font-size:12px}.project-gallery-link:hover .arrow{transform:translateX(4px)}body.light-theme .info-location{color:rgba(0,0,0,.6)}body.light-theme .project-gallery-link{color:#111;border-bottom-color:rgba(0,0,0,.4)}body.light-theme .project-gallery-link:hover{border-bottom-color:#000}body.light-theme .info-text{color:rgba(0,0,0,.92)}body.light-theme .info-text a{color:rgba(0,0,0,.92)!important;border-bottom-color:rgba(0,0,0,.4)!important}body.light-theme .info-text a:hover{color:#000!important;border-bottom-color:#000!important}.miniature-screen{background:#0a0a0a;overflow-y:auto;overflow-x:hidden;cursor:default;z-index:15;position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;opacity:0;visibility:hidden;transition:opacity .4s cubic-bezier(.23,1,.32,1),visibility 0s linear .4s}.miniature-screen.visible{opacity:1;visibility:visible;transition:opacity .4s cubic-bezier(.23,1,.32,1),visibility 0s linear 0s}body.light-theme .miniature-screen{background:#f5f5f5}.miniature-logo{position:fixed;top:12px;left:10px;font-family:'Unbounded',sans-serif;font-size:16px;font-weight:700;letter-spacing:.03em;color:#fff;z-index:31;border-bottom:1px dotted rgba(255,255,255,.4);line-height:1.2;padding-bottom:2px;transition:color .3s ease,border-bottom-color .3s ease;cursor:pointer}body.light-theme .miniature-logo{color:#111;border-bottom-color:rgba(0,0,0,.4)}.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding:80px 72px 100px;max-width:1600px;margin:0 auto}.grid-item{position:relative;overflow:hidden;cursor:pointer;background:0 0!important;transition:transform .3s ease;aspect-ratio:16/10}.grid-item:hover{transform:scale(1.02);z-index:5}.grid-item img{width:100%;height:100%;object-fit:cover;display:block}@media(max-width:768px){.gallery-grid{gap:8px;padding:70px 36px 90px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}body.miniature-mode .theme-toggle{display:none!important}body.miniature-mode .mobile-theme-button{display:flex!important;right:45px!important;z-index:220!important}.lightbox-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:1000;display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:opacity .25s ease;cursor:ew-resize}.lightbox-overlay.visible{visibility:visible;opacity:1}.lightbox-content{max-width:90vw;max-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;cursor:default}.lightbox-img{max-width:90vw;max-height:75vh;object-fit:contain;display:block;margin:0 auto;box-shadow:0 8px 30px rgba(0,0,0,.3);transition:opacity .2s cubic-bezier(.2,.9,.4,1.1),max-width .2s,max-height .2s;opacity:1;cursor:ew-resize}.lightbox-img.fade-out{opacity:0}html:fullscreen .lightbox-img{max-height:90vh;max-width:90vw}.lightbox-nav{background:0 0!important;border:none;color:#fff;font-size:2rem;font-weight:200;cursor:pointer;width:48px;height:48px;display:flex;align-items:center;justify-content:center;transition:transform .2s ease;font-family:monospace;line-height:1;backdrop-filter:none!important;box-shadow:none!important;border-radius:0!important}.lightbox-nav:hover{transform:scale(1.1)}.lightbox-theme-toggle,.lightbox-fullscreen-toggle,.lightbox-share-toggle{background:0 0!important;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;width:32px;height:32px;transition:transform .2s ease;color:#fff}.lightbox-theme-toggle svg,.lightbox-fullscreen-toggle svg,.lightbox-share-toggle svg{width:20px;height:20px;stroke:currentColor;stroke-width:2;fill:none;display:block}.lightbox-theme-toggle:hover,.lightbox-fullscreen-toggle:hover,.lightbox-share-toggle:hover{transform:scale(1.1)}body.light-theme .lightbox-overlay{background:#fff}body.light-theme .lightbox-nav{color:#111!important}body.light-theme .lightbox-close,body.light-theme .lightbox-theme-toggle,body.light-theme .lightbox-fullscreen-toggle,body.light-theme .lightbox-share-toggle,body.light-theme .lightbox-counter{color:#111!important}body.light-theme .lightbox-img{box-shadow:0 8px 30px rgba(0,0,0,.15)}body.light-theme .close-info-btn,body.light-theme .close-miniature-btn{color:#111!important}body.light-theme .nav-btn.active .nav-text,body.light-theme .submenu-btn.active span:first-child{border-bottom-color:rgba(0,0,0,.4)}body.light-theme .info-modal{background:rgba(255,255,255,.6)!important;backdrop-filter:blur(20px)!important}body.light-theme .info-modal .info-text,body.light-theme .info-modal .info-text p,body.light-theme .info-modal .contacts{color:#111!important}body.light-theme .info-modal .info-text a{color:#111!important;border-bottom-color:rgba(0,0,0,.4)!important}body.light-theme .info-modal .info-text a:hover{color:#000!important;border-bottom-color:#000!important}@media(min-width:1301px)and(max-width:1400px){.nav-buttons{top:auto!important;bottom:12px!important;left:10px!important;transform:none!important}.right-menu{top:auto!important;bottom:12px!important;right:10px!important;transform:none!important}}@media(max-width:1300px){.nav-buttons,.info-btn{display:none!important}.right-menu{display:flex!important;top:auto!important;bottom:12px!important;right:10px!important;transform:none!important}.mobile-menu-overlay{display:block!important}}@media(min-width:1301px){.mobile-menu-overlay{display:none!important}.info-btn{display:block!important}}@media(max-width:1199px){.color-main-img,.bw-img,.street-img,.places-img,.main-img,.spectrum-img{max-width:85%;max-height:65vh}}@media(max-width:991px){.logo{font-size:14px}.nav-btn,.right-menu-item,.submenu-btn{font-size:14px}}.mobile-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:204;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s;pointer-events:none}.mobile-overlay.active{opacity:1;visibility:visible;transition:opacity .3s ease,visibility 0s linear 0s;pointer-events:auto}.mobile-menu-overlay{position:fixed;top:0;right:0;width:280px;max-width:80vw;height:100%;z-index:205;transform:translateX(100%);transition:transform .3s cubic-bezier(.2,.9,.4,1.1);overflow-y:auto;padding:80px 20px 30px;box-shadow:-2px 0 12px rgba(0,0,0,.1)}.mobile-menu-overlay.open{transform:translateX(0)}.mobile-menu-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:20px}.mobile-menu-item{font-family:'Manrope',sans-serif;font-size:18px;font-weight:500;letter-spacing:.02em;padding:12px 0;border-bottom:1px dotted rgba(0,0,0,.2);cursor:pointer;transition:all .2s;color:#fff}body:not(.light-theme) .mobile-menu-item{border-bottom-color:rgba(255,255,255,.3)}body.light-theme .mobile-menu-item{color:#111;border-bottom-color:rgba(0,0,0,.2)}.mobile-menu-item:hover{opacity:.7}.mobile-menu-item:active{transform:translateX(4px)}.mobile-menu-item.info-item{border-top:none;margin-top:0}body.light-theme{background:#fff}body.light-theme .main-slider:not(.slide-up) .logo{color:#fff!important;border-bottom-color:rgba(255,255,255,.4)!important}body.light-theme.gallery-mode .logo{color:#111!important;border-bottom-color:rgba(0,0,0,.4)!important}body.light-theme .gallery-screen,body.light-theme #bwGallery,body.light-theme #streetColorGallery,body.light-theme #placesGallery,body.light-theme #mainGallery,body.light-theme #continuousSpectrumGallery{background:#fff}body.light-theme .nav-btn,body.light-theme .submenu-btn,body.light-theme .right-menu-item{color:#111!important}body.light-theme .nav-item-with-submenu .nav-btn .bullet::before{color:#111!important}body.light-theme .right-menu-item{border-bottom-color:rgba(0,0,0,.4)!important}body.light-theme .submenu-btn.active span:first-child{border-bottom-color:rgba(0,0,0,.4)}body.light-theme .bw-description,body.light-theme .bw-year{color:#111!important;text-shadow:none!important}body.light-theme .blur-bg{display:none}body.light-theme .main-slider{background:#f5f5f5}body.light-theme .close-info-btn,body.light-theme .close-miniature-btn{color:#111!important}body.light-theme.gallery-mode .theme-toggle,body.light-theme.gallery-mode .gallery-toggle,body.light-theme .gallery-toggle svg{color:#111}body.theme-transition,body.theme-transition *{transition-property:background-color,color,border-bottom-color,text-shadow,background!important;transition-duration:.35s!important;transition-timing-function:ease!important}.miniature-project-link{position:fixed;bottom:12px;right:10px;font-family:'Manrope',sans-serif;font-size:16px;font-weight:500;letter-spacing:0.03em;padding:4px 0;background:transparent;border:none;color:#fff;cursor:pointer;white-space:nowrap;border-bottom:1px dotted rgba(255,255,255,0.4);transition:border-bottom-color 0.2s,color 0.3s ease;display:inline-flex;align-items:center;gap:6px;line-height:1.2;z-index:25;pointer-events:auto}.miniature-project-link:hover{border-bottom-color:#fff}body.light-theme .miniature-project-link{color:#111;border-bottom-color:rgba(0,0,0,0.4)}body.light-theme .miniature-project-link:hover{border-bottom-color:#000}@media(max-width:768px){.miniature-project-link{font-size:14px;bottom:12px;right:10px;padding:4px 0}}.miniature-home-link{position:fixed;bottom:12px;left:10px;font-family:'Manrope',sans-serif;font-size:16px;font-weight:500;letter-spacing:0.03em;padding:4px 0;background:transparent;border:none;color:#fff;cursor:pointer;white-space:nowrap;border-bottom:1px dotted rgba(255,255,255,0.4);transition:border-bottom-color 0.2s,color 0.3s ease;display:inline-flex;align-items:center;gap:6px;line-height:1.2;z-index:25;pointer-events:auto}.miniature-home-link .arrow{display:inline-block;transition:transform 0.3s ease;font-size:12px}.miniature-home-link:hover{border-bottom-color:#fff}.miniature-home-link:hover .arrow{transform:translateX(-4px)}body.light-theme .miniature-home-link{color:#111;border-bottom-color:rgba(0,0,0,0.4)}body.light-theme .miniature-home-link:hover{border-bottom-color:#000}@media(max-width:768px){.miniature-home-link{font-size:14px;bottom:12px;left:10px;padding:4px 0}.miniature-home-link .arrow{font-size:11px}}.info-disclaimer-in-modal{position:fixed;bottom:12px;left:10px;font-family:'Manrope',sans-serif;font-size:12px;font-weight:200;letter-spacing:0.03em;color:rgba(255,255,255,0.4);line-height:1.4;max-width:calc(100% - 20px);transition:color .3s ease,opacity .3s ease;pointer-events:none;z-index:201;opacity:0}#infoModal.visible .info-disclaimer-in-modal{opacity:1}body.light-theme .info-disclaimer-in-modal{color:rgba(0,0,0,0.3)}@media(max-width:768px){.info-disclaimer-in-modal{font-size:10px;bottom:8px;left:10px;max-width:calc(100% - 20px)}}</style>
+</head>
+<body>
+
+<div id="mainSlider" class="main-slider"><div class="slider-container"><div class="slides-wrapper" id="slidesWrapper"></div></div></div>
+<div id="logo" class="logo">ДЕНИС ВОЛОШИН</div>
+
+<button id="closeInfoBtn" class="close-info-btn"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><line x1="16" y1="4" x2="4" y2="16"/><line x1="4" y1="4" x2="16" y2="16"/></svg></button>
+<button id="closeMiniatureBtn" class="close-miniature-btn"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><line x1="16" y1="4" x2="4" y2="16"/><line x1="4" y1="4" x2="16" y2="16"/></svg></button>
+<div id="scrollArrow" class="scroll-arrow">▼</div>
+
+<button id="mobileThemeButton" class="mobile-theme-button hidden" aria-label="Светлая/тёмная тема"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
+<button id="burgerBtn" class="burger-btn hidden" aria-label="Меню"><span></span><span></span><span></span></button>
+
+<div id="mobileOverlay" class="mobile-overlay"></div>
+<div id="mobileMenuOverlay" class="mobile-menu-overlay"><ul id="mobileMenuList" class="mobile-menu-list"></ul></div>
+
+<button id="themeToggle" class="theme-toggle hidden" aria-label="Светлая/тёмная тема"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
+<button id="galleryToggle" class="gallery-toggle hidden" aria-label="Галерея миниатюр"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></button>
+
+<div id="mainGallery" class="gallery-screen"><div class="blur-bg" id="mainBlurA"></div><div class="blur-bg" id="mainBlurB"></div><div class="image-track" id="mainTrack"><img id="mainImg" class="main-img" alt=""></div><div class="main-copyright">© Денис Волошин</div></div>
+<div id="colorGallery" class="gallery-screen"><div class="blur-bg" id="colorBlurA"></div><div class="blur-bg" id="colorBlurB"></div><div class="image-track" id="colorTrack"><img id="colorImg" class="color-main-img" alt=""></div></div>
+<div id="bwGallery" class="gallery-screen"><div class="blur-bg" id="bwBlurA"></div><div class="blur-bg" id="bwBlurB"></div><div class="image-track" id="bwTrack"><img class="bw-img" id="bwImg" alt=""></div></div>
+<div id="streetColorGallery" class="gallery-screen"><div class="blur-bg" id="streetBlurA"></div><div class="blur-bg" id="streetBlurB"></div><div class="image-track" id="streetTrack"><img class="street-img" id="streetImg" alt=""></div></div>
+<div id="placesGallery" class="gallery-screen"><div class="blur-bg" id="placesBlurA"></div><div class="blur-bg" id="placesBlurB"></div><div class="image-track" id="placesTrack"><img class="places-img" id="placesImg" alt=""></div></div>
+<div id="continuousSpectrumGallery" class="gallery-screen"><div class="blur-bg" id="spectrumBlurA"></div><div class="blur-bg" id="spectrumBlurB"></div><div class="image-track" id="spectrumTrack"><img class="spectrum-img" id="spectrumImg" alt=""></div></div>
+
+<div id="miniatureStreetColor" class="miniature-screen">
+    <div class="miniature-logo" data-mode="streetcolor">ВНЕ ВРЕМЕНИ</div>
+    <div class="gallery-grid" id="miniGridStreetColor"></div>
+    <button class="miniature-home-link" id="miniHomeStreetColor"><span class="arrow">←</span> на главную</button>
+    <button class="miniature-project-link" id="miniProjectStreetColor">о проекте</button>
+</div>
+<div id="miniatureSubway" class="miniature-screen">
+    <div class="miniature-logo" data-mode="subwaybw">В ГЛУБИНЕ</div>
+    <div class="gallery-grid" id="miniGridSubway"></div>
+    <button class="miniature-home-link" id="miniHomeSubway"><span class="arrow">←</span> на главную</button>
+    <button class="miniature-project-link" id="miniProjectSubway">о проекте</button>
+</div>
+<div id="miniaturePlaces" class="miniature-screen">
+    <div class="miniature-logo" data-mode="places">МЕСТА, ОБЪЕКТЫ, СВЕТ</div>
+    <div class="gallery-grid" id="miniGridPlaces"></div>
+    <button class="miniature-home-link" id="miniHomePlaces"><span class="arrow">←</span> на главную</button>
+    <button class="miniature-project-link" id="miniProjectPlaces">о проекте</button>
+</div>
+<div id="miniatureSpectrum" class="miniature-screen">
+    <div class="miniature-logo" data-mode="spectrum">НЕПРЕРЫВНЫЙ СПЕКТР</div>
+    <div class="gallery-grid" id="miniGridSpectrum"></div>
+    <button class="miniature-home-link" id="miniHomeSpectrum"><span class="arrow">←</span> на главную</button>
+    <button class="miniature-project-link" id="miniProjectSpectrum">о проекте</button>
+</div>
+
+<div id="lightboxOverlay" class="lightbox-overlay">
+    <div class="lightbox-content"><img id="lightboxImage" class="lightbox-img" alt=""></div>
+    <div class="lightbox-nav-fixed"><button class="lightbox-nav prev" id="lightboxPrev">‹</button><button class="lightbox-nav next" id="lightboxNext">›</button></div>
+    <div class="lightbox-top-right">
+        <button id="lightboxThemeToggle" class="lightbox-theme-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
+        <button id="lightboxFullscreenToggle" class="lightbox-fullscreen-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
+        <button id="lightboxShareToggle" class="lightbox-share-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+        <button id="lightboxCloseBtn" class="lightbox-close"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><line x1="16" y1="4" x2="4" y2="16"/><line x1="4" y1="4" x2="16" y2="16"/></svg></button>
+    </div>
+    <div id="lightboxCounter" class="lightbox-counter">1 / 1</div>
+</div>
+
+<div class="nav-buttons hidden" id="navButtons">
+    <div class="nav-item-with-submenu" id="projectsMenuItem"><button class="nav-btn" id="btnProjectsTrigger"><span class="nav-text">Проекты</span><span class="bullet"></span></button><div class="submenu" id="projectsSubmenu"><button class="submenu-btn" id="btnStreetColor"><span>Вне времени</span><span class="bullet"></span></button><button class="submenu-btn" id="btnSubwayBW"><span>В глубине</span><span class="bullet"></span></button><button class="submenu-btn" id="btnPlaces"><span>Места, объекты, свет</span><span class="bullet"></span></button><button class="submenu-btn" id="btnSpectrum"><span>Непрерывный спектр</span><span class="bullet"></span></button></div></div>
+    <button class="nav-btn" id="infoButton"><span class="nav-text">Инфо</span><span class="bullet"></span></button>
+</div>
+<div class="right-menu hidden" id="rightMenu"><div class="right-menu-item" id="rightMenuItem">о проекте</div></div>
+
+<div id="infoModal" class="info-modal dark-bg">
+    <div class="info-modal-title" id="infoModalTitle">Инфо</div>
+    <div class="info-modal-content">
+        <div class="info-text" id="infoModalText">
+            <p><b>Денис Волошин</b><br>Родился в городе Радужный, ХМАО. Работает как уличный фотограф в Санкт-Петербурге.<br>В центре его творчества — передать ту самую неуловимую дымку в кадре, вперемешку с застывшими эмоциями, светом и временем, не используя при этом постановку.</p>
+            <p>«Через фотографию я открываю для себя дверь в свою особенную реальность. Для меня фотография — это чувства, красота скоротечного, красота застывшего в секунде времени и способ борьбы со своими страхами. Мне кажется, что с фотографией я учусь принимать мир таким, какой он есть.»</p>
+            <div class="info-contacts-wrapper">
+                <div class="info-contacts-left">Социальные сети: <a href="https://www.instagram.com/denis___voloshin" target="_blank">Instagram</a>*</div>
+                <div class="info-contacts-right">Контакты: ✉ <a href="mailto:ph.denisvoloshin@gmail.com">ph.denisvoloshin@gmail.com</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="info-disclaimer-in-modal">*Компания Meta Platforms Inc. (социальные сети Instagram и Facebook) признана экстремистской организацией и запрещена на территории Российской Федерации.</div>
+</div>
+
+<div id="projectModal" class="info-modal dark-bg">
+    <div class="info-modal-title" id="projectModalTitle">В ГЛУБИНЕ</div>
+    <div class="info-modal-content">
+        <div class="info-text" id="projectModalText"><p>Проект про людей и их взаимодействие в метро. Мне нравится находить интересных для меня личностей, красивые и чувственные моменты в этой обыденной и уже привычной для многих среде. Метро удивительно плотно сталкивает самых разных людей вместе, где они погружаются в себя и порой обнажают свои души на мгновенье.</p></div>
+        <div class="info-location-wrapper"><div class="info-location" id="projectModalLocation">Санкт-Петербург, 2026 — в процессе</div><div class="project-gallery-link" id="projectGalleryLink">перейти в галерею<span class="arrow">→</span></div></div>
+    </div>
+</div>
+
+<div id="placesProjectModal" class="info-modal dark-bg">
+    <div class="info-modal-title" id="placesProjectModalTitle">МЕСТА, ОБЪЕКТЫ, СВЕТ</div>
+    <div class="info-modal-content">
+        <div class="info-text" id="placesProjectModalText"><p>В этом проекте я позволяю себе собирать в щелчке затвора места, объекты и свет. Я стремлюсь уловить в атмосфере нечто особенное, чтобы запечатлеть в кадре свои размышления или обрести новые смыслы.</p></div>
+        <div class="info-location-wrapper"><div class="info-location" id="placesProjectModalLocation">Санкт-Петербург, 2026 — в процессе</div><div class="project-gallery-link" id="placesProjectGalleryLink">перейти в галерею<span class="arrow">→</span></div></div>
+    </div>
+</div>
+
+<div id="streetProjectModal" class="info-modal dark-bg">
+    <div class="info-modal-title" id="streetProjectModalTitle">ВНЕ ВРЕМЕНИ</div>
+    <div class="info-modal-content">
+        <div class="info-text" id="streetProjectModalText"><p>Этот проект появился в мыслях случайно, и решил его продолжать. В некоторых фотографиях у меня возникает чувство, будто они вне времени, что-то тягучее, они в некотором смысле монументальны и заставляют задуматься, замереть, успокоиться.</p></div>
+        <div class="info-location-wrapper"><div class="info-location" id="streetProjectModalLocation">Санкт-Петербург, 2026 — в процессе</div><div class="project-gallery-link" id="streetProjectGalleryLink">перейти в галерею<span class="arrow">→</span></div></div>
+    </div>
+</div>
+
+<div id="spectrumProjectModal" class="info-modal dark-bg">
+    <div class="info-modal-title" id="spectrumProjectModalTitle">НЕПРЕРЫВНЫЙ СПЕКТР</div>
+    <div class="info-modal-content">
+        <div class="info-text" id="spectrumProjectModalText"><p>В этой серии я изучаю своё восприятие цвета, причины по который я поднимаю камеру.</p></div>
+        <div class="info-location-wrapper"><div class="info-location" id="spectrumProjectModalLocation">Санкт-Петербург, 2026 — в процессе</div><div class="project-gallery-link" id="spectrumProjectGalleryLink">перейти в галерею<span class="arrow">→</span></div></div>
+    </div>
+</div>
+
+<script>
+(function(){
+    // --- DATA ---
+    const STORAGE_KEY='denis_photo_theme';
+    const sunSVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+    const moonSVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+
+    const streetColorDataFull = [
+        {url:"https://static.tildacdn.com/tild6366-6438-4930-b031-323964363864/1781375864000_R00023.jpg"},
+        {url:"https://static.tildacdn.com/tild6330-6232-4434-b431-353238363830/1782727803000_R00030.jpg"},
+        {url:"https://static.tildacdn.com/tild6431-3766-4733-b231-316439356230/1781546107000_R00025.jpg"},
+        {url:"https://static.tildacdn.com/tild6635-6261-4032-b564-663665316333/1781537285000_R00024.jpg"},
+        {url:"https://static.tildacdn.com/tild6464-6231-4365-b638-393264633062/1781873030000_R00026.jpg"},
+        {url:"https://static.tildacdn.com/tild6662-3631-4563-b961-333261353437/1782481810000_R00029.jpg"},
+        {url:"https://static.tildacdn.com/tild3433-6336-4833-b331-386539633261/1782568853000_R00030.jpg"},
+        {url:"https://static.tildacdn.com/tild3439-3730-4832-a332-333037373235/1783441643000_R00032.jpg"},
+        {url:"https://static.tildacdn.com/tild6236-6438-4135-b562-353864326531/1783681250000_R00034.jpg"}
+    ];
+    const placesDataFull = [
+        {url:"https://static.tildacdn.com/tild3334-3366-4064-b931-396633623463/1780814826000_R00017.jpg"},
+        {url:"https://static.tildacdn.com/tild3065-6533-4366-a333-646637343539/1780812511000_R00016.jpg"},
+        {url:"https://static.tildacdn.com/tild6431-6238-4538-b738-616230336461/1780809854000_R00016.jpg"},
+        {url:"https://static.tildacdn.com/tild3534-6666-4437-a263-363561616164/1783954774000_R00036.jpg"}
+    ];
+    const subwayBWDataFull = [
+        {url:"https://static.tildacdn.com/tild6663-3364-4531-b066-626132656465/5_2.jpg"},
+        {url:"https://static.tildacdn.com/tild3062-3732-4638-b332-316565396631/1783233295000_R00031.jpg"},
+        {url:"https://static.tildacdn.com/tild6464-6237-4337-b332-613435386363/1781590015000_R00025.JPG"},
+        {url:"https://static.tildacdn.com/tild3863-3439-4038-b038-306237656636/1783838038000_R00034.jpg"},
+        {url:"https://static.tildacdn.com/tild6236-6639-4237-a337-623564343832/1781160116000_R00020.jpg"},
+        {url:"https://static.tildacdn.com/tild3739-6537-4662-b963-323061353162/1781073559000_R00019.jpg"},
+        {url:"https://static.tildacdn.com/tild6239-3738-4362-b634-373835386538/1782110738000_R00028.jpg"},
+        {url:"https://static.tildacdn.com/tild3962-3935-4365-a233-653336373865/1781283949000_R00021.jpg"},
+        {url:"https://static.tildacdn.com/tild3337-6232-4731-b564-306237656636/R0001234_1.jpg"},
+        {url:"https://static.tildacdn.com/tild6439-3831-4666-b364-346137343532/1783519374000_R00032.jpg"},
+        {url:"https://static.tildacdn.com/tild6461-3963-4335-a266-663737643631/1781073819000_R00019.jpg"},
+        {url:"https://static.tildacdn.com/tild6237-3465-4230-b532-396539616430/1780641538000_R00014.jpg"},
+        {url:"https://static.tildacdn.com/tild6233-3866-4835-b039-383366653237/1780641937000_R00014.jpg"},
+        {url:"https://static.tildacdn.com/tild3437-6661-4034-b961-626361393031/1780989103000_R00018.jpg"},
+        {url:"https://static.tildacdn.com/tild3665-3833-4333-b837-303661643936/1781283987000_R00021.jpg"},
+        {url:"https://static.tildacdn.com/tild3434-3334-4538-a636-316232323566/1783664636000_R00033.jpg"},
+        {url:"https://static.tildacdn.com/tild3036-3738-4135-b063-646465386337/1781198265000_R00021.JPG"},
+        {url:"https://static.tildacdn.com/tild3661-6232-4032-a663-356663393932/1781198246000_R00021.JPG"},
+        {url:"https://static.tildacdn.com/tild3136-3639-4430-a434-623734663835/1781198061000_R00021.jpg"},
+        {url:"https://static.tildacdn.com/tild3032-3738-4632-b261-386333656631/1781284370000_R00021.jpg"},
+        {url:"https://static.tildacdn.com/tild3639-6639-4738-a436-666333393564/1781532717000_R00024.jpg"},
+        {url:"https://static.tildacdn.com/tild3837-3362-4833-b032-326236303330/1782234793000_R00029.jpg"},
+        {url:"https://static.tildacdn.com/tild3639-3139-4136-b837-396564336534/1782148985000_R00028.jpg"},
+        {url:"https://static.tildacdn.com/tild3861-3265-4262-b239-313335653830/1782331258000_R00029.jpg"},
+        {url:"https://static.tildacdn.com/tild3263-3162-4739-a133-656262623261/1781678296000_R00025.jpg"}
+    ];
+    const spectrumDataFull = [
+        {url: "https://static.tildacdn.com/tild6633-6161-4566-b434-306637643732/1781160261000_R00020.jpg"},
+        {url: "https://static.tildacdn.com/tild3835-6534-4663-a161-633430653162/1783525366000_R00033.jpg"},
+        {url: "https://static.tildacdn.com/tild6365-6233-4535-b664-393865383034/1783441224000_R00032.jpg"},
+        {url: "https://static.tildacdn.com/tild3766-3538-4138-b933-346466633839/1781874604000_R00027.jpg"}
+    ];
+
+    // --- HELPERS ---
+    function getMainPhotosUniqShuffled() {
+        const map=new Map();
+        [streetColorDataFull, subwayBWDataFull, placesDataFull].forEach(arr=>arr.forEach(i=>{if(!map.has(i.url))map.set(i.url,i);}));
+        const unique=Array.from(map.values());
+        for(let i=unique.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[unique[i],unique[j]]=[unique[j],unique[i]];}
+        return unique;
+    }
+
+    // --- IMAGE CACHE ---
+    const imageCache=(function(){
+        const cache=new Map();
+        function get(url){if(cache.has(url))return cache.get(url);const img=new Image();img.src=url;cache.set(url,img);return img;}
+        function preload(urls){urls.forEach(u=>get(u));}
+        return {get,preload};
+    })();
+    const allUrls=[...streetColorDataFull,...subwayBWDataFull,...placesDataFull,...spectrumDataFull].map(i=>i.url);
+    imageCache.preload(allUrls);
+
+    // --- GALLERY FACTORY ---
+    function createGallery(galleryId, imgId, blurAId, blurBId, initialDataArray) {
+        let dataArray=[...initialDataArray], currentIndex=0, transitioning=false;
+        const img=document.getElementById(imgId);
+        const blurA=document.getElementById(blurAId), blurB=document.getElementById(blurBId);
+        let activeBlur='a';
+        const total=()=>dataArray.length;
+        function preloadNeighbors(i){if(!dataArray.length)return;const prev=(i-1+total())%total(),next=(i+1)%total();imageCache.get(dataArray[prev].url);imageCache.get(dataArray[next].url);}
+        function updateBlur(url,instant){
+            const cur=activeBlur==='a'?blurA:blurB,nxt=activeBlur==='a'?blurB:blurA;
+            if(instant){nxt.classList.add('instant');nxt.style.backgroundImage=`url('${url}')`;void nxt.offsetHeight;nxt.classList.remove('instant');nxt.classList.add('visible');cur.classList.remove('visible');cur.classList.add('instant');cur.style.backgroundImage='';void cur.offsetHeight;cur.classList.remove('instant');}
+            else{nxt.style.backgroundImage=`url('${url}')`;void nxt.offsetHeight;nxt.classList.add('visible');cur.classList.remove('visible');}
+            activeBlur=activeBlur==='a'?'b':'a';
+        }
+        function changeImage(newIndex){
+            if(transitioning||newIndex===currentIndex||!dataArray.length)return;
+            transitioning=true;
+            const newUrl=dataArray[newIndex].url;
+            preloadNeighbors(newIndex);
+            img.style.opacity='0';
+            setTimeout(()=>{img.src=newUrl;updateBlur(newUrl,false);img.style.opacity='1';currentIndex=newIndex;transitioning=false;},150);
+        }
+        function next(){if(dataArray.length)changeImage((currentIndex+1)%total());}
+        function prev(){if(dataArray.length)changeImage((currentIndex-1+total())%total());}
+        function show(){document.getElementById(galleryId).classList.add('visible');if(dataArray.length)preloadNeighbors(currentIndex);}
+        function hide(){document.getElementById(galleryId).classList.remove('visible');}
+        function setData(newDataArray){dataArray=[...newDataArray];currentIndex=0;if(dataArray.length){img.src=dataArray[0].url;img.style.opacity='1';updateBlur(dataArray[0].url,true);preloadNeighbors(0);}else img.src='';}
+        function init(){if(dataArray.length){img.src=dataArray[0].url;img.style.opacity='1';updateBlur(dataArray[0].url,true);preloadNeighbors(0);}}
+        return {init,show,hide,next,prev,setData};
+    }
+
+    // --- INIT GALLERIES ---
+    const colorGal=createGallery('colorGallery','colorImg','colorBlurA','colorBlurB',streetColorDataFull);
+    const subwayBWGal=createGallery('bwGallery','bwImg','bwBlurA','bwBlurB',subwayBWDataFull);
+    const streetColorGal=createGallery('streetColorGallery','streetImg','streetBlurA','streetBlurB',streetColorDataFull);
+    const placesGal=createGallery('placesGallery','placesImg','placesBlurA','placesBlurB',placesDataFull);
+    const spectrumGal=createGallery('continuousSpectrumGallery','spectrumImg','spectrumBlurA','spectrumBlurB',spectrumDataFull);
+    let currentMainData=getMainPhotosUniqShuffled();
+    const mainGal=createGallery('mainGallery','mainImg','mainBlurA','mainBlurB',currentMainData);
+    [colorGal,subwayBWGal,streetColorGal,placesGal,spectrumGal,mainGal].forEach(g=>g.init());
+
+    // --- AUTO SLIDE ---
+    let autoTimer=null, autoActive=false;
+    function startAuto(g){if(autoTimer)clearInterval(autoTimer);if(autoActive)autoTimer=setInterval(()=>g.next(),5000);}
+    function stopAuto(){if(autoTimer){clearInterval(autoTimer);autoTimer=null;}}
+    function enableAuto(g){autoActive=true;startAuto(g);}
+    function disableAuto(){autoActive=false;stopAuto();}
+
+    // --- MAIN SLIDER ---
+    const mainSlider=document.getElementById('mainSlider'), slidesWrapper=document.getElementById('slidesWrapper');
+    let sliderData=getMainPhotosUniqShuffled(), sliderIndex=1, sliderInterval;
+    const totalOriginal=sliderData.length;
+    let infiniteSlides=[sliderData[totalOriginal-1],...sliderData,sliderData[0]];
+    function buildWrapper(){slidesWrapper.innerHTML='';infiniteSlides.forEach(s=>{const div=document.createElement('div');div.className='slide';div.style.backgroundImage=`url('${s.url}')`;slidesWrapper.appendChild(div);});slidesWrapper.style.transition='none';slidesWrapper.style.transform=`translateX(${-sliderIndex*100}%)`;slidesWrapper.offsetHeight;slidesWrapper.style.transition='';}
+    function nextSlide(){
+        sliderIndex++;
+        slidesWrapper.style.transform=`translateX(${-sliderIndex*100}%)`;
+        if(sliderIndex>=totalOriginal+1){
+            const onEnd=()=>{slidesWrapper.removeEventListener('transitionend',onEnd);slidesWrapper.style.transition='none';sliderIndex=1;slidesWrapper.style.transform=`translateX(${-sliderIndex*100}%)`;slidesWrapper.offsetHeight;slidesWrapper.style.transition='';};
+            slidesWrapper.addEventListener('transitionend',onEnd);
+            setTimeout(()=>{if(sliderIndex>=totalOriginal+1){slidesWrapper.removeEventListener('transitionend',onEnd);slidesWrapper.style.transition='none';sliderIndex=1;slidesWrapper.style.transform=`translateX(${-sliderIndex*100}%)`;slidesWrapper.offsetHeight;slidesWrapper.style.transition='';}},600);
+        }
+    }
+    function prevSlide(){
+        sliderIndex--;
+        slidesWrapper.style.transform=`translateX(${-sliderIndex*100}%)`;
+        if(sliderIndex<=0){
+            const onEnd=()=>{slidesWrapper.removeEventListener('transitionend',onEnd);slidesWrapper.style.transition='none';sliderIndex=totalOriginal;slidesWrapper.style.transform=`translateX(${-sliderIndex*100}%)`;slidesWrapper.offsetHeight;slidesWrapper.style.transition='';};
+            slidesWrapper.addEventListener('transitionend',onEnd);
+            setTimeout(()=>{if(sliderIndex<=0){slidesWrapper.removeEventListener('transitionend',onEnd);slidesWrapper.style.transition='none';sliderIndex=totalOriginal;slidesWrapper.style.transform=`translateX(${-sliderIndex*100}%)`;slidesWrapper.offsetHeight;slidesWrapper.style.transition='';}},600);
+        }
+    }
+    function startSlider(){if(sliderInterval)clearInterval(sliderInterval);sliderInterval=setInterval(nextSlide,3800);}
+    buildWrapper();startSlider();
+
+    // --- DOM REFS ---
+    const scrollArrow=document.getElementById('scrollArrow'), logo=document.getElementById('logo');
+    const infoButton=document.getElementById('infoButton');
+    const closeInfoBtn=document.getElementById('closeInfoBtn'), closeMiniatureBtn=document.getElementById('closeMiniatureBtn');
+    const navButtons=document.getElementById('navButtons'), rightMenu=document.getElementById('rightMenu'), rightMenuItem=document.getElementById('rightMenuItem');
+    const btnProjectsTrigger=document.getElementById('btnProjectsTrigger');
+    const btnStreetColor=document.getElementById('btnStreetColor'), btnSubwayBW=document.getElementById('btnSubwayBW'), btnPlaces=document.getElementById('btnPlaces'), btnSpectrum=document.getElementById('btnSpectrum');
+    const projectsSubmenu=document.getElementById('projectsSubmenu');
+    const projectsMenuItem=document.getElementById('projectsMenuItem');
+    const themeToggle=document.getElementById('themeToggle'), galleryToggle=document.getElementById('galleryToggle');
+    const mobileThemeButton=document.getElementById('mobileThemeButton');
+    const burgerBtnElem=document.getElementById('burgerBtn');
+    const mobileMenuOverlayElem=document.getElementById('mobileMenuOverlay');
+    const mobileOverlay=document.getElementById('mobileOverlay');
+    const infoModal=document.getElementById('infoModal');
+    const projectModal=document.getElementById('projectModal');
+    const projectGalleryLink=document.getElementById('projectGalleryLink');
+    const placesProjectModal=document.getElementById('placesProjectModal');
+    const placesProjectGalleryLink=document.getElementById('placesProjectGalleryLink');
+    const streetProjectModal=document.getElementById('streetProjectModal');
+    const streetProjectGalleryLink=document.getElementById('streetProjectGalleryLink');
+    const spectrumProjectModal=document.getElementById('spectrumProjectModal');
+    const spectrumProjectGalleryLink=document.getElementById('spectrumProjectGalleryLink');
+    const lightboxOverlay=document.getElementById('lightboxOverlay');
+    const lightboxImage=document.getElementById('lightboxImage');
+    const lightboxPrev=document.getElementById('lightboxPrev'), lightboxNext=document.getElementById('lightboxNext');
+    const lightboxCloseBtn=document.getElementById('lightboxCloseBtn');
+    const lightboxThemeToggle=document.getElementById('lightboxThemeToggle');
+    const lightboxFullscreenToggle=document.getElementById('lightboxFullscreenToggle');
+    const lightboxShareToggle=document.getElementById('lightboxShareToggle');
+    const lightboxCounter=document.getElementById('lightboxCounter');
+    const miniatureScreens={streetcolor:document.getElementById('miniatureStreetColor'),subwaybw:document.getElementById('miniatureSubway'),places:document.getElementById('miniaturePlaces'),spectrum:document.getElementById('miniatureSpectrum')};
+    const miniGrids={streetcolor:document.getElementById('miniGridStreetColor'),subwaybw:document.getElementById('miniGridSubway'),places:document.getElementById('miniGridPlaces'),spectrum:document.getElementById('miniGridSpectrum')};
+    const allGalleryScreens=[document.getElementById('colorGallery'),document.getElementById('bwGallery'),document.getElementById('streetColorGallery'),document.getElementById('placesGallery'),document.getElementById('mainGallery'),document.getElementById('continuousSpectrumGallery')];
+    
+    const miniProjectButtons = {
+        streetcolor: document.getElementById('miniProjectStreetColor'),
+        subwaybw: document.getElementById('miniProjectSubway'),
+        places: document.getElementById('miniProjectPlaces'),
+        spectrum: document.getElementById('miniProjectSpectrum')
+    };
+
+    const miniHomeButtons = {
+        streetcolor: document.getElementById('miniHomeStreetColor'),
+        subwaybw: document.getElementById('miniHomeSubway'),
+        places: document.getElementById('miniHomePlaces'),
+        spectrum: document.getElementById('miniHomeSpectrum')
+    };
+
+    // --- STATE ---
+    let currentMode='slider', previousMode='slider';
+    let currentLightboxData=[], currentLightboxIndex=0, isLightboxTransitioning=false;
+
+    // --- RIGHT MENU ---
+    function updateRightMenu(mode){
+        if(mode==='streetcolor'){rightMenuItem.innerHTML='о проекте';rightMenuItem.classList.add('clickable');}
+        else if(mode==='subwaybw'){rightMenuItem.innerHTML='о проекте';rightMenuItem.classList.add('clickable');}
+        else if(mode==='places'){rightMenuItem.innerHTML='о проекте';rightMenuItem.classList.add('clickable');}
+        else if(mode==='spectrum'){rightMenuItem.innerHTML='о проекте';rightMenuItem.classList.add('clickable');}
+        else{rightMenuItem.innerHTML='';rightMenuItem.classList.remove('clickable');}
+    }
+
+    // --- Функция для возврата на страницу проекта из миниатюр ---
+    function goToProjectFromMiniature(mode) {
+        if (mode === 'streetcolor') {
+            switchToMode('streetcolor');
+        } else if (mode === 'subwaybw') {
+            switchToMode('subwaybw');
+        } else if (mode === 'places') {
+            switchToMode('places');
+        } else if (mode === 'spectrum') {
+            switchToMode('spectrum');
+        }
+    }
+
+    // --- Обработчики для кликов по названиям проектов в миниатюрах ---
+    document.querySelectorAll('.miniature-logo').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const mode = this.getAttribute('data-mode');
+            if (mode) {
+                goToProjectFromMiniature(mode);
+            }
+        });
+        el.style.cursor = 'pointer';
+    });
+
+    // --- MOBILE BURGER MENU ---
+    function updateBurgerVisibility() {
+        const isMobile = window.innerWidth <= 1300;
+        const isMiniature = currentMode === 'miniature';
+        const isInfoOpen = infoModal.classList.contains('visible') || projectModal.classList.contains('visible') || placesProjectModal.classList.contains('visible') || streetProjectModal.classList.contains('visible') || spectrumProjectModal.classList.contains('visible');
+        const isMenuOpen = mobileMenuOverlayElem.classList.contains('open');
+        const shouldBeVisible = (isMobile && !isMiniature && !isInfoOpen && currentMode !== 'slider');
+        
+        if (shouldBeVisible) {
+            burgerBtnElem.classList.remove('hidden');
+            burgerBtnElem.style.display = 'flex';
+            if (isMenuOpen) {
+                mobileThemeButton.classList.add('hidden');
+            } else {
+                mobileThemeButton.classList.remove('hidden');
+                mobileThemeButton.classList.add('shifted');
+            }
+        } else {
+            burgerBtnElem.classList.add('hidden');
+            burgerBtnElem.style.display = 'none';
+            mobileThemeButton.classList.remove('shifted');
+            if (!isMiniature) {
+                mobileThemeButton.classList.add('hidden');
+            }
+        }
+        
+        if (isMobile || isMiniature || isInfoOpen || currentMode === 'slider') {
+            navButtons.classList.add('hidden');
+        } else {
+            if (currentMode !== 'slider' && currentMode !== 'miniature') {
+                navButtons.classList.remove('hidden');
+            }
+        }
+        
+        if (isMiniature || isInfoOpen || currentMode === 'slider') {
+            rightMenu.classList.add('hidden');
+        } else {
+            if (currentMode !== 'main') {
+                rightMenu.classList.remove('hidden');
+            } else {
+                rightMenu.classList.add('hidden');
+            }
+        }
+    }
+    
+    function buildMobileMenu(){
+        const list=document.getElementById('mobileMenuList');
+        list.innerHTML='';
+        const items=['Вне времени','В глубине','Места, объекты, свет','Непрерывный спектр','Инфо'];
+        const actions=['streetcolor','subwaybw','places','spectrum',null];
+        items.forEach((label,idx)=>{const li=document.createElement('li');li.textContent=label;li.classList.add('mobile-menu-item');if(label==='Инфо')li.classList.add('info-item');li.addEventListener('click',()=>{if(actions[idx]===null)openInfoModal();else switchToMode(actions[idx]);closeMobileMenu();});list.appendChild(li);});
+    }
+    buildMobileMenu();
+    
+    function closeMobileMenu(){burgerBtnElem.classList.remove('active');mobileMenuOverlayElem.classList.remove('open');if(mobileOverlay)mobileOverlay.classList.remove('active');document.body.classList.remove('no-scroll');updateBurgerVisibility();}
+    function openMobileMenu(){burgerBtnElem.classList.add('active');mobileMenuOverlayElem.classList.add('open');if(mobileOverlay)mobileOverlay.classList.add('active');document.body.classList.add('no-scroll');mobileThemeButton.classList.add('hidden');}
+    
+    burgerBtnElem.addEventListener('click',function(e){e.stopPropagation();mobileMenuOverlayElem.classList.contains('open')?closeMobileMenu():openMobileMenu();});
+    mobileOverlay.addEventListener('click',closeMobileMenu);
+    window.addEventListener('resize', updateBurgerVisibility);
+
+    // --- MODE SWITCHING ---
+    function refreshMainGalleryData(){mainGal.setData(getMainPhotosUniqShuffled());}
+    function setMode(mode, skipUrl=false){
+        Object.values(miniatureScreens).forEach(el=>el.classList.remove('visible'));
+        if(mode!=='miniature')document.body.classList.remove('miniature-mode');
+        disableAuto();stopAuto();
+        if(mode==='slider'){
+            mainSlider.classList.remove('slide-up');
+        } else {
+            mainSlider.classList.add('slide-up');
+        }
+        allGalleryScreens.forEach(sc=>sc.classList.remove('visible'));
+        [colorGal,subwayBWGal,streetColorGal,placesGal,spectrumGal,mainGal].forEach(g=>g.hide());
+        startSlider();
+        if(mode==='slider'){
+            document.body.classList.remove('gallery-mode');
+            navButtons.classList.add('hidden');rightMenu.classList.add('hidden');
+            currentMode='slider';
+            scrollArrow.classList.remove('hidden');
+            themeToggle.classList.add('hidden');galleryToggle.classList.add('hidden');
+            infoButton.classList.remove('hidden');
+            closeMiniatureBtn.classList.remove('visible');
+            logo.classList.remove('hidden');
+            document.querySelectorAll('.submenu').forEach(s=>s.classList.remove('open'));
+            document.querySelectorAll('.nav-item-with-submenu').forEach(item=>item.classList.remove('open'));
+            mobileThemeButton.classList.add('hidden');burgerBtnElem.classList.add('hidden');
+            updateBurgerVisibility();
+        }else if(mode==='main'){
+            requestAnimationFrame(()=>{
+                refreshMainGalleryData();
+                document.body.classList.add('gallery-mode');
+                navButtons.classList.remove('hidden');
+                mainGal.show();enableAuto(mainGal);
+                currentMode='main';
+                rightMenu.classList.add('hidden');
+                scrollArrow.classList.add('hidden');
+                themeToggle.classList.remove('hidden');galleryToggle.classList.add('hidden');
+                infoButton.classList.remove('hidden');
+                closeMiniatureBtn.classList.remove('visible');
+                logo.classList.remove('hidden');
+                document.querySelectorAll('.submenu').forEach(s=>s.classList.remove('open'));
+                document.querySelectorAll('.nav-item-with-submenu').forEach(item=>item.classList.remove('open'));
+                updateBurgerVisibility();
+            });
+        }else{
+            document.body.classList.add('gallery-mode');
+            navButtons.classList.remove('hidden');rightMenu.classList.remove('hidden');
+            scrollArrow.classList.add('hidden');
+            themeToggle.classList.remove('hidden');galleryToggle.classList.remove('hidden');
+            infoButton.classList.remove('hidden');
+            closeMiniatureBtn.classList.remove('visible');
+            logo.classList.remove('hidden');
+            const modeMap={streetcolor:streetColorGal,subwaybw:subwayBWGal,places:placesGal,spectrum:spectrumGal};
+            const gal=modeMap[mode];
+            if(gal){gal.show();enableAuto(gal);currentMode=mode;updateRightMenu(mode);}
+            document.querySelectorAll('.submenu').forEach(s=>s.classList.remove('open'));
+            document.querySelectorAll('.nav-item-with-submenu').forEach(item=>item.classList.remove('open'));
+            projectsSubmenu.classList.add('open');projectsMenuItem.classList.add('open');
+            updateBurgerVisibility();
+        }
+        document.querySelectorAll('.nav-btn, .submenu-btn').forEach(btn=>btn.classList.remove('active'));
+        if(mode==='streetcolor')btnStreetColor.classList.add('active');
+        else if(mode==='subwaybw')btnSubwayBW.classList.add('active');
+        else if(mode==='places')btnPlaces.classList.add('active');
+        else if(mode==='spectrum')btnSpectrum.classList.add('active');
+        if(!skipUrl){
+            let newHash='';
+            if(mode==='main')newHash='#main';
+            else if(['streetcolor','subwaybw','places','spectrum'].includes(mode))newHash='#'+mode;
+            if(window.location.hash!==newHash)history.pushState(null,'',newHash||window.location.pathname);
+        }
+    }
+    function switchToMode(mode){setMode(mode,false);}
+
+    // --- MINIATURE MODE ---
+    function renderMiniatureGrid(gridElement,data){gridElement.innerHTML='';data.forEach((photo,idx)=>{const item=document.createElement('div');item.className='grid-item';const img=document.createElement('img');img.src=photo.url;img.alt='Фото';img.setAttribute('data-index',idx);item.appendChild(img);item.addEventListener('click',()=>openLightbox(data,idx));gridElement.appendChild(item);});}
+    function enterMiniatureMode(sourceMode,updateHistory=true){
+        Object.values(miniatureScreens).forEach(el=>el.classList.remove('visible'));
+        const dataMap={streetcolor:streetColorDataFull,subwaybw:subwayBWDataFull,places:placesDataFull,spectrum:spectrumDataFull};
+        const data=dataMap[sourceMode]||[];
+        const gridElement=miniGrids[sourceMode];
+        if(gridElement)renderMiniatureGrid(gridElement,data);
+        disableAuto();stopAuto();
+        mainSlider.classList.add('slide-up');
+        allGalleryScreens.forEach(sc=>sc.classList.remove('visible'));
+        [colorGal,subwayBWGal,streetColorGal,placesGal,spectrumGal,mainGal].forEach(g=>g.hide());
+        const targetScreen=miniatureScreens[sourceMode];
+        if(targetScreen)targetScreen.classList.add('visible');
+        document.body.classList.add('gallery-mode','miniature-mode');
+        navButtons.classList.add('hidden');rightMenu.classList.add('hidden');
+        currentMode='miniature';previousMode=sourceMode;
+        scrollArrow.classList.add('hidden');
+        themeToggle.classList.add('hidden');
+        mobileThemeButton.classList.remove('hidden');mobileThemeButton.style.display='flex';
+        galleryToggle.classList.add('hidden');
+        infoButton.classList.add('hidden');
+        closeMiniatureBtn.classList.add('visible');
+        logo.classList.add('hidden');
+        burgerBtnElem.classList.add('hidden');
+        if(updateHistory){const newHash=sourceMode+'-min';if(window.location.hash!=='#'+newHash)history.pushState(null,'','#'+newHash);}
+        updateBurgerVisibility();
+    }
+    function exitMiniatureMode(){
+        if(currentMode==='miniature'){
+            Object.values(miniatureScreens).forEach(el=>el.classList.remove('visible'));
+            document.body.classList.remove('miniature-mode');
+            mobileThemeButton.classList.add('hidden');
+            themeToggle.classList.remove('hidden');
+            setMode(previousMode,false);
+            updateBurgerVisibility();
+        }
+    }
+    galleryToggle.addEventListener('click',()=>{const activeModes=['streetcolor','subwaybw','places','spectrum'];if(activeModes.includes(currentMode))enterMiniatureMode(currentMode,true);});
+    closeMiniatureBtn.addEventListener('click',exitMiniatureMode);
+
+    // --- Обработчики для кнопок "на главную" в миниатюрах (ведут на #main) ---
+    function setupMiniatureHomeButtons() {
+        Object.keys(miniHomeButtons).forEach(key => {
+            if (miniHomeButtons[key]) {
+                miniHomeButtons[key].addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (currentMode === 'miniature') {
+                        Object.values(miniatureScreens).forEach(el => el.classList.remove('visible'));
+                        document.body.classList.remove('miniature-mode');
+                        mobileThemeButton.classList.add('hidden');
+                        themeToggle.classList.remove('hidden');
+                        setMode('main', false);
+                        updateBurgerVisibility();
+                    }
+                });
+            }
+        });
+    }
+    setupMiniatureHomeButtons();
+
+    // --- Обработчики для кнопок "о проекте" в миниатюрах ---
+    function setupMiniatureProjectButtons() {
+        if (miniProjectButtons.streetcolor) {
+            miniProjectButtons.streetcolor.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openStreetProjectModal();
+            });
+        }
+        if (miniProjectButtons.subwaybw) {
+            miniProjectButtons.subwaybw.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openProjectModal();
+            });
+        }
+        if (miniProjectButtons.places) {
+            miniProjectButtons.places.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openPlacesProjectModal();
+            });
+        }
+        if (miniProjectButtons.spectrum) {
+            miniProjectButtons.spectrum.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openSpectrumProjectModal();
+            });
+        }
+    }
+    setupMiniatureProjectButtons();
+
+    // --- MODALS ---
+    function closeAllModals(){
+        closeInfoBtn.classList.remove('visible');
+        infoModal.classList.remove('visible');
+        projectModal.classList.remove('visible');
+        placesProjectModal.classList.remove('visible');
+        streetProjectModal.classList.remove('visible');
+        spectrumProjectModal.classList.remove('visible');
+        document.body.classList.remove('no-scroll');
+    }
+    
+    function openInfoModal(){
+        closeAllModals();
+        infoModal.classList.add('visible');
+        document.body.classList.add('no-scroll');
+        logo.classList.add('hidden');
+        infoButton.classList.add('hidden');
+        navButtons.classList.add('hidden');
+        scrollArrow.classList.add('hidden');
+        rightMenu.classList.add('hidden');
+        closeInfoBtn.classList.add('visible');
+        themeToggle.classList.add('hidden');
+        galleryToggle.classList.add('hidden');
+        closeMiniatureBtn.classList.remove('visible');
+        mobileThemeButton.classList.add('hidden');
+        burgerBtnElem.classList.add('hidden');
+        updateBurgerVisibility();
+    }
+    
+    function openProjectModal(){
+        closeAllModals();
+        projectModal.classList.add('visible');
+        document.body.classList.add('no-scroll');
+        logo.classList.add('hidden');
+        infoButton.classList.add('hidden');
+        navButtons.classList.add('hidden');
+        scrollArrow.classList.add('hidden');
+        rightMenu.classList.add('hidden');
+        closeInfoBtn.classList.add('visible');
+        themeToggle.classList.add('hidden');
+        galleryToggle.classList.add('hidden');
+        closeMiniatureBtn.classList.remove('visible');
+        mobileThemeButton.classList.add('hidden');
+        burgerBtnElem.classList.add('hidden');
+        updateBurgerVisibility();
+    }
+    
+    function openPlacesProjectModal(){
+        closeAllModals();
+        placesProjectModal.classList.add('visible');
+        document.body.classList.add('no-scroll');
+        logo.classList.add('hidden');
+        infoButton.classList.add('hidden');
+        navButtons.classList.add('hidden');
+        scrollArrow.classList.add('hidden');
+        rightMenu.classList.add('hidden');
+        closeInfoBtn.classList.add('visible');
+        themeToggle.classList.add('hidden');
+        galleryToggle.classList.add('hidden');
+        closeMiniatureBtn.classList.remove('visible');
+        mobileThemeButton.classList.add('hidden');
+        burgerBtnElem.classList.add('hidden');
+        updateBurgerVisibility();
+    }
+    
+    function openStreetProjectModal(){
+        closeAllModals();
+        streetProjectModal.classList.add('visible');
+        document.body.classList.add('no-scroll');
+        logo.classList.add('hidden');
+        infoButton.classList.add('hidden');
+        navButtons.classList.add('hidden');
+        scrollArrow.classList.add('hidden');
+        rightMenu.classList.add('hidden');
+        closeInfoBtn.classList.add('visible');
+        themeToggle.classList.add('hidden');
+        galleryToggle.classList.add('hidden');
+        closeMiniatureBtn.classList.remove('visible');
+        mobileThemeButton.classList.add('hidden');
+        burgerBtnElem.classList.add('hidden');
+        updateBurgerVisibility();
+    }
+    
+    function openSpectrumProjectModal(){
+        closeAllModals();
+        spectrumProjectModal.classList.add('visible');
+        document.body.classList.add('no-scroll');
+        logo.classList.add('hidden');
+        infoButton.classList.add('hidden');
+        navButtons.classList.add('hidden');
+        scrollArrow.classList.add('hidden');
+        rightMenu.classList.add('hidden');
+        closeInfoBtn.classList.add('visible');
+        themeToggle.classList.add('hidden');
+        galleryToggle.classList.add('hidden');
+        closeMiniatureBtn.classList.remove('visible');
+        mobileThemeButton.classList.add('hidden');
+        burgerBtnElem.classList.add('hidden');
+        updateBurgerVisibility();
+    }
+    
+    infoButton.addEventListener('click',openInfoModal);
+    
+    closeInfoBtn.addEventListener('click', function() {
+        closeAllModals();
+        setTimeout(() => {
+            if (!infoModal.classList.contains('visible') && !projectModal.classList.contains('visible') && !placesProjectModal.classList.contains('visible') && !streetProjectModal.classList.contains('visible') && !spectrumProjectModal.classList.contains('visible')) {
+                if (currentMode !== 'miniature') {
+                    logo.classList.remove('hidden');
+                } else {
+                    logo.classList.add('hidden');
+                }
+                
+                if (currentMode !== 'miniature') {
+                    themeToggle.classList.remove('hidden');
+                    mobileThemeButton.classList.add('hidden');
+                    infoButton.classList.remove('hidden');
+                } else {
+                    themeToggle.classList.add('hidden');
+                    mobileThemeButton.classList.remove('hidden');
+                    mobileThemeButton.style.display = 'flex';
+                }
+                
+                if (currentMode !== 'slider') {
+                    document.body.classList.add('gallery-mode');
+                } else {
+                    document.body.classList.remove('gallery-mode');
+                }
+                
+                if (currentMode !== 'slider' && currentMode !== 'miniature') {
+                    navButtons.classList.remove('hidden');
+                } else {
+                    navButtons.classList.add('hidden');
+                }
+                
+                if (['streetcolor','subwaybw','places','spectrum'].includes(currentMode)) {
+                    rightMenu.classList.remove('hidden');
+                } else {
+                    rightMenu.classList.add('hidden');
+                }
+                
+                if (currentMode === 'slider') {
+                    scrollArrow.classList.remove('hidden');
+                } else {
+                    scrollArrow.classList.add('hidden');
+                }
+                
+                const visible = (currentMode !== 'slider' && currentMode !== 'miniature');
+                if (currentMode !== 'miniature') {
+                    themeToggle.classList.toggle('hidden', !visible);
+                } else {
+                    themeToggle.classList.add('hidden');
+                }
+                
+                if (currentMode !== 'main' && currentMode !== 'slider' && currentMode !== 'miniature') {
+                    galleryToggle.classList.toggle('hidden', !visible);
+                } else {
+                    galleryToggle.classList.add('hidden');
+                }
+                
+                if (currentMode === 'miniature') {
+                    closeMiniatureBtn.classList.add('visible');
+                } else {
+                    closeMiniatureBtn.classList.remove('visible');
+                }
+                
+                updateBurgerVisibility();
+            }
+        }, 350);
+    });
+    
+    projectGalleryLink.addEventListener('click',function(e){e.stopPropagation();projectModal.classList.remove('visible');closeInfoBtn.classList.remove('visible');document.body.classList.remove('no-scroll');enterMiniatureMode('subwaybw',true);});
+    placesProjectGalleryLink.addEventListener('click',function(e){e.stopPropagation();placesProjectModal.classList.remove('visible');closeInfoBtn.classList.remove('visible');document.body.classList.remove('no-scroll');enterMiniatureMode('places',true);});
+    streetProjectGalleryLink.addEventListener('click',function(e){e.stopPropagation();streetProjectModal.classList.remove('visible');closeInfoBtn.classList.remove('visible');document.body.classList.remove('no-scroll');enterMiniatureMode('streetcolor',true);});
+    spectrumProjectGalleryLink.addEventListener('click',function(e){e.stopPropagation();spectrumProjectModal.classList.remove('visible');closeInfoBtn.classList.remove('visible');document.body.classList.remove('no-scroll');enterMiniatureMode('spectrum',true);});
+    
+    rightMenuItem.addEventListener('click',function(){if(rightMenuItem.classList.contains('clickable')){if(currentMode==='streetcolor')openStreetProjectModal();else if(currentMode==='subwaybw')openProjectModal();else if(currentMode==='places')openPlacesProjectModal();else if(currentMode==='spectrum')openSpectrumProjectModal();}});
+
+    // --- LIGHTBOX ---
+    function updateLightboxCounter(){lightboxCounter.textContent=`${currentLightboxIndex+1}/${currentLightboxData.length}`;}
+    function setLightboxImageWithFade(newUrl,cb){if(isLightboxTransitioning)return;isLightboxTransitioning=true;lightboxImage.classList.add('fade-out');setTimeout(()=>{lightboxImage.src=newUrl;const temp=new Image();temp.onload=()=>{lightboxImage.classList.remove('fade-out');cb?.();isLightboxTransitioning=false;};temp.src=newUrl;if(temp.complete)temp.onload();},150);}
+    function openLightbox(data,index){if(!data.length)return;currentLightboxData=data;currentLightboxIndex=index;lightboxImage.src=currentLightboxData[currentLightboxIndex].url;lightboxImage.classList.remove('fade-out');lightboxOverlay.classList.add('visible');updateLightboxCounter();document.body.classList.add('no-scroll');}
+    function closeLightbox(){lightboxOverlay.classList.remove('visible');document.body.classList.remove('no-scroll');isLightboxTransitioning=false;if(document.fullscreenElement)document.exitFullscreen();}
+    function nextPhoto(){if(!currentLightboxData.length||isLightboxTransitioning)return;const newIdx=(currentLightboxIndex+1)%currentLightboxData.length;setLightboxImageWithFade(currentLightboxData[newIdx].url,()=>{currentLightboxIndex=newIdx;updateLightboxCounter();});}
+    function prevPhoto(){if(!currentLightboxData.length||isLightboxTransitioning)return;const newIdx=(currentLightboxIndex-1+currentLightboxData.length)%currentLightboxData.length;setLightboxImageWithFade(currentLightboxData[newIdx].url,()=>{currentLightboxIndex=newIdx;updateLightboxCounter();});}
+    function shareToPinterest(){if(!currentLightboxData.length)return;window.open(`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(location.href)}&media=${encodeURIComponent(currentLightboxData[currentLightboxIndex].url)}&description=Фотография%20Дениса%20Волошина`,'_blank');}
+    function toggleFullscreen(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
+    lightboxPrev.addEventListener('click',e=>{e.stopPropagation();prevPhoto();});
+    lightboxNext.addEventListener('click',e=>{e.stopPropagation();nextPhoto();});
+    lightboxCloseBtn.addEventListener('click',closeLightbox);
+    lightboxFullscreenToggle.addEventListener('click',e=>{e.stopPropagation();toggleFullscreen();});
+    lightboxShareToggle.addEventListener('click',e=>{e.stopPropagation();shareToPinterest();});
+    lightboxOverlay.addEventListener('click',e=>{if(e.target===lightboxOverlay){const rect=lightboxOverlay.getBoundingClientRect();(e.clientX-rect.left<rect.width/2)?prevPhoto():nextPhoto();}});
+    lightboxImage.addEventListener('click',e=>{e.stopPropagation();const rect=lightboxImage.getBoundingClientRect();(e.clientX-rect.left<rect.width/2)?prevPhoto():nextPhoto();});
+
+    // --- CLICK HANDLERS FOR GALLERIES ---
+    function attachClickHandler(div,gal){div.addEventListener('click',(e)=>{const rect=div.getBoundingClientRect();(e.clientX-rect.left<rect.width/2)?gal.prev():gal.next();disableAuto();});}
+    attachClickHandler(document.getElementById('mainGallery'),mainGal);
+    attachClickHandler(document.getElementById('colorGallery'),colorGal);
+    attachClickHandler(document.getElementById('bwGallery'),subwayBWGal);
+    attachClickHandler(document.getElementById('streetColorGallery'),streetColorGal);
+    attachClickHandler(document.getElementById('placesGallery'),placesGal);
+    attachClickHandler(document.getElementById('continuousSpectrumGallery'),spectrumGal);
+
+    // --- NAV ---
+    btnProjectsTrigger.addEventListener('click',(e)=>{e.stopPropagation();if(projectsSubmenu.classList.contains('open')){projectsSubmenu.classList.remove('open');projectsMenuItem.classList.remove('open');if(currentMode!=='streetcolor')switchToMode('streetcolor');}else{document.querySelectorAll('.submenu').forEach(s=>s.classList.remove('open'));document.querySelectorAll('.nav-item-with-submenu').forEach(item=>item.classList.remove('open'));projectsSubmenu.classList.add('open');projectsMenuItem.classList.add('open');}});
+    btnStreetColor.addEventListener('click',()=>switchToMode('streetcolor'));
+    btnSubwayBW.addEventListener('click',()=>switchToMode('subwaybw'));
+    btnPlaces.addEventListener('click',()=>switchToMode('places'));
+    btnSpectrum.addEventListener('click',()=>switchToMode('spectrum'));
+    mainSlider.addEventListener('click',(e)=>{if(currentMode==='slider')switchToMode('main');});
+    scrollArrow.addEventListener('click',()=>{if(currentMode==='slider')switchToMode('main');});
+    logo.addEventListener('click',()=>{closeAllModals();if(currentMode!=='slider')setMode('slider',false);else window.location.hash='';});
+
+    // --- KEYBOARD ---
+    document.addEventListener('keydown',function(e){
+        if(lightboxOverlay.classList.contains('visible'))return;
+        const key=e.key;
+        if(key==='ArrowLeft'||key==='ArrowRight'||key===' '){
+            e.preventDefault();disableAuto();
+            if(currentMode==='slider'){key==='ArrowLeft'?prevSlide():nextSlide();return;}
+            if(currentMode==='miniature'||currentMode==='main'){if(currentMode==='main'){key==='ArrowLeft'?mainGal.prev():mainGal.next();}return;}
+            const map={streetcolor:streetColorGal,subwaybw:subwayBWGal,places:placesGal,spectrum:spectrumGal};
+            const gal=map[currentMode];
+            if(gal){key==='ArrowLeft'?gal.prev():gal.next();}
+        }
+    });
+
+    // --- THEME ---
+    function initTheme(){
+        const savedTheme = localStorage.getItem(STORAGE_KEY);
+        if (savedTheme === 'light') {
+            setTheme('light');
+        } else {
+            setTheme('dark');
+        }
+    }
+    
+    function setTheme(theme){
+        if(theme==='light'){
+            document.body.classList.add('light-theme');
+            themeToggle.innerHTML = moonSVG;
+            mobileThemeButton.innerHTML = moonSVG;
+            lightboxThemeToggle.innerHTML = moonSVG;
+            localStorage.setItem(STORAGE_KEY,'light');
+        } else {
+            document.body.classList.remove('light-theme');
+            themeToggle.innerHTML = sunSVG;
+            mobileThemeButton.innerHTML = sunSVG;
+            lightboxThemeToggle.innerHTML = sunSVG;
+            localStorage.setItem(STORAGE_KEY,'dark');
+        }
+    }
+    
+    themeToggle.addEventListener('click',()=>{
+        const isLight=document.body.classList.contains('light-theme');
+        setTheme(isLight?'dark':'light');
+        document.body.classList.add('theme-transition');
+        setTimeout(()=>document.body.classList.remove('theme-transition'),3000);
+    });
+    
+    mobileThemeButton.addEventListener('click',()=>{
+        const isLight=document.body.classList.contains('light-theme');
+        setTheme(isLight?'dark':'light');
+        document.body.classList.add('theme-transition');
+        setTimeout(()=>document.body.classList.remove('theme-transition'),3000);
+    });
+    
+    lightboxThemeToggle.addEventListener('click',(e)=>{
+        e.stopPropagation();
+        const isLight=document.body.classList.contains('light-theme');
+        setTheme(isLight?'dark':'light');
+        document.body.classList.add('theme-transition');
+        setTimeout(()=>document.body.classList.remove('theme-transition'),3000);
+    });
+    
+    initTheme();
+
+    // --- HASH ROUTING ---
+    function onHashChange(){
+        const hash=window.location.hash.slice(1);
+        if(hash.endsWith('-min')){const src=hash.slice(0,-4);if(['streetcolor','subwaybw','places','spectrum'].includes(src)){enterMiniatureMode(src,false);}return;}
+        if(hash==='main')setMode('main',true);
+        else if(['streetcolor','subwaybw','places','spectrum'].includes(hash))setMode(hash,true);
+        else setMode('slider',true);
+    }
+    window.addEventListener('hashchange',onHashChange);
+    onHashChange();
+
+    mainSlider.addEventListener('wheel', function(e) {
+        if (currentMode === 'slider' && e.deltaY > 0) {
+            e.preventDefault();
+            switchToMode('main');
+        }
+    }, { passive: false });
+
+    setTimeout(updateBurgerVisibility, 50);
+})();
+</script>
+</body>
+</html>
