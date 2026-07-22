@@ -206,11 +206,51 @@
         body.light-theme.gallery-mode .theme-toggle,body.light-theme.gallery-mode .gallery-toggle,body.light-theme .gallery-toggle svg{color:#111}
         body.theme-transition,body.theme-transition *{transition-property:background-color,color,border-bottom-color,text-shadow,background!important;transition-duration:.35s!important;transition-timing-function:ease!important}
         
-        .miniature-project-link{position:fixed;bottom:12px;right:10px;font-family:'Manrope',sans-serif;font-size:16px;font-weight:500;letter-spacing:0.03em;padding:4px 0;background:transparent;border:none;color:#fff;cursor:pointer;white-space:nowrap;border-bottom:1px dotted rgba(255,255,255,0.4);transition:border-bottom-color 0.2s,color 0.3s ease;display:inline-flex;align-items:center;gap:6px;line-height:1.2;z-index:25;pointer-events:auto}
-        .miniature-project-link:hover{border-bottom-color:#fff}
-        body.light-theme .miniature-project-link{color:#111;border-bottom-color:rgba(0,0,0,0.4)}
-        body.light-theme .miniature-project-link:hover{border-bottom-color:#000}
-        @media(max-width:768px){.miniature-project-link{font-size:14px;bottom:12px;right:10px;padding:4px 0}}
+        .miniature-project-link {
+            position: fixed;
+            bottom: 12px;
+            right: 10px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            padding: 4px 0;
+            background: transparent;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            line-height: 1.2;
+            z-index: 25;
+            pointer-events: auto;
+            padding-right: 15px;
+        }
+        .miniature-project-link .link-text {
+            border-bottom: 1px dotted rgba(255,255,255,0.4);
+            transition: border-bottom-color 0.2s, color 0.3s ease;
+            display: inline-block;
+        }
+        .miniature-project-link:hover .link-text {
+            border-bottom-color: #fff;
+        }
+        body.light-theme .miniature-project-link .link-text {
+            border-bottom-color: rgba(0,0,0,0.4);
+        }
+        body.light-theme .miniature-project-link:hover .link-text {
+            border-bottom-color: #000;
+        }
+        @media(max-width:768px) {
+            .miniature-project-link {
+                font-size: 14px;
+                bottom: 12px;
+                right: 10px;
+                padding: 4px 0;
+                padding-right: 15px;
+            }
+        }
 
         .miniature-home-link{position:fixed;bottom:12px;left:10px;font-family:'Manrope',sans-serif;font-size:16px;font-weight:500;letter-spacing:0.03em;padding:4px 0;background:transparent;border:none;color:#fff;cursor:pointer;white-space:nowrap;border-bottom:1px dotted rgba(255,255,255,0.4);transition:border-bottom-color 0.2s,color 0.3s ease;display:inline-flex;align-items:center;gap:6px;line-height:1.2;z-index:25;pointer-events:auto}
         .miniature-home-link .arrow{display:inline-block;transition:transform 0.3s ease;font-size:12px}
@@ -255,25 +295,25 @@
     <div class="miniature-logo" data-mode="vnevremeni">ВНЕ ВРЕМЕНИ</div>
     <div class="gallery-grid" id="miniGridVnevremeni"></div>
     <button class="miniature-home-link" id="miniHomeVnevremeni"><span class="arrow">←</span> на главную</button>
-    <button class="miniature-project-link" id="miniProjectVnevremeni">о проекте</button>
+    <button class="miniature-project-link" id="miniProjectVnevremeni"><span class="link-text">о проекте</span></button>
 </div>
 <div id="miniatureVglubine" class="miniature-screen">
     <div class="miniature-logo" data-mode="vglubine">В ГЛУБИНЕ</div>
     <div class="gallery-grid" id="miniGridVglubine"></div>
     <button class="miniature-home-link" id="miniHomeVglubine"><span class="arrow">←</span> на главную</button>
-    <button class="miniature-project-link" id="miniProjectVglubine">о проекте</button>
+    <button class="miniature-project-link" id="miniProjectVglubine"><span class="link-text">о проекте</span></button>
 </div>
 <div id="miniaturePlaces" class="miniature-screen">
     <div class="miniature-logo" data-mode="places">МЕСТА, ОБЪЕКТЫ, СВЕТ</div>
     <div class="gallery-grid" id="miniGridPlaces"></div>
     <button class="miniature-home-link" id="miniHomePlaces"><span class="arrow">←</span> на главную</button>
-    <button class="miniature-project-link" id="miniProjectPlaces">о проекте</button>
+    <button class="miniature-project-link" id="miniProjectPlaces"><span class="link-text">о проекте</span></button>
 </div>
 <div id="miniatureSpectrum" class="miniature-screen">
     <div class="miniature-logo" data-mode="spectrum">НЕПРЕРЫВНЫЙ СПЕКТР</div>
     <div class="gallery-grid" id="miniGridSpectrum"></div>
     <button class="miniature-home-link" id="miniHomeSpectrum"><span class="arrow">←</span> на главную</button>
-    <button class="miniature-project-link" id="miniProjectSpectrum">о проекте</button>
+    <button class="miniature-project-link" id="miniProjectSpectrum"><span class="link-text">о проекте</span></button>
 </div>
 
 <div id="lightboxOverlay" class="lightbox-overlay">
