@@ -119,9 +119,15 @@
         body.light-theme .info-modal.dark-bg{background:rgba(255,255,255,.6)}
         .info-modal-title{position:fixed;top:12px;left:10px;font-family:'Unbounded',sans-serif;font-size:16px;font-weight:700;letter-spacing:.03em;color:#fff;border-bottom:1px dotted rgba(255,255,255,.4);padding-bottom:2px;line-height:1.2;z-index:201;display:inline-block;transition:color .3s ease,border-bottom-color .3s ease}
         body.light-theme .info-modal-title{color:#111;border-bottom-color:rgba(0,0,0,.4)}
-        .info-modal-content{max-width:800px;width:100%;margin:0 auto;background:0 0;cursor:default;opacity:0;transition:opacity .3s cubic-bezier(.2,.9,.4,1.1);will-change:opacity;padding:60px 20px 20px;user-select:text!important;-webkit-user-select:text!important}
+        .info-modal-content{max-width:800px;width:100%;margin:0 auto;background:0 0;cursor:default;opacity:0;transition:opacity .3s cubic-bezier(.2,.9,.4,1.1);will-change:opacity;padding:60px 20px 20px}
+        .info-modal-content,
+        .info-modal-content * {
+            user-select: text !important;
+            -webkit-user-select: text !important;
+            cursor: text !important;
+        }
         .info-modal.visible .info-modal-content{opacity:1}
-        .info-text{text-align:left;font-family:'Manrope',sans-serif;font-weight:200;font-size:1rem;letter-spacing:.02em;line-height:1.55;color:rgba(255,255,255,.92);transform:translateZ(0);backface-visibility:hidden;transition:color .3s ease;user-select:text!important;-webkit-user-select:text!important}
+        .info-text{text-align:left;font-family:'Manrope',sans-serif;font-weight:200;font-size:1rem;letter-spacing:.02em;line-height:1.55;color:rgba(255,255,255,.92);transform:translateZ(0);backface-visibility:hidden;transition:color .3s ease}
         .info-text p{margin-bottom:1.5rem}
         .info-text a{color:rgba(255,255,255,.92)!important;text-decoration:none!important;border-bottom:1px dotted rgba(255,255,255,.5)!important;transition:border-color .2s,color .3s ease;cursor:pointer}
         .info-text a:hover{border-bottom-color:#fff!important;color:#fff!important}
