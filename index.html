@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;family=Unbounded:wght@200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <style>
+        /* все ваши существующие стили остаются без изменений */
         *{margin:0;padding:0;box-sizing:border-box;user-select:none;-webkit-tap-highlight-color:transparent}
         html,body{height:100%}
         body{background:#000;font-family:'Manrope',sans-serif;overflow:hidden;transition:background-color .35s ease;min-height:100vh}
@@ -273,6 +274,37 @@
         #infoModal.visible .info-disclaimer-in-modal{opacity:1}
         body.light-theme .info-disclaimer-in-modal{color:rgba(0,0,0,0.3)}
         @media(max-width:768px){.info-disclaimer-in-modal{font-size:10px;bottom:8px;left:10px;max-width:calc(100% - 20px)}}
+        
+        /* Стиль для уведомления о копировании */
+        .toast-notification {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .toast-notification.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        body.light-theme .toast-notification {
+            background: rgba(255, 255, 255, 0.9);
+            color: #111;
+            border-color: rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -390,6 +422,9 @@
     </div>
 </div>
 
+<!-- Toast-уведомление для копирования -->
+<div id="toastNotification" class="toast-notification">Ссылка скопирована!</div>
+
 <script>
 (function(){
     // --- DATA ---
@@ -463,8 +498,6 @@
         {url: "https://static.tildacdn.com/tild6365-6233-4535-b664-393865383034/1783441224000_R00032.jpg"},
         {url: "https://static.tildacdn.com/tild3766-3538-4138-b933-346466633839/1781874604000_R00027.jpg"},
         {url: "https://static.tildacdn.com/tild3731-3530-4465-b033-663437373537/1784983393000_R00040.jpg"}
-        
-        
     ];
 
     // --- HELPERS ---
@@ -592,6 +625,7 @@
     const lightboxFullscreenToggle=document.getElementById('lightboxFullscreenToggle');
     const lightboxShareToggle=document.getElementById('lightboxShareToggle');
     const lightboxCounter=document.getElementById('lightboxCounter');
+    const toastNotification=document.getElementById('toastNotification');
     const miniatureScreens={vnevremeni:document.getElementById('miniatureVnevremeni'),vglubine:document.getElementById('miniatureVglubine'),places:document.getElementById('miniaturePlaces'),spectrum:document.getElementById('miniatureSpectrum')};
     const miniGrids={vnevremeni:document.getElementById('miniGridVnevremeni'),vglubine:document.getElementById('miniGridVglubine'),places:document.getElementById('miniGridPlaces'),spectrum:document.getElementById('miniGridSpectrum')};
     const allGalleryScreens=[document.getElementById('colorGallery'),document.getElementById('bwGallery'),document.getElementById('streetColorGallery'),document.getElementById('placesGallery'),document.getElementById('mainGallery'),document.getElementById('continuousSpectrumGallery')];
@@ -1128,19 +1162,181 @@
     // --- LIGHTBOX ---
     function updateLightboxCounter(){lightboxCounter.textContent=`${currentLightboxIndex+1}/${currentLightboxData.length}`;}
     function setLightboxImageWithFade(newUrl,cb){if(isLightboxTransitioning)return;isLightboxTransitioning=true;lightboxImage.classList.add('fade-out');setTimeout(()=>{lightboxImage.src=newUrl;const temp=new Image();temp.onload=()=>{lightboxImage.classList.remove('fade-out');cb?.();isLightboxTransitioning=false;};temp.src=newUrl;if(temp.complete)temp.onload();},150);}
-    function openLightbox(data,index){if(!data.length)return;currentLightboxData=data;currentLightboxIndex=index;lightboxImage.src=currentLightboxData[currentLightboxIndex].url;lightboxImage.classList.remove('fade-out');lightboxOverlay.classList.add('visible');updateLightboxCounter();document.body.classList.add('no-scroll');}
-    function closeLightbox(){lightboxOverlay.classList.remove('visible');document.body.classList.remove('no-scroll');isLightboxTransitioning=false;if(document.fullscreenElement)document.exitFullscreen();}
-    function nextPhoto(){if(!currentLightboxData.length||isLightboxTransitioning)return;const newIdx=(currentLightboxIndex+1)%currentLightboxData.length;setLightboxImageWithFade(currentLightboxData[newIdx].url,()=>{currentLightboxIndex=newIdx;updateLightboxCounter();});}
-    function prevPhoto(){if(!currentLightboxData.length||isLightboxTransitioning)return;const newIdx=(currentLightboxIndex-1+currentLightboxData.length)%currentLightboxData.length;setLightboxImageWithFade(currentLightboxData[newIdx].url,()=>{currentLightboxIndex=newIdx;updateLightboxCounter();});}
-    function shareToPinterest(){if(!currentLightboxData.length)return;window.open(`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(location.href)}&media=${encodeURIComponent(currentLightboxData[currentLightboxIndex].url)}&description=Фотография%20Дениса%20Волошина`,'_blank');}
-    function toggleFullscreen(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
-    lightboxPrev.addEventListener('click',e=>{e.stopPropagation();prevPhoto();});
-    lightboxNext.addEventListener('click',e=>{e.stopPropagation();nextPhoto();});
-    lightboxCloseBtn.addEventListener('click',closeLightbox);
-    lightboxFullscreenToggle.addEventListener('click',e=>{e.stopPropagation();toggleFullscreen();});
-    lightboxShareToggle.addEventListener('click',e=>{e.stopPropagation();shareToPinterest();});
-    lightboxOverlay.addEventListener('click',e=>{if(e.target===lightboxOverlay){const rect=lightboxOverlay.getBoundingClientRect();(e.clientX-rect.left<rect.width/2)?prevPhoto():nextPhoto();}});
-    lightboxImage.addEventListener('click',e=>{e.stopPropagation();const rect=lightboxImage.getBoundingClientRect();(e.clientX-rect.left<rect.width/2)?prevPhoto():nextPhoto();});
+    
+    function openLightbox(data,index){
+        if(!data.length)return;
+        currentLightboxData=data;
+        currentLightboxIndex=index;
+        lightboxImage.src=currentLightboxData[currentLightboxIndex].url;
+        lightboxImage.classList.remove('fade-out');
+        lightboxOverlay.classList.add('visible');
+        updateLightboxCounter();
+        document.body.classList.add('no-scroll');
+        // Обновляем URL с параметром фото при открытии лайтбокса
+        updateShareableUrl(currentLightboxData[currentLightboxIndex].url);
+    }
+    
+    function closeLightbox(){
+        lightboxOverlay.classList.remove('visible');
+        document.body.classList.remove('no-scroll');
+        isLightboxTransitioning=false;
+        if(document.fullscreenElement)document.exitFullscreen();
+        // Убираем параметр photo из URL при закрытии лайтбокса
+        const url = new URL(window.location);
+        if (url.searchParams.has('photo')) {
+            url.searchParams.delete('photo');
+            window.history.replaceState({}, '', url);
+        }
+    }
+    
+    function nextPhoto(){
+        if(!currentLightboxData.length||isLightboxTransitioning)return;
+        const newIdx=(currentLightboxIndex+1)%currentLightboxData.length;
+        setLightboxImageWithFade(currentLightboxData[newIdx].url,()=>{
+            currentLightboxIndex=newIdx;
+            updateLightboxCounter();
+            updateShareableUrl(currentLightboxData[newIdx].url);
+        });
+    }
+    
+    function prevPhoto(){
+        if(!currentLightboxData.length||isLightboxTransitioning)return;
+        const newIdx=(currentLightboxIndex-1+currentLightboxData.length)%currentLightboxData.length;
+        setLightboxImageWithFade(currentLightboxData[newIdx].url,()=>{
+            currentLightboxIndex=newIdx;
+            updateLightboxCounter();
+            updateShareableUrl(currentLightboxData[newIdx].url);
+        });
+    }
+    
+    // --- ФУНКЦИЯ ДЛЯ СОЗДАНИЯ ССЫЛКИ НА ФОТО ---
+    function createPhotoUrl(photoUrl) {
+        // Кодируем URL фото в base64 для безопасной передачи
+        const encodedPhoto = encodeURIComponent(photoUrl);
+        const baseUrl = window.location.origin + window.location.pathname;
+        return baseUrl + '?photo=' + encodedPhoto;
+    }
+    
+    // --- ФУНКЦИЯ ДЛЯ ОБНОВЛЕНИЯ URL С ПАРАМЕТРОМ ФОТО ---
+    function updateShareableUrl(photoUrl) {
+        const url = new URL(window.location);
+        url.searchParams.set('photo', encodeURIComponent(photoUrl));
+        window.history.replaceState({ photo: photoUrl }, '', url);
+    }
+    
+    // --- ФУНКЦИЯ ДЛЯ КОПИРОВАНИЯ ССЫЛКИ В БУФЕР ОБМЕНА ---
+    function copyPhotoLink() {
+        if (!currentLightboxData.length) return;
+        const photoUrl = currentLightboxData[currentLightboxIndex].url;
+        const shareableUrl = createPhotoUrl(photoUrl);
+        
+        // Проверяем наличие API буфера обмена
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(shareableUrl)
+                .then(() => showToast('Ссылка скопирована!'))
+                .catch(() => fallbackCopy(shareableUrl));
+        } else {
+            fallbackCopy(shareableUrl);
+        }
+    }
+    
+    // --- ЗАПАСНОЙ МЕТОД КОПИРОВАНИЯ (для старых браузеров) ---
+    function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        textarea.style.pointerEvents = 'none';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showToast('Ссылка скопирована!');
+            } else {
+                showToast('Не удалось скопировать ссылку');
+            }
+        } catch (e) {
+            showToast('Не удалось скопировать ссылку');
+        }
+        document.body.removeChild(textarea);
+    }
+    
+    // --- ПОКАЗ УВЕДОМЛЕНИЯ ---
+    let toastTimeout = null;
+    function showToast(message) {
+        toastNotification.textContent = message;
+        toastNotification.classList.add('show');
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+            toastNotification.classList.remove('show');
+            toastTimeout = null;
+        }, 2500);
+    }
+    
+    // --- ОБРАБОТЧИК КЛИКА ПО КНОПКЕ ПОДЕЛИТЬСЯ ---
+    lightboxShareToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        copyPhotoLink();
+    });
+    
+    // --- ОБРАБОТКА ПАРАМЕТРА PHOTO В URL ПРИ ЗАГРУЗКЕ СТРАНИЦЫ ---
+    function handlePhotoParamOnLoad() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const encodedPhoto = urlParams.get('photo');
+        if (encodedPhoto) {
+            try {
+                const photoUrl = decodeURIComponent(encodedPhoto);
+                // Ищем фото во всех коллекциях
+                const allPhotos = [
+                    ...vnevremeniDataFull,
+                    ...vglubineDataFull,
+                    ...placesDataFull,
+                    ...spectrumDataFull
+                ];
+                const foundIndex = allPhotos.findIndex(p => p.url === photoUrl);
+                if (foundIndex !== -1) {
+                    // Открываем лайтбокс с этим фото
+                    // Сначала определяем, в каком проекте находится фото
+                    const dataMap = {
+                        vnevremeni: vnevremeniDataFull,
+                        vglubine: vglubineDataFull,
+                        places: placesDataFull,
+                        spectrum: spectrumDataFull
+                    };
+                    let foundData = null;
+                    let foundMode = null;
+                    let foundIdx = 0;
+                    
+                    for (const [mode, data] of Object.entries(dataMap)) {
+                        const idx = data.findIndex(p => p.url === photoUrl);
+                        if (idx !== -1) {
+                            foundData = data;
+                            foundMode = mode;
+                            foundIdx = idx;
+                            break;
+                        }
+                    }
+                    
+                    if (foundData) {
+                        // Переключаемся на соответствующий проект
+                        if (foundMode) {
+                            setMode(foundMode, true);
+                            // Открываем лайтбокс с задержкой, чтобы галерея успела загрузиться
+                            setTimeout(() => {
+                                openLightbox(foundData, foundIdx);
+                            }, 400);
+                        }
+                    }
+                }
+            } catch (e) {
+                console.warn('Не удалось обработать параметр photo:', e);
+            }
+        }
+    }
+    
+    // Вызываем обработку параметра при загрузке
+    setTimeout(handlePhotoParamOnLoad, 100);
 
     // --- CLICK HANDLERS FOR GALLERIES ---
     function attachClickHandler(div,gal){div.addEventListener('click',(e)=>{const rect=div.getBoundingClientRect();(e.clientX-rect.left<rect.width/2)?gal.prev():gal.next();disableAuto();});}
