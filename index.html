@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Денис Волошин – фотограф | Портфолио</title>
+    <title>Денис Волошин – фотограф | Раз, два, три — лети!</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;family=Unbounded:wght@200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <style>
@@ -39,11 +39,11 @@
         .blur-bg.visible{opacity:1}
         .blur-bg.instant{transition:none}
         .blur-bg::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);pointer-events:none;z-index:1}
-        #colorGallery .image-track,#streetColorGallery .image-track,#placesGallery .image-track,#mainGallery .image-track,#continuousSpectrumGallery .image-track{position:relative;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:2}
+        #colorGallery .image-track,#streetColorGallery .image-track,#placesGallery .image-track,#mainGallery .image-track,#continuousSpectrumGallery .image-track,#letiGallery .image-track{position:relative;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:2}
         .color-main-img{display:block;max-width:90%;max-height:70vh;width:auto;height:auto;object-fit:contain;margin:0 auto;transition:opacity .2s cubic-bezier(.2,.9,.4,1.1);opacity:1;cursor:inherit;pointer-events:auto}
-        #bwGallery,#streetColorGallery,#placesGallery,#mainGallery,#continuousSpectrumGallery{display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;background:#000;transition:background-color .3s ease}
-        #bwGallery .image-track,#streetColorGallery .image-track,#placesGallery .image-track,#mainGallery .image-track,#continuousSpectrumGallery .image-track{position:relative;width:auto;max-width:90%;height:auto;z-index:2;text-align:center;margin:0 auto}
-        #bwGallery .bw-img,#streetColorGallery .street-img,#placesGallery .places-img,#mainGallery .main-img,#continuousSpectrumGallery .spectrum-img{display:block;max-width:100%;max-height:70vh;width:auto;height:auto;object-fit:contain;cursor:inherit;transition:opacity .2s cubic-bezier(.2,.9,.4,1.1);margin:0 auto;pointer-events:auto}
+        #bwGallery,#streetColorGallery,#placesGallery,#mainGallery,#continuousSpectrumGallery,#letiGallery{display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;background:#000;transition:background-color .3s ease}
+        #bwGallery .image-track,#streetColorGallery .image-track,#placesGallery .image-track,#mainGallery .image-track,#continuousSpectrumGallery .image-track,#letiGallery .image-track{position:relative;width:auto;max-width:90%;height:auto;z-index:2;text-align:center;margin:0 auto}
+        #bwGallery .bw-img,#streetColorGallery .street-img,#placesGallery .places-img,#mainGallery .main-img,#continuousSpectrumGallery .spectrum-img,#letiGallery .leti-img{display:block;max-width:100%;max-height:70vh;width:auto;height:auto;object-fit:contain;cursor:inherit;transition:opacity .2s cubic-bezier(.2,.9,.4,1.1);margin:0 auto;pointer-events:auto}
         .bw-text-wrapper{display:flex;flex-direction:column;align-items:center;width:100%}
         .bw-description,.bw-year{text-align:center;font-family:'Manrope',sans-serif;font-weight:200;font-size:.85rem;letter-spacing:.03em;color:rgba(255,255,255,.9);text-shadow:0 1px 3px rgba(0,0,0,.5);pointer-events:none;z-index:25;padding:0 20px;line-height:1.5;max-width:90%;width:auto;background:0 0;transition:color .3s ease,text-shadow .3s ease}
         .bw-description{margin-top:20px;margin-bottom:20px}
@@ -178,7 +178,7 @@
         @media(min-width:1301px)and(max-width:1400px){.nav-buttons{top:auto!important;bottom:12px!important;left:10px!important;transform:none!important}.right-menu{top:auto!important;bottom:12px!important;right:10px!important;transform:none!important}}
         @media(max-width:1300px){.nav-buttons,.info-btn{display:none!important}.right-menu{display:flex!important;top:auto!important;bottom:12px!important;right:10px!important;transform:none!important}.mobile-menu-overlay{display:block!important}}
         @media(min-width:1301px){.mobile-menu-overlay{display:none!important}.info-btn{display:block!important}}
-        @media(max-width:1199px){.color-main-img,.bw-img,.street-img,.places-img,.main-img,.spectrum-img{max-width:85%;max-height:65vh}}
+        @media(max-width:1199px){.color-main-img,.bw-img,.street-img,.places-img,.main-img,.spectrum-img,.leti-img{max-width:85%;max-height:65vh}}
         @media(max-width:991px){.logo{font-size:14px}.nav-btn,.right-menu-item,.submenu-btn{font-size:14px}}
         .mobile-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:204;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s;pointer-events:none}
         .mobile-overlay.active{opacity:1;visibility:visible;transition:opacity .3s ease,visibility 0s linear 0s;pointer-events:auto}
@@ -194,7 +194,7 @@
         body.light-theme{background:#fff}
         body.light-theme .main-slider:not(.slide-up) .logo{color:#fff!important;border-bottom-color:rgba(255,255,255,.4)!important}
         body.light-theme.gallery-mode .logo{color:#111!important;border-bottom-color:rgba(0,0,0,.4)!important}
-        body.light-theme .gallery-screen,body.light-theme #bwGallery,body.light-theme #streetColorGallery,body.light-theme #placesGallery,body.light-theme #mainGallery,body.light-theme #continuousSpectrumGallery{background:#fff}
+        body.light-theme .gallery-screen,body.light-theme #bwGallery,body.light-theme #streetColorGallery,body.light-theme #placesGallery,body.light-theme #mainGallery,body.light-theme #continuousSpectrumGallery,body.light-theme #letiGallery{background:#fff}
         body.light-theme .nav-btn,body.light-theme .submenu-btn,body.light-theme .right-menu-item{color:#111!important}
         body.light-theme .nav-item-with-submenu .nav-btn .bullet::before{color:#111!important}
         body.light-theme .right-menu-item{border-bottom-color:rgba(0,0,0,.4)!important}
@@ -275,21 +275,17 @@
             -webkit-user-select: text !important;
             cursor: text !important;
         }
-        /* Но ссылки должны иметь pointer */
         .info-modal-content a,
         .info-modal-content .project-gallery-link,
         .info-modal-content .project-gallery-link * {
             cursor: pointer !important;
         }
-        /* Заголовок модалки — тоже pointer */
         .info-modal-title {
             cursor: default !important;
         }
-        /* Убираем текстовый курсор с оверлея модалки */
         .info-modal {
             cursor: pointer !important;
         }
-        /* Контент модалки — текст, но не оверлей */
         .info-modal .info-modal-content {
             cursor: default !important;
         }
@@ -327,6 +323,9 @@
 <div id="streetColorGallery" class="gallery-screen"><div class="blur-bg" id="streetBlurA"></div><div class="blur-bg" id="streetBlurB"></div><div class="image-track" id="streetTrack"><img class="street-img" id="streetImg" alt=""></div></div>
 <div id="placesGallery" class="gallery-screen"><div class="blur-bg" id="placesBlurA"></div><div class="blur-bg" id="placesBlurB"></div><div class="image-track" id="placesTrack"><img class="places-img" id="placesImg" alt=""></div></div>
 <div id="continuousSpectrumGallery" class="gallery-screen"><div class="blur-bg" id="spectrumBlurA"></div><div class="blur-bg" id="spectrumBlurB"></div><div class="image-track" id="spectrumTrack"><img class="spectrum-img" id="spectrumImg" alt=""></div></div>
+
+<!-- Новая галерея для "Раз, два, три — лети!" -->
+<div id="letiGallery" class="gallery-screen"><div class="blur-bg" id="letiBlurA"></div><div class="blur-bg" id="letiBlurB"></div><div class="image-track" id="letiTrack"><img class="leti-img" id="letiImg" alt=""></div></div>
 
 <div id="miniatureVnevremeni" class="miniature-screen">
     <div class="miniature-logo" data-mode="vnevremeni">ВНЕ ВРЕМЕНИ</div>
@@ -520,7 +519,6 @@
         {url: "https://static.tildacdn.com/tild3937-6331-4337-a433-383235383936/1784456206000_R00038.jpg"},
         {url: "https://static.tildacdn.com/tild3165-3038-4065-a436-313163653565/1784976646000_R00040.jpg"},
         {url: "https://static.tildacdn.com/tild3533-3432-4464-b935-376462616262/1784976613000_R00040.jpg"}
-        
     ];
 
     // --- HELPERS ---
@@ -579,7 +577,7 @@
     const vnevremeniGal=createGallery('streetColorGallery','streetImg','streetBlurA','streetBlurB',vnevremeniDataFull);
     const placesGal=createGallery('placesGallery','placesImg','placesBlurA','placesBlurB',placesDataFull);
     const spectrumGal=createGallery('continuousSpectrumGallery','spectrumImg','spectrumBlurA','spectrumBlurB',spectrumDataFull);
-    const letiGallery=createGallery('colorGallery','colorImg','colorBlurA','colorBlurB',letiDataFull);
+    const letiGallery=createGallery('letiGallery','letiImg','letiBlurA','letiBlurB',letiDataFull);
 
     let currentMainData=getMainPhotosUniqShuffled();
     const mainGal=createGallery('mainGallery','mainImg','mainBlurA','mainBlurB',currentMainData);
@@ -655,7 +653,7 @@
     const lightboxCounter=document.getElementById('lightboxCounter');
     const miniatureScreens={vnevremeni:document.getElementById('miniatureVnevremeni'),vglubine:document.getElementById('miniatureVglubine'),places:document.getElementById('miniaturePlaces'),spectrum:document.getElementById('miniatureSpectrum'),leti:document.getElementById('miniatureLeti')};
     const miniGrids={vnevremeni:document.getElementById('miniGridVnevremeni'),vglubine:document.getElementById('miniGridVglubine'),places:document.getElementById('miniGridPlaces'),spectrum:document.getElementById('miniGridSpectrum'),leti:document.getElementById('miniGridLeti')};
-    const allGalleryScreens=[document.getElementById('colorGallery'),document.getElementById('bwGallery'),document.getElementById('streetColorGallery'),document.getElementById('placesGallery'),document.getElementById('mainGallery'),document.getElementById('continuousSpectrumGallery')];
+    const allGalleryScreens=[document.getElementById('colorGallery'),document.getElementById('bwGallery'),document.getElementById('streetColorGallery'),document.getElementById('placesGallery'),document.getElementById('mainGallery'),document.getElementById('continuousSpectrumGallery'),document.getElementById('letiGallery')];
     
     const miniProjectButtons = {
         vnevremeni: document.getElementById('miniProjectVnevremeni'),
@@ -1244,6 +1242,7 @@
     attachClickHandler(document.getElementById('streetColorGallery'),vnevremeniGal);
     attachClickHandler(document.getElementById('placesGallery'),placesGal);
     attachClickHandler(document.getElementById('continuousSpectrumGallery'),spectrumGal);
+    attachClickHandler(document.getElementById('letiGallery'),letiGallery);
 
     // --- NAV ---
     btnProjectsTrigger.addEventListener('click',(e)=>{e.stopPropagation();if(projectsSubmenu.classList.contains('open')){projectsSubmenu.classList.remove('open');projectsMenuItem.classList.remove('open');if(currentMode!=='vnevremeni')switchToMode('vnevremeni');}else{document.querySelectorAll('.submenu').forEach(s=>s.classList.remove('open'));document.querySelectorAll('.nav-item-with-submenu').forEach(item=>item.classList.remove('open'));projectsSubmenu.classList.add('open');projectsMenuItem.classList.add('open');}});
