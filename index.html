@@ -275,7 +275,6 @@
         .legend-item{display:flex;align-items:center;gap:6px;font-family:'Manrope',sans-serif;font-size:.75rem;font-weight:400;letter-spacing:.02em;color:rgba(255,255,255,.5);transition:color .3s ease}
         body.light-theme .legend-item{color:rgba(0,0,0,.4)}
         .legend-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
-        /* completed — оранжевый, current — зелёный */
         .legend-dot.completed{background:#e8a87c;box-shadow:0 0 6px rgba(232,168,124,.5)}
         .legend-dot.current{background:#4a9e6f;box-shadow:0 0 8px rgba(74,158,111,.7);animation:pulse 2s ease-in-out infinite}
         .legend-dot.upcoming{background:rgba(255,255,255,.2)}
@@ -283,7 +282,6 @@
         @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:.8}}
         .progress-bar{width:100%;max-width:300px;height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin:8px auto 20px;overflow:hidden}
         body.light-theme .progress-bar{background:rgba(0,0,0,.1)}
-        /* градиент от оранжевого к зелёному */
         .progress-fill{height:100%;background:linear-gradient(90deg,#e8a87c,#4a9e6f);border-radius:2px;transition:width .5s ease;width:0%}
         .chapters-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px}
         @media(max-width:600px){.chapters-grid{grid-template-columns:1fr;gap:12px}}
@@ -294,7 +292,6 @@
         body.light-theme .chapter-card{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.08)}
         .chapter-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.25);box-shadow:0 8px 24px rgba(0,0,0,.3)}
         body.light-theme .chapter-card:hover{border-color:rgba(0,0,0,.25);box-shadow:0 8px 24px rgba(0,0,0,.1)}
-        /* completed — оранжевый hover, current — зелёный hover */
         .chapter-card.completed{opacity:1}
         .chapter-card.completed:hover{border-color:rgba(232,168,124,.5);box-shadow:0 8px 24px rgba(232,168,124,.25)}
         .chapter-card.current{opacity:1;border-color:rgba(74,158,111,.3)}
@@ -307,7 +304,6 @@
         .chapter-number{font-family:'Unbounded',sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.05em;color:rgba(255,255,255,.4);transition:color .3s ease;display:flex;align-items:center;gap:8px;margin-bottom:6px}
         body.light-theme .chapter-number{color:rgba(0,0,0,.35)}
         .chapter-number .status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-        /* completed — оранжевый, current — зелёный */
         .chapter-number .status-dot.completed{background:#e8a87c;box-shadow:0 0 6px rgba(232,168,124,.5)}
         .chapter-number .status-dot.current{background:#4a9e6f;box-shadow:0 0 8px rgba(74,158,111,.7);animation:pulse 2s ease-in-out infinite}
         .chapter-number .status-dot.upcoming{background:rgba(255,255,255,.2)}
@@ -344,7 +340,6 @@
         .chapter-header-dates{font-family:'Manrope',sans-serif;font-weight:300;font-size:.75rem;letter-spacing:.03em;color:rgba(255,255,255,.3);transition:color .3s ease}
         body.light-theme .chapter-header-dates{color:rgba(0,0,0,.3)}
         .chapter-header-right{width:100%;max-width:100%;display:flex;justify-content:center}
-        /* ЗАГЛУШКА ДЛЯ ВЛОГА (пунктирный прямоугольник) */
         .chapter-video-placeholder{
             width:100%;max-width:600px;aspect-ratio:16/10;
             background:transparent;
@@ -365,12 +360,11 @@
             color:rgba(0,0,0,.4);
         }
         .chapter-self-portrait-section{display:flex;flex-direction:column;align-items:center;width:100%}
-        /* ЗАГЛУШКА ПОРТРЕТА БЕЗ ОКАНТОВКИ */
         .chapter-self-portrait{
             width:100%;max-width:100%;aspect-ratio:16/10;
             background-size:cover;background-position:center;
             background-color:#1a1a1a;
-            border:none;                        /* окантовка убрана */
+            border:none;
             display:flex;align-items:center;justify-content:center;
             margin-bottom:16px;
             transition:background .3s ease,opacity .3s ease;
@@ -380,8 +374,6 @@
         .chapter-self-portrait svg{width:48px;height:48px;opacity:.4}
         .chapter-portrait-caption{font-size:.85rem;font-weight:300;font-style:italic;color:rgba(255,255,255,.5);transition:color .3s ease;user-select:text;cursor:text;text-align:center;width:100%;margin-top:4px}
         body.light-theme .chapter-portrait-caption{color:rgba(0,0,0,.5)}
-        .chapter-logo{position:fixed;top:12px;left:10px;font-family:'Unbounded',sans-serif;font-size:16px;font-weight:700;letter-spacing:.03em;color:#fff;z-index:51;border-bottom:1px dotted rgba(255,255,255,.4);line-height:1.2;padding-bottom:2px;transition:color .3s ease,border-bottom-color .3s ease;cursor:pointer;white-space:nowrap;max-width:calc(100vw - 110px);overflow:hidden;text-overflow:ellipsis}
-        body.light-theme .chapter-logo{color:#111;border-bottom-color:rgba(0,0,0,.4)}
         .chapter-screen .chapter-theme-btn{position:fixed;top:12px;right:52px;width:32px;height:32px;background:transparent;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;color:#fff;z-index:220;transition:transform .2s ease,color .3s ease;border-radius:50%}
         body.light-theme .chapter-screen .chapter-theme-btn{color:#111}
         .chapter-screen .chapter-theme-btn:hover{transform:scale(1.1)}
@@ -398,6 +390,21 @@
         body.light-theme .chapter-transcript{color:rgba(0,0,0,.7)}
         .chapter-transcript p{margin-bottom:1.4rem}
         .chapter-transcript p:last-child{margin-bottom:0}
+
+        /* ===== ДНЕВНИКОВАЯ ЗАПИСЬ ===== */
+        .diary-entry{display:flex;flex-direction:column;gap:14px}
+        .diary-datestamp{
+            font-family:'Manrope',sans-serif;
+            font-weight:400;
+            font-size:.9rem;
+            letter-spacing:.04em;
+            color:rgba(255,255,255,.55);
+            padding-bottom:14px;
+            border-bottom:1px solid rgba(255,255,255,.08);
+            transition:color .3s ease,border-color .3s ease;
+        }
+        body.light-theme .diary-datestamp{color:rgba(0,0,0,.55);border-bottom-color:rgba(0,0,0,.08)}
+
         .chapter-photos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
         .chapter-photos-grid img{width:100%;aspect-ratio:16/10;object-fit:cover;cursor:pointer;transition:opacity .2s;display:block}
         .chapter-photos-grid img:hover{opacity:.7}
@@ -472,10 +479,6 @@
             .live-project-badge .live-arrow{font-size:12px;}
             .live-project-badge .live-dot{width:7px;height:7px;}
         }
-
-        /* ===== ТИХАЯ СТРОКА ЖИВОГО ПРОЕКТА — ЗАКОММЕНТИРОВАНА =====
-        .live-project-line{...}
-        ===== КОНЕЦ ЗАКОММЕНТИРОВАННОГО БЛОКА ===== */
     </style>
 </head>
 <body>
@@ -497,14 +500,6 @@
     </span>
     <span class="live-arrow">→</span>
 </button>
-
-<!-- ===== ТИХАЯ СТРОКА ЖИВОГО ПРОЕКТА — ЗАКОММЕНТИРОВАНА =====
-<button id="liveProjectLine" class="live-project-line" aria-label="Текущий проект">
-    <span class="live-line-dot"></span>
-    <span class="live-line-text" id="liveLineTitle">Год без зеркал · Глава 01</span>
-    <span class="live-arrow">→</span>
-</button>
--->
 
 <button id="mobileThemeButton" class="mobile-theme-button hidden" aria-label="Светлая/тёмная тема"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
 <button id="burgerBtn" class="burger-btn hidden" aria-label="Меню"><span></span><span></span><span></span></button>
@@ -538,9 +533,10 @@
             <div class="chapters-section">
                 <h3 class="chapters-section-title">Главы проекта</h3>
                 <p class="chapters-section-subtitle">12 глав · 12 месяцев · 365 дней</p>
+                <!-- Легенда: статусы в порядке 1. В процессе, 2. Завершена, 3. Предстоит -->
                 <div class="chapters-legend">
-                    <div class="legend-item"><span class="legend-dot completed"></span>Завершена</div>
                     <div class="legend-item"><span class="legend-dot current"></span>В процессе</div>
+                    <div class="legend-item"><span class="legend-dot completed"></span>Завершена</div>
                     <div class="legend-item"><span class="legend-dot upcoming"></span>Предстоит</div>
                 </div>
                 <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
@@ -552,7 +548,6 @@
 
 <!-- ===== ЭКРАН ГЛАВЫ (SPA) ===== -->
 <div class="chapter-screen" id="chapterScreen">
-    <div class="chapter-logo" id="chapterLogo">Глава 01</div>
     <button class="chapter-theme-btn" id="chapterThemeBtn" aria-label="Светлая/тёмная тема"></button>
     <button class="chapter-close-btn" id="chapterCloseBtn" aria-label="Закрыть">
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
@@ -569,7 +564,6 @@
             </div>
         </div>
         <div class="chapter-header-right">
-            <!-- ===== ЗАГЛУШКА ДЛЯ ВЛОГА ===== -->
             <div class="chapter-video-placeholder">Здесь будет влог</div>
         </div>
     </div>
@@ -646,7 +640,6 @@
 
     const firstPhoto = 'https://static.tildacdn.com/tild6365-3564-4362-b465-646630383831/1788458739000_R00047.jpg';
     
-    // ===== 12 ГЛАВ =====
     const chaptersData = [
         { 
             id: 1, 
@@ -656,6 +649,7 @@
             preview: '',
             description: 'Начало пути. Фиксация исходной точки, первые автопортреты и осознание масштаба предстоящего эксперимента.', 
             summary: '', 
+            diaryDate: '1 сентября 2026, 10:51',
             photos: [
                 'https://static.tildacdn.com/tild6364-6666-4265-b663-663564666637/1788458360000_R00047.jpg',
                 'https://static.tildacdn.com/tild6338-6466-4137-b530-313236326332/1789217316000_R00047.jpg',
@@ -665,17 +659,17 @@
                 'https://static.tildacdn.com/tild3635-3133-4937-a664-633864346537/1788604372000_R00047.jpg'
             ]
         },
-        { id: 2, title: 'Тишина', status: 'upcoming', dates: 'Октябрь 2026', preview: '', description: '', summary: '', photos: [] },
-        { id: 3, title: 'Привычки', status: 'upcoming', dates: 'Ноябрь 2026', preview: '', description: '', summary: '', photos: [] },
-        { id: 4, title: 'Страх', status: 'upcoming', dates: 'Декабрь 2026', preview: '', description: '', summary: '', photos: [] },
-        { id: 5, title: 'Сомнения', status: 'upcoming', dates: 'Январь 2027', preview: '', description: '', summary: '', photos: [] },
-        { id: 6, title: 'Отражения', status: 'upcoming', dates: 'Февраль 2027', preview: '', description: '', summary: '', photos: [] },
-        { id: 7, title: 'Границы', status: 'upcoming', dates: 'Март 2027', preview: '', description: '', summary: '', photos: [] },
-        { id: 8, title: 'Свет', status: 'upcoming', dates: 'Апрель 2027', preview: '', description: '', summary: '', photos: [] },
-        { id: 9, title: 'Тень', status: 'upcoming', dates: 'Май 2027', preview: '', description: '', summary: '', photos: [] },
-        { id: 10, title: 'Ритм', status: 'upcoming', dates: 'Июнь 2027', preview: '', description: '', summary: '', photos: [] },
-        { id: 11, title: 'Пауза', status: 'upcoming', dates: 'Июль 2027', preview: '', description: '', summary: '', photos: [] },
-        { id: 12, title: 'Возвращение', status: 'upcoming', dates: 'Август 2027', preview: '', description: '', summary: '', photos: [] }
+        { id: 2, title: 'Тишина', status: 'upcoming', dates: 'Октябрь 2026', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
+        { id: 3, title: 'Привычки', status: 'upcoming', dates: 'Ноябрь 2026', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
+        { id: 4, title: 'Страх', status: 'upcoming', dates: 'Декабрь 2026', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
+        { id: 5, title: 'Сомнения', status: 'upcoming', dates: 'Январь 2027', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
+        { id: 6, title: 'Отражения', status: 'upcoming', dates: 'Февраль 2027', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
+        { id: 7, title: 'Границы', status: 'upcoming', dates: 'Март 2027', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
+        { id: 8, title: 'Свет', status: 'upcoming', dates: 'Апрель 2027', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
+        { id: 9, title: 'Тень', status: 'upcoming', dates: 'Май 2027', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
+        { id: 10, title: 'Ритм', status: 'upcoming', dates: 'Июнь 2027', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
+        { id: 11, title: 'Пауза', status: 'upcoming', dates: 'Июль 2027', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
+        { id: 12, title: 'Возвращение', status: 'upcoming', dates: 'Август 2027', preview: '', description: '', summary: '', diaryDate: '', photos: [] }
     ];
 
     chaptersData.forEach(ch => {
@@ -943,7 +937,6 @@
         document.getElementById('chapterHeaderTitle').textContent = chapter.title;
         document.getElementById('chapterHeaderNumber').textContent = `Глава ${String(chapter.id).padStart(2,'0')}`;
         document.getElementById('chapterHeaderDates').textContent = chapter.dates;
-        document.getElementById('chapterLogo').textContent = `Глава ${String(chapter.id).padStart(2,'0')}`;
         
         syncChapterTheme();
         toggleMainThemeButtons(true);
@@ -967,10 +960,18 @@
             ? `onclick="openChapterLightboxFromUrl('https://static.tildacdn.com/tild3464-3136-4635-b565-323535303065/1788598685000_R00047.jpg')"` 
             : '';
         
+        const diaryDate = chapter.diaryDate || '';
+        const diaryBlock = diaryDate 
+            ? `<div class="diary-datestamp">${diaryDate}</div>` 
+            : '';
+        
         content.innerHTML = `
             <div class="chapter-section">
-                <div class="chapter-section-label">Расшифровка</div>
-                <div class="chapter-transcript"><p>${chapter.description || 'Описание отсутствует.'}</p></div>
+                <div class="chapter-section-label">Дневник</div>
+                <div class="chapter-transcript diary-entry">
+                    ${diaryBlock}
+                    <p>${chapter.description || 'Описание отсутствует.'}</p>
+                </div>
             </div>
             <div class="chapter-section">
                 <div class="chapter-section-label">Фотографии · ${photoCount}</div>
