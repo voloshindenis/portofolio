@@ -417,6 +417,56 @@
         body.light-theme .chapter-show-more-btn:hover{color:rgba(0,0,0,.7);border-color:rgba(0,0,0,.15)}
         .chapter-conclusion{font-size:.9rem;font-weight:300;line-height:1.9;color:rgba(255,255,255,.7);padding-top:24px;border-top:1px solid rgba(255,255,255,.06);transition:color .3s ease,border-color .3s ease;user-select:text;cursor:text}
         body.light-theme .chapter-conclusion{color:rgba(0,0,0,.7);border-top-color:rgba(0,0,0,.08)}
+        /* ===== Изображение в выводе главы ===== */
+        .chapter-conclusion-image{
+            display:block;
+            max-width:100%;
+            height:auto;
+            margin:24px auto 0;
+            cursor:pointer;
+            transition:opacity .2s ease;
+            border:1px solid rgba(255,255,255,.06);
+        }
+        .chapter-conclusion-image:hover{opacity:.85;}
+        body.light-theme .chapter-conclusion-image{border-color:rgba(0,0,0,.08);}
+
+        /* ===== Вывод в две колонки ===== */
+        .chapter-conclusion-columns{
+            display:flex;
+            flex-direction:row;
+            gap:32px;
+            align-items:flex-start;
+            padding-top:24px;
+            border-top:1px solid rgba(255,255,255,.06);
+            transition:border-color .3s ease;
+        }
+        body.light-theme .chapter-conclusion-columns{border-top-color:rgba(0,0,0,.08)}
+        .chapter-conclusion-columns .chapter-conclusion-image{
+            flex:0 0 45%;
+            max-width:45%;
+            margin:0;
+            border:1px solid rgba(255,255,255,.06);
+        }
+        body.light-theme .chapter-conclusion-columns .chapter-conclusion-image{border-color:rgba(0,0,0,.08)}
+        .chapter-conclusion-columns .chapter-conclusion-text{
+            flex:1 1 55%;
+            font-size:.9rem;
+            font-weight:300;
+            line-height:1.9;
+            color:rgba(255,255,255,.7);
+            transition:color .3s ease;
+            user-select:text;
+            cursor:text;
+        }
+        body.light-theme .chapter-conclusion-columns .chapter-conclusion-text{color:rgba(0,0,0,.7)}
+        .chapter-conclusion-columns .chapter-conclusion-text p{margin-bottom:1.4rem}
+        .chapter-conclusion-columns .chapter-conclusion-text p:last-child{margin-bottom:0}
+        @media(max-width:700px){
+            .chapter-conclusion-columns{flex-direction:column;gap:20px}
+            .chapter-conclusion-columns .chapter-conclusion-image{flex:none;max-width:100%;width:100%}
+            .chapter-conclusion-columns .chapter-conclusion-text{flex:none;width:100%}
+        }
+
         .chapter-screen::-webkit-scrollbar{width:4px}
         .chapter-screen::-webkit-scrollbar-track{background:transparent}
         .chapter-screen::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15)}
@@ -648,8 +698,9 @@
             dates: 'Сентябрь 2026', 
             preview: '',
             description: 'Начало пути. Фиксация исходной точки, первые автопортреты и осознание масштаба предстоящего эксперимента.', 
-            summary: '', 
+            summary: 'Месяц сомнений и неопределённости, но мне кажется, он таким и должен быть. Мне удалось удалить все социальные сети, и это было сделать довольно просто. Со временем, конечно, мозг стал активно искать отговорки, чтобы вернуть приложения и использовать их в виде инструментов и всё же постить материал, но это нарушило бы суть проекта и эксперимента над собой. Проблема всплыла с влогами, т. к. я и раньше не снимал, и сейчас под проект мне сложно было выдавить из себя мысли. Думаю, оставить ли этот блок с влогами или всё же отказаться от него. Всё больше мыслей, что остаёшься один на один со своим творчеством — это немного волнительно, но в то же время появляется азарт исследования.<br><br>Думаю, на этом я закончу вывод из этого месяца. Увидимся в следующей главе через месяц.', 
             diaryDate: '1 сентября 2026, 10:51',
+            conclusionImage: 'https://static.tildacdn.com/tild6632-6131-4464-b662-636137393833/_1__261003_114845.jpg',
             photos: [
                 'https://static.tildacdn.com/tild6364-6666-4265-b663-663564666637/1788458360000_R00047.jpg',
                 'https://static.tildacdn.com/tild6338-6466-4137-b530-313236326332/1789217316000_R00047.jpg',
@@ -965,6 +1016,20 @@
             ? `<div class="diary-datestamp">${diaryDate}</div>` 
             : '';
         
+        let conclusionHtml = '';
+        if (chapter.conclusionImage) {
+            conclusionHtml = `
+                <div class="chapter-conclusion-columns">
+                    <img src="${chapter.conclusionImage}" alt="Изображение к выводу" class="chapter-conclusion-image" onclick="openChapterLightboxFromUrl('${chapter.conclusionImage}')">
+                    <div class="chapter-conclusion-text">
+                        <p>${chapter.summary || 'Вывод будет добавлен после завершения главы.'}</p>
+                    </div>
+                </div>
+            `;
+        } else {
+            conclusionHtml = `<div class="chapter-conclusion">${chapter.summary || 'Вывод будет добавлен после завершения главы.'}</div>`;
+        }
+        
         content.innerHTML = `
             <div class="chapter-section">
                 <div class="chapter-section-label">Дневник</div>
@@ -989,7 +1054,7 @@
             </div>
             <div class="chapter-section">
                 <div class="chapter-section-label">Вывод</div>
-                <div class="chapter-conclusion">${chapter.summary || 'Вывод будет добавлен после завершения главы.'}</div>
+                ${conclusionHtml}
             </div>
         `;
         
@@ -1279,7 +1344,7 @@
                 miniHomeButtons[key].addEventListener('click',function(e){
                     e.stopPropagation();
                     if(currentMode==='miniature'){
-                        Object.values(miniatureScreens).forEach(el=>{if(el)el.classList.remove('visible')});
+                        Object.values(miniatureScreens).forEach(el=>el.classList.remove('visible'));
                         document.body.classList.remove('miniature-mode');
                         mobileThemeButton.classList.add('hidden');
                         themeToggle.classList.remove('hidden');
