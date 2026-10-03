@@ -409,12 +409,7 @@
         .chapter-photos-grid img{width:100%;aspect-ratio:16/10;object-fit:cover;cursor:pointer;transition:opacity .2s;display:block}
         .chapter-photos-grid img:hover{opacity:.7}
         @media(max-width:500px){.chapter-photos-grid{grid-template-columns:1fr}}
-        .chapter-photos-grid .hidden-photo{display:none}
-        .chapter-photos-grid.expanded .hidden-photo{display:block}
-        .chapter-show-more-btn{display:block;width:100%;padding:12px 0;margin-top:20px;background:transparent;border:none;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer;font-family:'Manrope',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .3s ease,border-color .3s ease;user-select:none}
-        body.light-theme .chapter-show-more-btn{color:rgba(0,0,0,.4);border-top-color:rgba(0,0,0,.08);border-bottom-color:rgba(0,0,0,.08)}
-        .chapter-show-more-btn:hover{color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.15)}
-        body.light-theme .chapter-show-more-btn:hover{color:rgba(0,0,0,.7);border-color:rgba(0,0,0,.15)}
+
         .chapter-conclusion{font-size:.9rem;font-weight:300;line-height:1.9;color:rgba(255,255,255,.7);padding-top:24px;border-top:1px solid rgba(255,255,255,.06);transition:color .3s ease,border-color .3s ease;user-select:text;cursor:text}
         body.light-theme .chapter-conclusion{color:rgba(0,0,0,.7);border-top-color:rgba(0,0,0,.08)}
         /* ===== Изображение в выводе главы ===== */
@@ -707,7 +702,13 @@
                 'https://static.tildacdn.com/tild6638-6463-4332-a130-636234313761/1789220148000_R00048.jpg',
                 'https://static.tildacdn.com/tild6633-6138-4331-a664-343137346566/1789322127000_R00048.jpg',
                 'https://static.tildacdn.com/tild3030-3634-4334-a332-343132623730/1788244797000_R00047.jpg',
-                'https://static.tildacdn.com/tild3635-3133-4937-a664-633864346537/1788604372000_R00047.jpg'
+                'https://static.tildacdn.com/tild3635-3133-4937-a664-633864346537/1788604372000_R00047.jpg',
+                'https://static.tildacdn.com/tild3662-3032-4062-b431-363032363936/1790569271000_R00049.jpg',
+                'https://static.tildacdn.com/tild6433-3161-4230-b839-646336653265/1790918215000_R00050.jpg',
+                'https://static.tildacdn.com/tild6366-6133-4938-a466-343237646132/1790338320000_R00049.jpg',
+                'https://static.tildacdn.com/tild6139-6366-4361-b162-633533663736/1790427996000_R00049.jpg',
+                'https://static.tildacdn.com/tild3237-6536-4162-a137-656562366138/1787852163000_R00046.jpg',
+                'https://static.tildacdn.com/tild3366-3139-4634-b063-346564303432/1790692393000_R00050.jpg'
             ]
         },
         { id: 2, title: 'Тишина', status: 'upcoming', dates: 'Октябрь 2026', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
@@ -996,7 +997,7 @@
         let photosHtml = '';
         if(allPhotos.length > 0){
             photosHtml = allPhotos.map((url, i) => 
-                `<img src="${url}" alt="Фото ${i+1}" class="${i >= 4 ? 'hidden-photo' : ''}" onclick="openChapterLightbox(${i})">`
+                `<img src="${url}" alt="Фото ${i+1}" onclick="openChapterLightbox(${i})">`
             ).join('');
         } else {
             photosHtml = `<div class="chapter-placeholder-text">Фотографии будут добавлены</div>`;
@@ -1041,7 +1042,6 @@
             <div class="chapter-section">
                 <div class="chapter-section-label">Фотографии · ${photoCount}</div>
                 <div class="chapter-photos-grid" id="chapterPhotosGrid">${photosHtml}</div>
-                ${photoCount > 4 ? `<button class="chapter-show-more-btn" id="chapterPhotosShowMoreBtn">Показать все · ${photoCount}</button>` : ''}
             </div>
             <div class="chapter-section">
                 <div class="chapter-section-label">Автопортрет</div>
@@ -1059,15 +1059,6 @@
         `;
         
         window._chapterPhotos = allPhotos;
-        
-        setTimeout(() => {
-            const photosGrid = document.getElementById('chapterPhotosGrid');
-            const photosBtn = document.getElementById('chapterPhotosShowMoreBtn');
-            if(photosBtn) photosBtn.addEventListener('click', function() {
-                const expanded = photosGrid.classList.toggle('expanded');
-                this.textContent = expanded ? 'Свернуть' : `Показать все · ${photoCount}`;
-            });
-        }, 50);
         
         if (updateHistory !== false) {
             const newHash = 'godbezzerkal-' + chapter.id;
