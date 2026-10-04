@@ -330,7 +330,7 @@
         .chapter-screen{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:#0a0a0a;overflow-y:auto;overflow-x:hidden;cursor:default;z-index:50;transition:background-color .3s ease;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .4s cubic-bezier(.23,1,.32,1),visibility 0s linear .4s,background-color .3s ease}
         .chapter-screen.visible{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .4s cubic-bezier(.23,1,.32,1),visibility 0s linear 0s}
         body.light-theme .chapter-screen{background:#f5f5f5}
-        .chapter-header{display:flex;flex-direction:column;align-items:flex-start;padding:80px 20px 56px;max-width:900px;margin:0 auto;gap:32px}
+        .chapter-header{display:flex;flex-direction:column;align-items:flex-start;padding:80px 20px 56px;max-width:800px;margin:0 auto;gap:32px}
         .chapter-header-left{display:flex;flex-direction:column;align-items:flex-start;width:100%}
         .chapter-header-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:2.5rem;letter-spacing:.02em;color:#fff;margin-bottom:12px;transition:color .3s ease;line-height:1.2}
         body.light-theme .chapter-header-title{color:#111}
@@ -339,10 +339,10 @@
         body.light-theme .chapter-header-number{color:rgba(0,0,0,.35)}
         .chapter-header-dates{font-family:'Manrope',sans-serif;font-weight:300;font-size:.75rem;letter-spacing:.03em;color:rgba(255,255,255,.3);transition:color .3s ease}
         body.light-theme .chapter-header-dates{color:rgba(0,0,0,.3)}
-        .chapter-header-right{width:100%;max-width:100%;display:flex;justify-content:center}
-        /* ===== YouTube-плеер вместо заглушки ===== */
+        .chapter-header-right{width:100%;display:flex;justify-content:flex-start}
+        /* ===== YouTube-плеер ===== */
         .chapter-video-wrapper{
-            width:100%;max-width:600px;
+            width:100%;
             aspect-ratio:16/9;
             background:#000;
             position:relative;
@@ -699,7 +699,7 @@
             description: 'Начало пути. Фиксация исходной точки, первые автопортреты и осознание масштаба предстоящего эксперимента.', 
             summary: 'Месяц сомнений и неопределённости, но мне кажется, он таким и должен быть. Мне удалось удалить все социальные сети, и это было сделать довольно просто. Со временем, конечно, мозг стал активно искать отговорки, чтобы вернуть приложения и использовать их в виде инструментов и всё же постить материал, но это нарушило бы суть проекта и эксперимента над собой. Проблема всплыла с влогами, т. к. я и раньше не снимал, и сейчас под проект мне сложно было выдавить из себя мысли. Думаю, оставить ли этот блок с влогами или всё же отказаться от него. Всё больше мыслей, что остаёшься один на один со своим творчеством — это немного волнительно, но в то же время появляется азарт исследования.<br><br>Думаю, на этом я закончу вывод из этого месяца. Увидимся в следующей главе через месяц.', 
             diaryDate: '1 сентября 2026, 10:51',
-            conclusionImage: 'https://static.tildacdn.com/tild6632-6131-4464-b662-636137393833/_1__261003_114845.jpg',
+            conclusionImage: 'https://static.tildacdn.com/tild3433-6165-4534-b133-316462323966/_1__261004_164324.jpg',
             videoId: chapter1VideoId,
             photos: [
                 'https://static.tildacdn.com/tild6364-6666-4265-b663-663564666637/1788458360000_R00047.jpg',
@@ -1129,7 +1129,7 @@
     }
     
     document.getElementById('chapterCloseBtn').addEventListener('click', closeChapterScreen);
-    document.getElementById('chapterScreen').addEventListener('click', function(e) { if (e.target === this) closeChapterScreen(); });
+    // Выход из главы — только кнопкой "✕" или клавишей Escape.
     document.getElementById('chapterThemeBtn').addEventListener('click', function() {
         const isLight = document.body.classList.contains('light-theme');
         setTheme(isLight ? 'dark' : 'light');
