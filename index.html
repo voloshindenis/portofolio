@@ -340,24 +340,24 @@
         .chapter-header-dates{font-family:'Manrope',sans-serif;font-weight:300;font-size:.75rem;letter-spacing:.03em;color:rgba(255,255,255,.3);transition:color .3s ease}
         body.light-theme .chapter-header-dates{color:rgba(0,0,0,.3)}
         .chapter-header-right{width:100%;max-width:100%;display:flex;justify-content:center}
-        .chapter-video-placeholder{
-            width:100%;max-width:600px;aspect-ratio:16/10;
-            background:transparent;
-            border:1px dashed rgba(255,255,255,.15);
-            display:flex;align-items:center;justify-content:center;
-            font-family:'Manrope',sans-serif;font-size:.9rem;
-            color:rgba(255,255,255,.4);
-            cursor:default;
-            transition:color .3s ease,border-color .3s ease,background .3s ease;
-            text-align:center;padding:20px;
-            letter-spacing:.08em;
-            text-transform:uppercase;
-            font-weight:500;
+        /* ===== YouTube-плеер вместо заглушки ===== */
+        .chapter-video-wrapper{
+            width:100%;max-width:600px;
+            aspect-ratio:16/9;
+            background:#000;
+            position:relative;
+            overflow:hidden;
+            border:1px solid rgba(255,255,255,.08);
+            transition:border-color .3s ease;
         }
-        body.light-theme .chapter-video-placeholder{
-            background:transparent;
-            border-color:rgba(0,0,0,.15);
-            color:rgba(0,0,0,.4);
+        body.light-theme .chapter-video-wrapper{border-color:rgba(0,0,0,.08);}
+        .chapter-video-wrapper iframe{
+            position:absolute;
+            top:0;left:0;
+            width:100%;
+            height:100%;
+            border:none;
+            display:block;
         }
         .chapter-self-portrait-section{display:flex;flex-direction:column;align-items:center;width:100%}
         .chapter-self-portrait{
@@ -609,7 +609,8 @@
             </div>
         </div>
         <div class="chapter-header-right">
-            <div class="chapter-video-placeholder">Здесь будет влог</div>
+            <!-- YouTube-плеер будет вставлен динамически -->
+            <div class="chapter-video-wrapper" id="chapterVideoWrapper"></div>
         </div>
     </div>
     <div class="chapter-content" id="chapterContent"></div>
@@ -685,6 +686,9 @@
 
     const firstPhoto = 'https://static.tildacdn.com/tild6365-3564-4362-b465-646630383831/1788458739000_R00047.jpg';
     
+    // ID YouTube-видео для главы 1
+    const chapter1VideoId = 'dRYzbkyHP50';
+    
     const chaptersData = [
         { 
             id: 1, 
@@ -696,6 +700,7 @@
             summary: 'Месяц сомнений и неопределённости, но мне кажется, он таким и должен быть. Мне удалось удалить все социальные сети, и это было сделать довольно просто. Со временем, конечно, мозг стал активно искать отговорки, чтобы вернуть приложения и использовать их в виде инструментов и всё же постить материал, но это нарушило бы суть проекта и эксперимента над собой. Проблема всплыла с влогами, т. к. я и раньше не снимал, и сейчас под проект мне сложно было выдавить из себя мысли. Думаю, оставить ли этот блок с влогами или всё же отказаться от него. Всё больше мыслей, что остаёшься один на один со своим творчеством — это немного волнительно, но в то же время появляется азарт исследования.<br><br>Думаю, на этом я закончу вывод из этого месяца. Увидимся в следующей главе через месяц.', 
             diaryDate: '1 сентября 2026, 10:51',
             conclusionImage: 'https://static.tildacdn.com/tild6632-6131-4464-b662-636137393833/_1__261003_114845.jpg',
+            videoId: chapter1VideoId,
             photos: [
                 'https://static.tildacdn.com/tild6364-6666-4265-b663-663564666637/1788458360000_R00047.jpg',
                 'https://static.tildacdn.com/tild6338-6466-4137-b530-313236326332/1789217316000_R00047.jpg',
@@ -906,6 +911,7 @@
     const miniHomeButtons={vnevremeni:document.getElementById('miniHomeVnevremeni'),vglubine:document.getElementById('miniHomeVglubine')};
     const liveProjectBadge=document.getElementById('liveProjectBadge');
     const liveBadgeTitle=document.getElementById('liveBadgeTitle');
+    const chapterVideoWrapper=document.getElementById('chapterVideoWrapper');
 
     let currentMode='slider', previousMode='slider';
     let currentLightboxData=[], currentLightboxIndex=0, isLightboxTransitioning=false;
@@ -979,6 +985,20 @@
         });
     }
     
+    function setChapterVideo(videoId){
+        // Очищаем контейнер
+        chapterVideoWrapper.innerHTML = '';
+        if (!videoId) return;
+        // Создаём iframe YouTube
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
+        iframe.title = 'Влог главы';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        iframe.loading = 'lazy';
+        chapterVideoWrapper.appendChild(iframe);
+    }
+    
     function openChapterScreen(chapterId, updateHistory){
         const chapter=chaptersData.find(c=>c.id===chapterId);
         if(!chapter) return;
@@ -991,6 +1011,9 @@
         document.getElementById('chapterHeaderTitle').textContent = chapter.title;
         document.getElementById('chapterHeaderNumber').textContent = `Глава ${String(chapter.id).padStart(2,'0')}`;
         document.getElementById('chapterHeaderDates').textContent = chapter.dates;
+        
+        // Устанавливаем видео, если оно задано для главы
+        setChapterVideo(chapter.videoId);
         
         syncChapterTheme();
         toggleMainThemeButtons(true);
