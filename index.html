@@ -250,6 +250,14 @@
         .godbezzerkal-screen{display:flex;flex-direction:column;align-items:center;cursor:default!important;padding:100px 24px 100px;box-sizing:border-box}
         .godbezzerkal-content{max-width:800px;width:100%;margin:0 auto;box-sizing:border-box}
         .godbezzerkal-content,.godbezzerkal-content *{user-select:text;cursor:text}
+        /* Исключение: карточки глав внутри .godbezzerkal-content — не текст */
+        .godbezzerkal-content .chapter-card,
+        .godbezzerkal-content .chapter-card *,
+        .godbezzerkal-content .chapter-card *::before,
+        .godbezzerkal-content .chapter-card *::after{
+            user-select:none!important;
+            -webkit-user-select:none!important;
+        }
         .godbezzerkal-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:1.6rem;letter-spacing:.02em;color:#fff;margin-bottom:10px;transition:color .3s ease}
         .godbezzerkal-short-desc{font-family:'Manrope',sans-serif;font-weight:300;font-size:1rem;letter-spacing:.03em;color:rgba(255,255,255,.7);margin-bottom:36px;font-style:italic;transition:color .3s ease}
         .godbezzerkal-description{font-family:'Manrope',sans-serif;font-weight:200;font-size:1rem;letter-spacing:.02em;line-height:1.6;color:rgba(255,255,255,.9);transition:color .3s ease}
@@ -286,9 +294,41 @@
         .chapters-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px}
         @media(max-width:600px){.chapters-grid{grid-template-columns:1fr;gap:12px}}
         @media(min-width:1200px){.chapters-grid{grid-template-columns:repeat(3,1fr);gap:18px}}
-        .chapter-card{position:relative;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);padding:20px 18px 16px;transition:all .3s ease;display:flex;flex-direction:column;aspect-ratio:16/10;overflow:hidden;min-height:0}
-        .chapter-card.completed,.chapter-card.current{cursor:pointer}
-        .chapter-card.upcoming{cursor:default}
+
+        /* === БАЗОВЫЕ СТИЛИ КАРТОЧКИ === */
+        .chapter-card{
+            position:relative;
+            background:rgba(255,255,255,.03);
+            border:1px solid rgba(255,255,255,.08);
+            padding:20px 18px 16px;
+            transition:all .3s ease;
+            display:flex;
+            flex-direction:column;
+            aspect-ratio:16/10;
+            overflow:hidden;
+            min-height:0;
+            cursor:pointer;
+        }
+        .chapter-card.upcoming{cursor:default!important;}
+        .chapter-card.locked{cursor:default!important;}
+
+        /* Все элементы внутри карточки наследуют её курсор */
+        .chapter-card .chapter-top,
+        .chapter-card .chapter-bottom,
+        .chapter-card .chapter-number,
+        .chapter-card .chapter-name,
+        .chapter-card .chapter-dates,
+        .chapter-card .chapter-arrow,
+        .chapter-card .chapter-preview,
+        .chapter-card .chapter-top *,
+        .chapter-card .chapter-bottom *{
+            cursor:inherit;
+            user-select:none!important;
+            -webkit-user-select:none!important;
+        }
+        .chapter-card.upcoming *,
+        .chapter-card.locked *{cursor:default!important;}
+
         body.light-theme .chapter-card{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.08)}
         .chapter-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.25);box-shadow:0 8px 24px rgba(0,0,0,.3)}
         body.light-theme .chapter-card:hover{border-color:rgba(0,0,0,.25);box-shadow:0 8px 24px rgba(0,0,0,.1)}
@@ -300,7 +340,13 @@
         .chapter-card.upcoming:hover{opacity:.7;transform:none;box-shadow:none}
         .chapter-card.upcoming .chapter-arrow{opacity:.2}
         .chapter-card.upcoming:hover .chapter-arrow{transform:none;color:rgba(255,255,255,.2)}
-        .chapter-top{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;flex:1}
+
+        /* Заблокированная глава: не кликабельна, без hover-эффекта открытия */
+        .chapter-card.locked:hover{transform:none;box-shadow:none;border-color:rgba(74,158,111,.3)}
+        .chapter-card.locked .chapter-arrow{opacity:.3;color:rgba(255,255,255,.3)}
+        .chapter-card.locked:hover .chapter-arrow{transform:none;color:rgba(255,255,255,.3)}
+
+        .chapter-top{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;flex:1;}
         .chapter-number{font-family:'Unbounded',sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.05em;color:rgba(255,255,255,.4);transition:color .3s ease;display:flex;align-items:center;gap:8px;margin-bottom:6px}
         body.light-theme .chapter-number{color:rgba(0,0,0,.35)}
         .chapter-number .status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
@@ -311,12 +357,12 @@
         .chapter-name{font-family:'Manrope',sans-serif;font-weight:500;font-size:.95rem;letter-spacing:.02em;color:#fff;line-height:1.3;transition:color .3s ease}
         body.light-theme .chapter-name{color:#111}
         .chapter-card.upcoming .chapter-name{opacity:.6}
-        .chapter-bottom{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);transition:border-color .3s ease}
+        .chapter-bottom{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);transition:border-color .3s ease;}
         body.light-theme .chapter-bottom{border-top-color:rgba(0,0,0,.06)}
         .chapter-dates{font-family:'Manrope',sans-serif;font-weight:300;font-size:.65rem;letter-spacing:.02em;color:rgba(255,255,255,.4);transition:color .3s ease}
         body.light-theme .chapter-dates{color:rgba(0,0,0,.35)}
         .chapter-arrow{font-family:monospace;font-size:1rem;color:rgba(255,255,255,.3);transition:all .3s ease}
-        .chapter-card:not(.upcoming):hover .chapter-arrow{transform:translateX(4px);color:rgba(255,255,255,.7)}
+        .chapter-card:not(.upcoming):not(.locked):hover .chapter-arrow{transform:translateX(4px);color:rgba(255,255,255,.7)}
         .chapter-preview{position:absolute;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;transition:opacity .3s ease;pointer-events:none;z-index:0}
         .chapter-card.completed .chapter-preview{opacity:.85}
         .chapter-card.current .chapter-preview{opacity:.85}
@@ -541,7 +587,7 @@
     <span class="live-dot"></span>
     <span class="live-text-wrap">
         <span class="live-label">Сейчас идёт</span>
-        <span class="live-title" id="liveBadgeTitle">Год без зеркал · Глава 01</span>
+        <span class="live-title" id="liveBadgeTitle">Год без зеркал · Глава 02</span>
     </span>
     <span class="live-arrow">→</span>
 </button>
@@ -693,7 +739,7 @@
         { 
             id: 1, 
             title: 'Точка отсчёта', 
-            status: 'current', 
+            status: 'completed', 
             dates: 'Сентябрь 2026', 
             preview: '',
             description: 'Начало пути. Фиксация исходной точки, первые автопортреты и осознание масштаба предстоящего эксперимента.', 
@@ -716,7 +762,7 @@
                 'https://static.tildacdn.com/tild3366-3139-4634-b063-346564303432/1790692393000_R00050.jpg'
             ]
         },
-        { id: 2, title: 'Тишина', status: 'upcoming', dates: 'Октябрь 2026', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
+        { id: 2, title: 'Тишина', status: 'current', locked: true, dates: 'Октябрь 2026', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
         { id: 3, title: 'Привычки', status: 'upcoming', dates: 'Ноябрь 2026', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
         { id: 4, title: 'Страх', status: 'upcoming', dates: 'Декабрь 2026', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
         { id: 5, title: 'Сомнения', status: 'upcoming', dates: 'Январь 2027', preview: '', description: '', summary: '', diaryDate: '', photos: [] },
@@ -959,9 +1005,10 @@
     function getChapterCardHtml(chapter){
         const numStr=String(chapter.id).padStart(2,'0');
         const statusClass=chapter.status;
+        const lockedClass = chapter.locked ? ' locked' : '';
         const previewStyle=chapter.preview?`style="background-image:url('${chapter.preview}')"`:'';
         const previewDiv=chapter.preview?`<div class="chapter-preview" ${previewStyle}></div>`:'';
-        return `<div class="chapter-card ${statusClass}" data-chapter-id="${chapter.id}">
+        return `<div class="chapter-card ${statusClass}${lockedClass}" data-chapter-id="${chapter.id}">
             ${previewDiv}
             <div class="chapter-top">
                 <div class="chapter-number"><span class="status-dot ${statusClass}"></span>Глава ${numStr}</div>
@@ -977,7 +1024,8 @@
     function renderChapters(){
         chaptersGrid.innerHTML=chaptersData.map(getChapterCardHtml).join('');
         updateProgress();
-        document.querySelectorAll('.chapter-card.current, .chapter-card.completed').forEach(card=>{
+        // Навешиваем обработчик только на карточки без класса locked
+        document.querySelectorAll('.chapter-card.current:not(.locked), .chapter-card.completed:not(.locked)').forEach(card=>{
             card.addEventListener('click',function(e){
                 e.stopPropagation();
                 openChapterScreen(parseInt(this.getAttribute('data-chapter-id')));
@@ -1003,6 +1051,7 @@
         const chapter=chaptersData.find(c=>c.id===chapterId);
         if(!chapter) return;
         if(chapter.status === 'upcoming') { alert('Эта глава ещё не доступна'); return; }
+        if(chapter.locked) { return; }
         
         const screen = document.getElementById('chapterScreen');
         const content = document.getElementById('chapterContent');
@@ -1680,7 +1729,7 @@
         if (chapterMatch) {
             const chapterId = parseInt(chapterMatch[1]);
             const chapter = chaptersData.find(c => c.id === chapterId);
-            if (chapter && chapter.status !== 'upcoming') {
+            if (chapter && chapter.status !== 'upcoming' && !chapter.locked) {
                 if (currentMode !== 'godbezzerkal') {
                     setMode('godbezzerkal', true);
                     setTimeout(() => { openChapterScreen(chapterId, false); }, 100);
