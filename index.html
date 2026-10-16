@@ -55,6 +55,14 @@ body[data-mode=slider] #nav,body[data-mode=mini] #nav,body[data-ov] #nav{display
 #top{top:12px;right:10px;z-index:300;display:flex;gap:12px}
 .ic{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center}.ic[hidden]{display:none}
 .ic svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2}
+.ic{transition:transform .2s ease}.ic:hover{transform:scale(1.1)}
+#gridBtn:hover{transform:translateX(-50%) scale(1.1)}
+#close,[data-act=lbclose]{transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+#close:hover,[data-act=lbclose]:hover{transform:rotate(90deg) scale(1.1)}
+#menuBtn path{transform-box:fill-box;transform-origin:center;transition:transform .25s ease,opacity .25s ease}
+#menuBtn[aria-expanded=true] path:nth-child(1){transform:translateY(6px) rotate(45deg)}
+#menuBtn[aria-expanded=true] path:nth-child(2){opacity:0}
+#menuBtn[aria-expanded=true] path:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 body[data-mode=slider] #top{color:#fff}
 body[data-mode=slider] #theme,body[data-mode=slider] #menuBtn,#close,#menuBtn{display:none}
 body[data-ov] #close,body[data-mode=mini] #close{display:inline-flex}
@@ -156,7 +164,7 @@ body[data-mode=slider]:not([data-ov]) #live.has{display:flex}
 <nav id="nav" class="fx" aria-label="Разделы"></nav>
 <div id="top" class="fx">
 <button id="theme" class="ic" data-act="theme" aria-label="Светлая/тёмная тема"></button>
-<button id="menuBtn" class="ic" data-act="menu" aria-label="Меню" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+<button id="menuBtn" class="ic" data-act="menu" aria-label="Меню" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg></button>
 <button id="close" class="ic" data-act="close" aria-label="Закрыть"><svg viewBox="0 0 20 20"><path d="M16 4 4 16M4 4l12 12"/></svg></button>
 </div>
 <div id="menu" aria-label="Меню"></div>
