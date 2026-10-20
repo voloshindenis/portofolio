@@ -28,10 +28,6 @@ a{color:inherit}
 .view{position:fixed;inset:0;overflow-y:auto;background:var(--bg);opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
 .view.on{opacity:1;visibility:visible;transition:opacity .4s}
 .wrap{max-width:800px;margin:0 auto}
-/* слайдер */
-#slider{position:fixed;inset:0;z-index:10;background:#1a1a1a;cursor:pointer;overflow:hidden;transition:transform .5s}
-body:not([data-mode=slider]) #slider{transform:translateY(-100%)}
-.sl{position:absolute;inset:0;background:center/cover;opacity:0;transition:opacity 1s}.sl.on{opacity:1}
 /* галерея */
 #gal{z-index:15;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:ew-resize}
 #gbg{position:absolute;inset:-60px;background:center/cover;filter:blur(40px);opacity:.55}
@@ -44,14 +40,13 @@ body:not([data-mode=slider]) #slider{transform:translateY(-100%)}
 /* фиксированный интерфейс */
 .fx{position:fixed;z-index:31}
 #logo,#mt{top:12px;left:10px;font:700 16px/1.2 Unbounded,sans-serif;letter-spacing:.03em;border-bottom:1px dotted var(--line);padding-bottom:2px}
-body[data-mode=slider] #logo{color:#fff;border-color:rgba(255,255,255,.4)}
 body[data-ov] #logo,body[data-mode=mini] #logo,#mt:empty{display:none}
 #mt{display:block}
 #nav{top:50%;left:10px;transform:translateY(-50%);display:flex;flex-direction:column;align-items:flex-start}
 #nav button,#menu button{font-weight:500;padding:3px 16px 3px 0;text-align:left;transition:transform .2s}
 #nav button:hover{transform:translateX(4px)}
 button span{border-bottom:1px dotted transparent}button.act span{border-color:var(--line)}
-body[data-mode=slider] #nav,body[data-mode=mini] #nav,body[data-ov] #nav{display:none}
+body[data-mode=mini] #nav,body[data-ov] #nav{display:none}
 #top{top:12px;right:10px;z-index:300;display:flex;gap:12px}
 .ic{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center}.ic[hidden]{display:none}
 .ic svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2}
@@ -63,12 +58,11 @@ body[data-mode=slider] #nav,body[data-mode=mini] #nav,body[data-ov] #nav{display
 #menuBtn[aria-expanded=true] path:nth-child(1){transform:translateY(6px) rotate(45deg)}
 #menuBtn[aria-expanded=true] path:nth-child(2){opacity:0}
 #menuBtn[aria-expanded=true] path:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-body[data-mode=slider] #top{color:#fff}
-body[data-mode=slider] #theme,body[data-mode=slider] #menuBtn,#close,#menuBtn{display:none}
+#close,#menuBtn{display:none}
 body[data-ov] #close,body[data-mode=mini] #close{display:inline-flex}
 #menu{position:fixed;top:0;right:0;bottom:0;width:280px;max-width:80vw;z-index:250;background:var(--bg);padding:80px 20px;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s;box-shadow:-2px 0 12px rgba(0,0,0,.25)}
 #menu.open{transform:none}#menu button{font-size:18px;padding:12px 0;border-bottom:1px dotted var(--line)}
-@media(max-width:1300px){#nav{display:none}body:not([data-mode=slider]):not([data-mode=mini]):not([data-ov]) #menuBtn{display:inline-flex}}
+@media(max-width:1300px){#nav{display:none}body:not([data-mode=mini]):not([data-ov]) #menuBtn{display:inline-flex}}
 .cn{bottom:12px;font-weight:500;border-bottom:1px dotted var(--line);padding:4px 0;display:none}
 #home{left:10px}
 #about{right:10px;top:50%;bottom:auto;transform:translateY(-50%)}
@@ -78,11 +72,12 @@ body[data-mode=mini] #about{top:auto;bottom:12px;transform:none;padding-right:15
 body:is([data-mode=vnevremeni],[data-mode=vglubine],[data-mode=mini]):not([data-ov]) #about,body[data-mode=mini]:not([data-ov]) #home{display:block}
 #gridBtn{bottom:50px;left:50%;transform:translateX(-50%);display:none}
 body:is([data-mode=vnevremeni],[data-mode=vglubine]):not([data-ov]) #gridBtn{display:inline-flex}
-#enter{bottom:30px;left:50%;transform:translateX(-50%);color:#fff;font:24px monospace;display:none;animation:bob 3s infinite ease-in-out}
-body[data-mode=slider] #enter{display:block}
-@keyframes bob{50%{margin-bottom:5px}}
 #live{bottom:12px;right:10px;z-index:36;display:none;align-items:center;gap:10px;padding:8px 14px;border-radius:18px;border:1px solid var(--line);background:rgba(20,20,20,.55);backdrop-filter:blur(14px);color:#fff;font-size:13px;font-weight:500;text-align:left}
-body[data-mode=slider]:not([data-ov]) #live.has{display:flex}
+body[data-mode=main]:not([data-ov]) #live.has{display:flex}
+:root.light #live{background:rgba(255,255,255,.6);color:#111}
+#copy{bottom:12px;left:0;right:0;z-index:20;display:none;text-align:center;font-size:12px;letter-spacing:.03em;color:var(--mut);pointer-events:none}
+body[data-mode=main]:not([data-ov]) #copy{display:block}
+@media(max-width:768px){#copy{left:10px;right:auto;text-align:left}}
 #live i{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:pulse 2s infinite}
 #live small{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.6}
 @keyframes pulse{50%{transform:scale(1.3);opacity:.7}}
@@ -138,8 +133,7 @@ body[data-mode=slider]:not([data-ov]) #live.has{display:flex}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
 </style>
 </head>
-<body data-mode="slider">
-<div id="slider" role="img" aria-label="Фотографии Дениса Волошина"><div class="sl" id="s0"></div><div class="sl" id="s1"></div></div>
+<body data-mode="main">
 <main>
 <section id="gal" class="view" aria-label="Галерея"><div id="gbg"></div><img id="gimg" alt="Фотография Дениса Волошина"></section>
 <section id="grid" class="view" aria-label="Миниатюры"><div class="gg" id="gg"></div></section>
@@ -159,7 +153,7 @@ body[data-mode=slider]:not([data-ov]) #live.has{display:flex}
 <section id="chap" class="view" aria-label="Глава"><div class="wrap" id="chc"></div></section>
 </main>
 
-<button id="logo" class="fx" data-act="go" data-v="slider">ДЕНИС ВОЛОШИН</button>
+<button id="logo" class="fx" data-act="go" data-v="main">ДЕНИС ВОЛОШИН</button>
 <button id="mt" class="fx" data-act="go"></button>
 <nav id="nav" class="fx" aria-label="Разделы"></nav>
 <div id="top" class="fx">
@@ -168,7 +162,7 @@ body[data-mode=slider]:not([data-ov]) #live.has{display:flex}
 <button id="close" class="ic" data-act="close" aria-label="Закрыть"><svg viewBox="0 0 20 20"><path d="M16 4 4 16M4 4l12 12"/></svg></button>
 </div>
 <div id="menu" aria-label="Меню"></div>
-<button id="enter" class="fx" data-act="go" data-v="main" aria-label="Открыть галерею">▼</button>
+<div id="copy" class="fx">© Денис Волошин</div>
 <button id="gridBtn" class="fx ic" data-act="grid" aria-label="Галерея миниатюр" title="Галерея"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></button>
 <button id="home" class="fx cn" data-act="go" data-v="main">← на главную</button>
 <button id="about" class="fx cn" data-act="about">о проекте</button>
@@ -287,13 +281,13 @@ const chapters=TITLES.map((title,i)=>{const s=new Date(2026,8+i,1),e=new Date(20
 const ch=id=>chapters.find(c=>c.id===id),curCh=chapters.find(c=>c.st==='current');
 
 /* ================= СОСТОЯНИЕ И РОУТЕР ================= */
-const mk=s=>({mode:'slider',from:null,chapter:null,modal:null,...s});
+const mk=s=>({mode:'main',from:null,chapter:null,modal:null,...s});
 let S=mk({}),chapterPushed=false,prevFocus=null;
 function parse(hash){const h=hash.slice(1);let m;
  if(m=h.match(/^godbezzerkal-(\d+)$/)){const c=ch(+m[1]);return c&&c.st==='completed'?{mode:'godbezzerkal',chapter:c.id}:{mode:'godbezzerkal'}}
  if(h.endsWith('-min')&&PROJ[h.slice(0,-4)])return{mode:'mini',from:h.slice(0,-4)};
- return h==='main'||h==='godbezzerkal'||PROJ[h]?{mode:h}:{mode:'slider'}}
-const ser=s=>s.mode==='slider'?'':s.mode==='mini'?'#'+s.from+'-min':s.chapter?'#godbezzerkal-'+s.chapter:'#'+s.mode;
+ return h==='godbezzerkal'||PROJ[h]?{mode:h}:{mode:'main'}}
+const ser=s=>s.mode==='main'?'':s.mode==='mini'?'#'+s.from+'-min':s.chapter?'#godbezzerkal-'+s.chapter:'#'+s.mode;
 function nav(s,o={}){S=mk(s);const h=ser(S);
  if(h!==location.hash)history[o.replace?'replaceState':'pushState'](null,'',h||location.pathname+location.search);render()}
 addEventListener('popstate',()=>{S=mk(parse(location.hash));render()});
@@ -324,15 +318,6 @@ function closeTop(){
  if(S.modal){S={...S,modal:null};render();prevFocus&&prevFocus.focus&&prevFocus.focus();return}
  if(S.chapter)return closeChapter();
  if(S.mode==='mini')nav({mode:S.from})}
-
-/* ================= СЛАЙДЕР ЛЕНДИНГА (2 слоя, грузится по одному кадру) ================= */
-const sl=[$('#s0'),$('#s1')],sPool=shuffle(allUrls());let sI=0,sCur=0,sBusy=false;
-sl[0].style.backgroundImage=`url('${sPool[0]}')`;sl[0].classList.add('on');
-async function slideTo(i){if(sBusy)return;sBusy=true;sI=(i+sPool.length)%sPool.length;const n=sl[1-sCur],u=sPool[sI];
- await load(u);n.style.backgroundImage=`url('${u}')`;n.classList.add('on');sl[sCur].classList.remove('on');sCur=1-sCur;sBusy=false}
-setInterval(()=>{if(S.mode==='slider'&&!document.hidden&&!reduce)slideTo(sI+1)},3800);
-$('#slider').addEventListener('click',()=>nav({mode:'main'}));
-$('#slider').addEventListener('wheel',e=>{if(e.deltaY>0)nav({mode:'main'})},{passive:true});
 
 /* ================= ГАЛЕРЕЯ ================= */
 const gimg=$('#gimg'),gbg=$('#gbg');let G={mode:null,list:[],i:0},gBusy=false,autoOn=!reduce;
@@ -411,8 +396,7 @@ document.addEventListener('keydown',e=>{const k=e.key;
  if(k==='Escape'){closeTop();return}
  const step=k==='ArrowLeft'||k==='ArrowRight'||(k===' '&&!e.target.closest('button,a'));
  if(!step||S.modal||S.chapter)return;const d=k==='ArrowLeft'?-1:1;
- if(S.mode==='slider'){e.preventDefault();slideTo(sI+d)}
- else if(GALMODES.includes(S.mode)){e.preventDefault();autoOn=false;galGo(d)}});
+ if(GALMODES.includes(S.mode)){e.preventDefault();autoOn=false;galGo(d)}});
 
 /* ================= ЗАПУСК ================= */
 const NAV=[['godbezzerkal','Год без зеркал'],['vnevremeni','Вне времени'],['vglubine','В глубине'],['info','Инфо']];
