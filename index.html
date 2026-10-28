@@ -143,8 +143,8 @@ body[data-mode=main]:not([data-ov]) #copy{display:block}
 <p>Проект «365 дней без социальных сетей» — это годичное исследование себя через фотографию. Отказ от цифрового шума становится инструментом для встречи с собственными страхами, преодоления внутренних барьеров и возвращения к чистому, не отягощенному чужим мнением творчеству.</p>
 <p>Это поиск индивидуального визуального языка в рутине повседневности, умение замечать взаимосвязи там, где раньше проходил мимо. Проект строится на длительной рефлексии, работе «в долгую» и доверии к процессу, а не к сиюминутному результату.</p>
 <h3>Структура</h3>
-<p>Проект включает 12 глав, каждая из которых длится 1 месяц.<br>Каждая глава состоит из пяти обязательных элементов:</p>
-<ul><li>автопортрет — как точка отсчета и работа с самоидентификацией;</li><li>видеодневник (влог) — фиксация мыслей и состояний на протяжении месяца;</li><li>дневниковая запись — текстовые заметки месяца;</li><li>12 финальных фотографий — визуальный итог периода;</li><li>письменный вывод в конце главы — осмысление пройденного этапа.</li></ul>
+<p>Проект включает 12 глав, каждая из которых длится 1 месяц.<br>Каждая глава состоит из четырёх обязательных элементов:</p>
+<ul><li>автопортрет — как точка отсчета и работа с самоидентификацией;</li><li>видеодневник (влог) — фиксация мыслей и состояний на протяжении месяца;</li><li>12 финальных фотографий — визуальный итог периода;</li><li>письменный вывод в конце главы — осмысление пройденного этапа.</li></ul>
 </div>
 <div class="cs"><h3>Главы проекта</h3><p class="sd" id="psub"></p>
 <div class="lg"><span class="current"><i class="dot"></i>В процессе</span><span class="completed"><i class="dot"></i>Завершена</span><span><i class="dot"></i>Предстоит</span></div>
@@ -189,7 +189,7 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],sle
 const vnevremeniDataFull=[
  {url:'https://static.tildacdn.com/tild6431-3766-4733-b231-316439356230/1781546107000_R00025.jpg'},
  {url:'https://static.tildacdn.com/tild6366-6438-4930-b031-323964363864/1781375864000_R00023.jpg'},
- {url:'https://static.tildacdn.com/tila3133-6263-4663-b438-343736323965/1783438986000_R00032.jpg'},
+ {url:'https://static.tildacdn.com/tild3133-6263-4663-b438-343736323965/1783438986000_R00032.jpg'},
  {url:'https://static.tildacdn.com/tild6330-6232-4434-b431-353238363830/1782727803000_R00030.jpg'},
  {url:'https://static.tildacdn.com/tild6635-6261-4032-b564-663665316333/1781537285000_R00024.jpg'},
  {url:'https://static.tildacdn.com/tild6464-6231-4365-b638-393264633062/1781873030000_R00026.jpg'},
@@ -213,7 +213,7 @@ const vglubineDataFull=[
  {url:'https://static.tildacdn.com/tild6663-3364-4531-b066-626132656465/5_2.jpg'},
  {url:'https://static.tildacdn.com/tild3062-3732-4638-b332-316565396631/1783233295000_R00031.jpg'},
  {url:'https://static.tildacdn.com/tild6464-6237-4337-b332-613435386363/1781590015000_R00025.JPG'},
- {url:'https://static.tildacdn.com/tila6664-3332-4132-b763-646432376238/1783838232000_R00034.jpg'},
+ {url:'https://static.tildacdn.com/tild6664-3332-4132-b763-646432376238/1783838232000_R00034.jpg'},
  {url:'https://static.tildacdn.com/tild6236-6639-4237-a337-623564343832/1781160116000_R00020.jpg'},
  {url:'https://static.tildacdn.com/tild6239-3738-4362-b634-373835386538/1782110738000_R00028.jpg'},
  {url:'https://static.tildacdn.com/tild3962-3935-4365-a233-653336373865/1781283949000_R00021.jpg'},
@@ -371,7 +371,6 @@ function buildChapter(id){const c=ch(id),n=pad(id);chapPhotos=c.photos||[];
  const pt=c.portrait?`<button class="pt" data-act="one" data-v="${c.portrait}" style="background-image:url('${c.portrait}')" aria-label="Автопортрет"></button>`:'<div class="pt" style="display:flex"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>';
  $('#chc').innerHTML=`<h1 class="ct">${c.title}</h1><div class="cm"><span>Глава ${n}</span><span>${c.dates}</span></div>
 ${videoHtml(c.videoId)}
-<div class="lab">Дневник</div><div>${c.diaryDate?`<div class="dd">${c.diaryDate}</div>`:''}<p>${c.description||'Описание отсутствует.'}</p></div>
 <div class="lab">Фотографии · ${chapPhotos.length}</div><div class="ph">${ph}</div>
 <div class="lab">Автопортрет</div>${pt}<p class="cap">${c.portraitCaption||'«Автопортрет будет добавлен»'}</p>
 <div class="lab">Вывод</div>${c.conclusionImage?`<div class="cc"><button data-act="one" data-v="${c.conclusionImage}"><img src="${c.conclusionImage}" alt="Изображение к выводу" loading="lazy"></button><div>${sm}</div></div>`:`<div class="cc">${sm}</div>`}`}
