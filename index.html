@@ -137,6 +137,7 @@ body[data-mode=main]:not([data-ov]) #copy{display:block}
 <main>
 <section id="gal" class="view" aria-label="Галерея"><div id="gbg"></div><img id="gimg" alt="Фотография Дениса Волошина"></section>
 <section id="grid" class="view" aria-label="Миниатюры"><div class="gg" id="gg"></div></section>
+<!-- [ГБЗ] Проект «Год без зеркал» временно отключён. Чтобы вернуть: раскомментировать все места, помеченные [ГБЗ] (HTML и JS).
 <section id="proj" class="view" aria-label="Год без зеркал"><div class="wrap">
 <h2 class="h1">Год без зеркал</h2><p class="sd">Отказ от соц. сетей, фотопроект, погружение.</p>
 <div class="tx">
@@ -151,6 +152,7 @@ body[data-mode=main]:not([data-ov]) #copy{display:block}
 <div class="pb"><div id="pf"></div></div><div class="cg" id="cg"></div></div>
 </div></section>
 <section id="chap" class="view" aria-label="Глава"><div class="wrap" id="chc"></div></section>
+-->
 </main>
 
 <button id="logo" class="fx" data-act="go" data-v="main">ДЕНИС ВОЛОШИН</button>
@@ -166,7 +168,9 @@ body[data-mode=main]:not([data-ov]) #copy{display:block}
 <button id="gridBtn" class="fx ic" data-act="grid" aria-label="Галерея миниатюр" title="Галерея"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></button>
 <button id="home" class="fx cn" data-act="go" data-v="main">← на главную</button>
 <button id="about" class="fx cn" data-act="about">о проекте</button>
+<!-- [ГБЗ] плашка «Сейчас идёт»
 <button id="live" class="fx" data-act="go" data-v="godbezzerkal"><i></i><span><small>Сейчас идёт</small><b id="livet"></b></span><span>→</span></button>
+-->
 
 <div id="modal" role="dialog" aria-modal="true" aria-label="Информация"><div id="mbox" tabindex="-1"></div></div>
 
@@ -249,9 +253,10 @@ const PROJ={
  vnevremeni:{name:'Вне времени',data:vnevremeniDataFull,loc:'Санкт-Петербург, 2026 — в процессе',text:'Здесь собрана коллекция моих уличных фотографий. Я ничего не пытаюсь доказать этими фотографиями, а лишь ищу чувства, которые порой не могу понять, но могу увидеть в других людях и в окружающем.'},
  vglubine:{name:'В глубине',data:vglubineDataFull,loc:'Санкт-Петербург, 2026 — в процессе',text:'Проект про людей и их взаимодействие в метро. Мне нравится находить интересных для меня личностей, красивые и чувственные моменты в этой обыденной и уже привычной для многих среде. Метро удивительно плотно сталкивает самых разных людей вместе, где они погружаются в себя и порой обнажают свои души на мгновенье.'}};
 const INFO='<h2 class="mt">Инфо</h2><div class="tx"><p><b>Денис Волошин</b><br>Родился в городе Радужный, ХМАО. Работает как уличный фотограф в Санкт-Петербурге.<br>В центре его творчества — передать ту самую неуловимую дымку в кадре, вперемешку с застывшими эмоциями, светом и временем, не используя при этом постановку.</p><p>«Через фотографию я открываю для себя дверь в свою особенную реальность. Для меня фотография — это чувства, красота скоротечного, красота застывшего в секунде времени и способ борьбы со своими страхами. Мне кажется, что с фотографией я учусь принимать мир таким, какой он есть.»</p><p class="it">Контакты: ✉ <a href="mailto:ph.denisvoloshin@gmail.com">ph.denisvoloshin@gmail.com</a><br>Социальные сети: <a href="https://www.instagram.com/denis___voloshin" target="_blank" rel="noopener noreferrer">Instagram</a>*</p></div><p class="dis">*Компания Meta Platforms Inc. (социальные сети Instagram и Facebook) признана экстремистской организацией и запрещена на территории Российской Федерации.</p>';
+/* [ГБЗ] Данные проекта «Год без зеркал» (закомментировано)
 const TITLES=['Точка отсчёта','Тишина','Привычки','Страх','Сомнения','Отражения','Границы','Свет','Тень','Ритм','Пауза','Возвращение'];
 const MONTHS=['Сентябрь','Октябрь','Ноябрь','Декабрь','Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август'];
-/* Содержимое глав по номеру. summary — строка или массив абзацев; photos — адреса фото главы. */
+// Содержимое глав по номеру. summary — строка или массив абзацев; photos — адреса фото главы.
 const CONTENT={1:{
  description:'Начало пути. Фиксация исходной точки, первые автопортреты и осознание масштаба предстоящего эксперимента.',
  diaryDate:'1 сентября 2026, 10:51',
@@ -273,6 +278,7 @@ const CONTENT={1:{
  'https://static.tildacdn.com/tild3237-6536-4162-a137-656562366138/1787852163000_R00046.jpg',
  'https://static.tildacdn.com/tild3366-3139-4634-b063-346564303432/1790692393000_R00050.jpg'
  ]}};
+*/
 
 /* ================= ХЕЛПЕРЫ ================= */
 const GALMODES=['main','vnevremeni','vglubine'],urls=a=>a.map(x=>x.url);
@@ -282,35 +288,39 @@ const load=u=>new Promise(r=>{const m=new Image();m.onload=m.onerror=r;m.src=u})
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const pad=n=>String(n).padStart(2,'0');
 
-/* ================= ГЛАВЫ (статус считается по датам) ================= */
+/* [ГБЗ] Главы проекта «Год без зеркал» (статус считался по датам) — закомментировано
 const START=new Date(2026,8,1),now=new Date();
 const day=Math.min(365,Math.max(0,Math.floor((now-START)/864e5)+1));
 const chapters=TITLES.map((title,i)=>{const s=new Date(2026,8+i,1),e=new Date(2026,9+i,1);
  return{id:i+1,title,st:now>=e?'completed':now>=s?'current':'upcoming',dates:MONTHS[i]+' '+s.getFullYear(),...CONTENT[i+1]}});
 const ch=id=>chapters.find(c=>c.id===id),curCh=chapters.find(c=>c.st==='current');
+*/
 
 /* ================= СОСТОЯНИЕ И РОУТЕР ================= */
 const mk=s=>({mode:'main',from:null,chapter:null,modal:null,...s});
-let S=mk({}),chapterPushed=false,prevFocus=null;
-function parse(hash){const h=hash.slice(1);let m;
- if(m=h.match(/^godbezzerkal-(\d+)$/)){const c=ch(+m[1]);return c&&c.st==='completed'?{mode:'godbezzerkal',chapter:c.id}:{mode:'godbezzerkal'}}
+let S=mk({}),prevFocus=null/* [ГБЗ] ,chapterPushed=false */;
+function parse(hash){const h=hash.slice(1);
+ /* [ГБЗ] let m; if(m=h.match(/^godbezzerkal-(\d+)$/)){const c=ch(+m[1]);return c&&c.st==='completed'?{mode:'godbezzerkal',chapter:c.id}:{mode:'godbezzerkal'}} */
  if(h.endsWith('-min')&&PROJ[h.slice(0,-4)])return{mode:'mini',from:h.slice(0,-4)};
- return h==='godbezzerkal'||PROJ[h]?{mode:h}:{mode:'main'}}
+ /* [ГБЗ] return h==='godbezzerkal'||PROJ[h]?{mode:h}:{mode:'main'} */
+ return PROJ[h]?{mode:h}:{mode:'main'}}
 const ser=s=>s.mode==='main'?'':s.mode==='mini'?'#'+s.from+'-min':s.chapter?'#godbezzerkal-'+s.chapter:'#'+s.mode;
 function nav(s,o={}){S=mk(s);const h=ser(S);
  if(h!==location.hash)history[o.replace?'replaceState':'pushState'](null,'',h||location.pathname+location.search);render()}
 addEventListener('popstate',()=>{S=mk(parse(location.hash));render()});
 
-const gal=$('#gal'),grid=$('#grid'),proj=$('#proj'),chap=$('#chap'),modal=$('#modal'),menu=$('#menu');
-let shown=null,gridFor=null;
-const LBL={godbezzerkal:'Год без зеркал',vnevremeni:'Вне времени',vglubine:'В глубине'};
+const gal=$('#gal'),grid=$('#grid'),modal=$('#modal'),menu=$('#menu');
+/* [ГБЗ] const proj=$('#proj'),chap=$('#chap'); */
+let gridFor=null/* [ГБЗ] ,shown=null */;
+const LBL={/* [ГБЗ] godbezzerkal:'Год без зеркал', */vnevremeni:'Вне времени',vglubine:'В глубине'};
 function render(){
  const d=document.body.dataset,ov=S.modal||S.chapter,on=(el,v)=>el.classList.toggle('on',!!v);
  d.mode=S.mode;ov?d.ov='1':delete d.ov;
- on(gal,GALMODES.includes(S.mode));on(grid,S.mode==='mini');on(proj,S.mode==='godbezzerkal');on(chap,S.chapter);on(modal,S.modal);
+ on(gal,GALMODES.includes(S.mode));on(grid,S.mode==='mini');on(modal,S.modal);
+ /* [ГБЗ] on(proj,S.mode==='godbezzerkal');on(chap,S.chapter); */
  if(GALMODES.includes(S.mode))setGal(S.mode);else G.mode=null;
  if(S.mode==='mini'&&gridFor!==S.from)buildGrid(S.from);
- if(S.chapter!==shown){shown=S.chapter;if(shown){buildChapter(shown);chap.scrollTop=0}else setTimeout(()=>{if(!S.chapter)$('#chc').innerHTML=''},450)}
+ /* [ГБЗ] if(S.chapter!==shown){shown=S.chapter;if(shown){buildChapter(shown);chap.scrollTop=0}else setTimeout(()=>{if(!S.chapter)$('#chc').innerHTML=''},450)} */
  if(S.modal){$('#mbox').innerHTML=S.modal==='info'?INFO:modalHtml(S.modal)}
  const mt=$('#mt');mt.textContent=S.mode==='mini'?PROJ[S.from].name.toUpperCase():'';mt.dataset.v=S.from||'';
  $$('#nav button,#menu button').forEach(b=>b.classList.toggle('act',b.dataset.k===S.mode||(S.mode==='mini'&&b.dataset.k===S.from)));
@@ -321,11 +331,11 @@ function render(){
 function modalHtml(k){const p=PROJ[k];
  return`<h2 class="mt">${p.name.toUpperCase()}</h2><div class="tx"><p>${p.text}</p></div><div class="row"><span class="it">${p.loc}</span><button class="lnk" data-act="mini" data-v="${k}">перейти в галерею →</button></div>`}
 function openModal(k){prevFocus=document.activeElement;S={...S,modal:k};render();$('#mbox').focus()}
-function closeChapter(){if(chapterPushed){chapterPushed=false;history.back()}else nav({mode:'godbezzerkal'},{replace:true})}
+/* [ГБЗ] function closeChapter(){if(chapterPushed){chapterPushed=false;history.back()}else nav({mode:'godbezzerkal'},{replace:true})} */
 function closeTop(){
  if(lbOn)return lbClose();
  if(S.modal){S={...S,modal:null};render();prevFocus&&prevFocus.focus&&prevFocus.focus();return}
- if(S.chapter)return closeChapter();
+ /* [ГБЗ] if(S.chapter)return closeChapter(); */
  if(S.mode==='mini')nav({mode:S.from})}
 
 /* ================= ГАЛЕРЕЯ ================= */
@@ -355,7 +365,7 @@ lbE.addEventListener('pointerup',e=>{if(sx===null)return;const dx=e.clientX-sx;s
 lbE.addEventListener('click',e=>{if(swiped){swiped=false;return}if(e.target.closest('button'))return;lbGo(e.clientX<innerWidth/2?-1:1)});
 if(!document.documentElement.requestFullscreen)$('#lbfs').hidden=true;
 
-/* ================= ПРОЕКТ «ГОД БЕЗ ЗЕРКАЛ» И ГЛАВЫ ================= */
+/* [ГБЗ] ПРОЕКТ «ГОД БЕЗ ЗЕРКАЛ» И ГЛАВЫ — закомментировано
 function cardHtml(c){const pv=c.photos&&c.photos[0];
  return`<button class="card ${c.st}${pv?' has':''}" ${c.st==='completed'?`data-act="chapter" data-v="${c.id}"`:'disabled'}>${pv?`<div class="pv" style="background-image:url('${pv}')"></div>`:''}<div><div><i class="dot"></i>Глава ${pad(c.id)}</div><div class="cname">${c.title}</div></div><div class="cb"><span>${c.dates}</span><span>→</span></div></button>`}
 $('#cg').innerHTML=chapters.map(cardHtml).join('');
@@ -378,6 +388,7 @@ ${videoHtml(c.videoId)}
 <div class="lab">Фотографии · ${chapPhotos.length}</div><div class="ph">${ph}</div>
 <div class="lab">Автопортрет</div>${pt}<p class="cap">${c.portraitCaption||'«Автопортрет будет добавлен»'}</p>
 <div class="lab">Вывод</div>${c.conclusionImage?`<div class="cc"><button data-act="one" data-v="${c.conclusionImage}"><img src="${c.conclusionImage}" alt="Изображение к выводу" loading="lazy"></button><div>${sm}</div></div>`:`<div class="cc">${sm}</div>`}`}
+*/
 
 /* ================= ТЕМА ================= */
 const SUN='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>',MOON='<svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>';
@@ -388,8 +399,9 @@ function setTheme(light,save){document.documentElement.classList.toggle('light',
 const A={
  go:v=>nav({mode:v}),info:()=>openModal('info'),about:()=>openModal(S.mode==='mini'?S.from:S.mode),
  grid:()=>nav({mode:'mini',from:S.mode}),mini:v=>nav({mode:'mini',from:v}),
- chapter:v=>{chapterPushed=true;nav({mode:'godbezzerkal',chapter:+v})},
- ph:v=>openLb(chapPhotos,+v),one:v=>openLb([...new Set([v,...chapPhotos])],0),mph:v=>openLb(urls(PROJ[S.from].data),+v),
+ /* [ГБЗ] chapter:v=>{chapterPushed=true;nav({mode:'godbezzerkal',chapter:+v})},
+ ph:v=>openLb(chapPhotos,+v),one:v=>openLb([...new Set([v,...chapPhotos])],0), */
+ mph:v=>openLb(urls(PROJ[S.from].data),+v),
  theme:()=>{const r=document.documentElement;r.classList.add('tt');setTheme(!r.classList.contains('light'),true);setTimeout(()=>r.classList.remove('tt'),400)},
  menu:()=>{const o=menu.classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',o)},
  close:closeTop,lbclose:lbClose,lbprev:()=>lbGo(-1),lbnext:()=>lbGo(1),
@@ -407,7 +419,7 @@ document.addEventListener('keydown',e=>{const k=e.key;
  if(GALMODES.includes(S.mode)){e.preventDefault();autoOn=false;galGo(d)}});
 
 /* ================= ЗАПУСК ================= */
-const NAV=[['godbezzerkal','Год без зеркал'],['vnevremeni','Вне времени'],['vglubine','В глубине'],['info','Инфо']];
+const NAV=[/* [ГБЗ] ['godbezzerkal','Год без зеркал'], */['vnevremeni','Вне времени'],['vglubine','В глубине'],['info','Инфо']];
 const navHtml=NAV.map(([k,l])=>`<button data-k="${k}" data-act="${k==='info'?'info':'go'}" data-v="${k}"><span>${l}</span></button>`).join('');
 $('#nav').innerHTML=navHtml;menu.innerHTML=navHtml;
 setTheme(document.documentElement.classList.contains('light'));
