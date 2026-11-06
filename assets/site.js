@@ -22,34 +22,25 @@ const ch=id=>chapters.find(c=>c.id===id),curCh=chapters.find(c=>c.st==='current'
 */
 
 /* ================= СОСТОЯНИЕ И РОУТЕР ================= */
-/* Page metadata follows the current project without changing its UI. */
-const SITE='https://denisvoloshin.ru';
-function seoSchema(key){
- const p=SEO[key],url=SITE+p.path;
- return{'@context':'https://schema.org','@graph':[
- {'@type':'Person','@id':SITE+'/#author',name:'Денис Волошин',url:SITE+'/',jobTitle:'Фотограф',sameAs:['https://www.instagram.com/denis___voloshin']},
- {'@type':'WebSite','@id':SITE+'/#website',url:SITE+'/',name:'Денис Волошин — фотограф',inLanguage:'ru',creator:{'@id':SITE+'/#author'}},
- {'@type':key==='main'?'WebPage':'CollectionPage','@id':url+'#webpage',url,name:p.title,description:p.description,inLanguage:'ru',isPartOf:{'@id':SITE+'/#website'},author:{'@id':SITE+'/#author'},image:p.image}
- ]};
-}
+/* Build-time and client metadata use the same photo URL and preview image. */
+const META=window.PortfolioMetadata,{SITE,photoPath}=META;
 let seoKey=null;
-function updateSeo(key){
- key=SEO[key]?key:'main';if(seoKey===key)return;seoKey=key;
- const p=SEO[key],url=SITE+p.path;
+function updateSeo(key,id){
+ const p=META.page(window.PORTFOLIO,key,id);if(seoKey===p.path)return;seoKey=p.path;
  document.title=p.title;
- $('h1.sr-only').textContent=PROJ[key]?.name||'Денис Волошин — уличный фотограф';
- $('#canonical').href=url;
- const values={'description':p.description,'og:title':p.title,'og:description':p.description,'og:url':url,'og:image':p.image,'og:image:alt':p.imageAlt,'twitter:title':p.title,'twitter:description':p.description,'twitter:image':p.image,'twitter:image:alt':p.imageAlt};
- Object.entries(values).forEach(([name,value])=>{const attr=name.startsWith('og:')?'property':'name';document.querySelector('meta['+attr+'="'+name+'"]').content=value});
- $('#structured-data').textContent=JSON.stringify(seoSchema(key));
+ $('h1.sr-only').textContent=p.heading;
+ $('#canonical').href=p.url;
+ Object.entries(META.tags(p)).forEach(([name,value])=>{const attr=name.startsWith('og:')?'property':'name';document.querySelector('meta['+attr+'="'+name+'"]').content=value});
+ $('#structured-data').textContent=JSON.stringify(META.schema(p));
 }
 
 const PATHS={main:'/',vnevremeni:'/vnevremeni/',vglubine:'/vglubine/'};
 const mk=s=>({mode:'main',from:null,chapter:null,modal:null,photo:null,...s});
 let S=mk({}),prevFocus=null/* [ГБЗ] ,chapterPushed=false */;
 function parse(path=location.pathname,hash=location.hash,search=location.search){
- const h=hash.slice(1),segment=path.split('/').filter(Boolean)[0];
+ const h=hash.slice(1),segments=path.split('/').filter(Boolean),segment=segments[0];
  let mode=Object.hasOwn(PROJ,segment)?segment:'main',state;
+ if(segments.length===2&&Object.hasOwn(PROJ,segment)&&PROJ[segment].data.some(x=>x.id===segments[1]))return{mode:'mini',from:segment,photo:segments[1]};
  if(h.endsWith('-min')&&Object.hasOwn(PROJ,h.slice(0,-4)))state={mode:'mini',from:h.slice(0,-4)};
  else if(Object.hasOwn(PROJ,h))state={mode:h};
  else state=h==='mini'&&PROJ[mode]?{mode:'mini',from:mode}:{mode};
@@ -57,11 +48,10 @@ function parse(path=location.pathname,hash=location.hash,search=location.search)
  if(id&&PROJ[key]?.data.some(x=>x.id===id))return{mode:'mini',from:key,photo:id};
  return state;
 }
-const photoPath=(key,id)=>PATHS[key]+'?photo='+encodeURIComponent(id)+'#mini';
 const ser=s=>{
  const query=new URLSearchParams(location.search);query.delete('photo');
- if(s.photo)query.set('photo',s.photo);
- return(PATHS[s.mode==='mini'?s.from:s.mode]||'/')+(query.size?'?'+query:'')+(s.mode==='mini'?'#mini':'');
+ const path=s.photo?photoPath(s.from,s.photo):(PATHS[s.mode==='mini'?s.from:s.mode]||'/');
+ return path+(query.size?'?'+query:'')+(s.mode==='mini'&&!s.photo?'#mini':'');
 };
 function nav(s,o={}){
  const previous=S;S=mk(s);const url=ser(S);
@@ -81,7 +71,7 @@ const LBL={/* [ГБЗ] godbezzerkal:'Год без зеркал', */vnevremeni:'
 function render(){
  const d=document.body.dataset,ov=S.modal||S.chapter,on=(el,v)=>el.classList.toggle('on',!!v);
  d.mode=S.mode;ov?d.ov='1':delete d.ov;
- updateSeo(S.mode==='mini'?S.from:S.mode);
+ updateSeo(S.mode==='mini'?S.from:S.mode,S.photo);
  on(gal,GALMODES.includes(S.mode));on(grid,S.mode==='mini');on(modal,S.modal);
  /* [ГБЗ] on(proj,S.mode==='godbezzerkal');on(chap,S.chapter); */
  if(GALMODES.includes(S.mode))setGal(S.mode);else G.mode=null;
@@ -163,7 +153,7 @@ function shareFeedback(text){
 }
 async function sharePhoto(){
  if(!lbOn||!S.photo)return;
- const url=SITE+photoPath(S.from,S.photo),title=PROJ[S.from].name+' — Денис Волошин';
+ const {url,title}=META.page(window.PORTFOLIO,S.from,S.photo);
  if(navigator.share){
   try{await navigator.share({title,url});return}
   catch(e){if(e.name==='AbortError')return}
