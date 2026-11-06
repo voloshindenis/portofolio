@@ -37,6 +37,7 @@ function updateSeo(key){
  key=SEO[key]?key:'main';if(seoKey===key)return;seoKey=key;
  const p=SEO[key],url=SITE+p.path;
  document.title=p.title;
+ $('h1.sr-only').textContent=PROJ[key]?.name||'Денис Волошин — уличный фотограф';
  $('#canonical').href=url;
  const values={'description':p.description,'og:title':p.title,'og:description':p.description,'og:url':url,'og:image':p.image,'og:image:alt':p.imageAlt,'twitter:title':p.title,'twitter:description':p.description,'twitter:image':p.image,'twitter:image:alt':p.imageAlt};
  Object.entries(values).forEach(([name,value])=>{const attr=name.startsWith('og:')?'property':'name';document.querySelector('meta['+attr+'="'+name+'"]').content=value});
