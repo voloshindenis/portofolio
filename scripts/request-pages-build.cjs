@@ -10,10 +10,6 @@ async function api(route,method='GET') {
 }
 (async()=>{
   const commit = execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
-  // One-time recovery of the deployment started by the initial publication check.
-  const stalled = '/pages/deployments/472fabc3f3c901b7af092ff7f21d2d0640830819';
-  console.log('Previous Pages deployment:', await api(stalled));
-  await api(stalled+'/cancel','POST');
   const requestedAt = Date.now();
   await api('/pages/builds','POST');
   for(let i=0;i<60;i++){
