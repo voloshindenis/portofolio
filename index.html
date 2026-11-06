@@ -3,12 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Денис Волошин – фотограф | Портфолио</title>
-<meta name="description" content="Денис Волошин — уличный фотограф из Санкт-Петербурга. Проекты «Год без зеркал», «Вне времени», «В глубине».">
-<meta property="og:title" content="Денис Волошин – фотограф">
-<meta property="og:description" content="Уличная фотография, Санкт-Петербург">
-<meta property="og:type" content="website">
+<title>Денис Волошин — уличный фотограф в Санкт-Петербурге</title>
+<meta name="description" content="Портфолио уличного фотографа Дениса Волошина. Фотопроекты «Вне времени» и «В глубине»: люди, чувства и мгновения городской жизни Санкт-Петербурга.">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <link id="canonical" rel="canonical" href="https://denisvoloshin.ru/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Денис Волошин — фотограф">
+<meta property="og:title" content="Денис Волошин — уличный фотограф в Санкт-Петербурге">
+<meta property="og:description" content="Портфолио уличного фотографа Дениса Волошина. Фотопроекты «Вне времени» и «В глубине»: люди, чувства и мгновения городской жизни Санкт-Петербурга.">
+<meta property="og:url" content="https://denisvoloshin.ru/">
+<meta property="og:image" content="https://static.tildacdn.com/tild6431-3766-4733-b231-316439356230/1781546107000_R00025.jpg">
+<meta property="og:image:alt" content="Фотография Дениса Волошина из проекта «Вне времени»">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Денис Волошин — уличный фотограф в Санкт-Петербурге">
+<meta name="twitter:description" content="Портфолио уличного фотографа Дениса Волошина. Фотопроекты «Вне времени» и «В глубине»: люди, чувства и мгновения городской жизни Санкт-Петербурга.">
+<meta name="twitter:image" content="https://static.tildacdn.com/tild6431-3766-4733-b231-316439356230/1781546107000_R00025.jpg">
+<meta name="twitter:image:alt" content="Фотография Дениса Волошина из проекта «Вне времени»">
+<script id="structured-data" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://denisvoloshin.ru/#author","name":"Денис Волошин","url":"https://denisvoloshin.ru/","jobTitle":"Фотограф","sameAs":["https://www.instagram.com/denis___voloshin"]},{"@type":"WebSite","@id":"https://denisvoloshin.ru/#website","url":"https://denisvoloshin.ru/","name":"Денис Волошин — фотограф","inLanguage":"ru","creator":{"@id":"https://denisvoloshin.ru/#author"}},{"@type":"WebPage","@id":"https://denisvoloshin.ru/#webpage","url":"https://denisvoloshin.ru/","name":"Денис Волошин — уличный фотограф в Санкт-Петербурге","description":"Портфолио уличного фотографа Дениса Волошина. Фотопроекты «Вне времени» и «В глубине»: люди, чувства и мгновения городской жизни Санкт-Петербурга.","inLanguage":"ru","isPartOf":{"@id":"https://denisvoloshin.ru/#website"},"author":{"@id":"https://denisvoloshin.ru/#author"},"image":"https://static.tildacdn.com/tild6431-3766-4733-b231-316439356230/1781546107000_R00025.jpg"}]}</script>
 <meta name="theme-color" content="#000">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -300,6 +312,28 @@ const ch=id=>chapters.find(c=>c.id===id),curCh=chapters.find(c=>c.st==='current'
 */
 
 /* ================= СОСТОЯНИЕ И РОУТЕР ================= */
+/* Page metadata follows the current project without changing its UI. */
+const SITE='https://denisvoloshin.ru';
+const SEO={"main":{"path":"/","title":"Денис Волошин — уличный фотограф в Санкт-Петербурге","description":"Портфолио уличного фотографа Дениса Волошина. Фотопроекты «Вне времени» и «В глубине»: люди, чувства и мгновения городской жизни Санкт-Петербурга.","image":"https://static.tildacdn.com/tild6431-3766-4733-b231-316439356230/1781546107000_R00025.jpg","imageAlt":"Фотография Дениса Волошина из проекта «Вне времени»"},"vnevremeni":{"path":"/vnevremeni/","title":"Вне времени — уличная фотография | Денис Волошин","description":"«Вне времени» — коллекция уличных фотографий Дениса Волошина. Люди, чувства и мгновения городской жизни Санкт-Петербурга.","image":"https://static.tildacdn.com/tild6431-3766-4733-b231-316439356230/1781546107000_R00025.jpg","imageAlt":"Фотография Дениса Волошина из проекта «Вне времени»"},"vglubine":{"path":"/vglubine/","title":"В глубине — фотографии метро | Денис Волошин","description":"«В глубине» — фотопроект Дениса Волошина о людях и их взаимодействии в метро Санкт-Петербурга. Фотографии и авторский взгляд на повседневную жизнь.","image":"https://static.tildacdn.com/tild6663-3364-4531-b066-626132656465/5_2.jpg","imageAlt":"Фотография Дениса Волошина из проекта «В глубине»"}};
+function seoSchema(key){
+ const p=SEO[key],url=SITE+p.path;
+ return{'@context':'https://schema.org','@graph':[
+ {'@type':'Person','@id':SITE+'/#author',name:'Денис Волошин',url:SITE+'/',jobTitle:'Фотограф',sameAs:['https://www.instagram.com/denis___voloshin']},
+ {'@type':'WebSite','@id':SITE+'/#website',url:SITE+'/',name:'Денис Волошин — фотограф',inLanguage:'ru',creator:{'@id':SITE+'/#author'}},
+ {'@type':key==='main'?'WebPage':'CollectionPage','@id':url+'#webpage',url,name:p.title,description:p.description,inLanguage:'ru',isPartOf:{'@id':SITE+'/#website'},author:{'@id':SITE+'/#author'},image:p.image}
+ ]};
+}
+let seoKey=null;
+function updateSeo(key){
+ key=SEO[key]?key:'main';if(seoKey===key)return;seoKey=key;
+ const p=SEO[key],url=SITE+p.path;
+ document.title=p.title;
+ $('#canonical').href=url;
+ const values={'description':p.description,'og:title':p.title,'og:description':p.description,'og:url':url,'og:image':p.image,'og:image:alt':p.imageAlt,'twitter:title':p.title,'twitter:description':p.description,'twitter:image':p.image,'twitter:image:alt':p.imageAlt};
+ Object.entries(values).forEach(([name,value])=>{const attr=name.startsWith('og:')?'property':'name';document.querySelector('meta['+attr+'="'+name+'"]').content=value});
+ $('#structured-data').textContent=JSON.stringify(seoSchema(key));
+}
+
 const PATHS={main:'/',vnevremeni:'/vnevremeni/',vglubine:'/vglubine/'};
 const mk=s=>({mode:'main',from:null,chapter:null,modal:null,...s});
 let S=mk({}),prevFocus=null/* [ГБЗ] ,chapterPushed=false */;
@@ -324,7 +358,7 @@ const LBL={/* [ГБЗ] godbezzerkal:'Год без зеркал', */vnevremeni:'
 function render(){
  const d=document.body.dataset,ov=S.modal||S.chapter,on=(el,v)=>el.classList.toggle('on',!!v);
  d.mode=S.mode;ov?d.ov='1':delete d.ov;
- $('#canonical').href='https://denisvoloshin.ru'+(PATHS[S.mode==='mini'?S.from:S.mode]||'/');
+ updateSeo(S.mode==='mini'?S.from:S.mode);
  on(gal,GALMODES.includes(S.mode));on(grid,S.mode==='mini');on(modal,S.modal);
  /* [ГБЗ] on(proj,S.mode==='godbezzerkal');on(chap,S.chapter); */
  if(GALMODES.includes(S.mode))setGal(S.mode);else G.mode=null;
@@ -334,8 +368,7 @@ function render(){
  const mt=$('#mt');mt.textContent=S.mode==='mini'?PROJ[S.from].name.toUpperCase():'';mt.dataset.v=S.from||'';
  $$('#nav button,#menu button').forEach(b=>b.classList.toggle('act',b.dataset.k===S.mode||(S.mode==='mini'&&b.dataset.k===S.from)));
  menu.classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');
- const sub=S.mode==='mini'?PROJ[S.from].name:S.chapter?'Глава '+pad(S.chapter):LBL[S.mode];
- document.title='Денис Волошин – фотограф'+(sub?' — '+sub:'');
+
 }
 function modalHtml(k){const p=PROJ[k];
  return`<h2 class="mt">${p.name.toUpperCase()}</h2><div class="tx"><p>${p.text}</p></div><div class="row"><span class="it">${p.loc}</span><button class="lnk" data-act="mini" data-v="${k}">перейти в галерею →</button></div>`}
