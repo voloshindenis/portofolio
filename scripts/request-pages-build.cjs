@@ -10,11 +10,18 @@ async function api(route,method='GET') {
 }
 (async()=>{
   const commit = execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
+  const requestedAt = Date.now();
   await api('/pages/builds','POST');
   for(let i=0;i<60;i++){
-    const build = await api('/pages/builds/latest');
-    if(build.commit === commit && build.status === 'built') { console.log('GitHub Pages опубликовал '+commit);return; }
-    if(build.commit === commit && build.status === 'errored') throw Error(build.error?.message||'Ошибка публикации GitHub Pages.');
+    const result = await api('/actions/runs?event=dynamic&head_sha='+commit+'&per_page=30');
+    const build = (result.workflow_runs || []).find(run =>
+      run.path === 'dynamic/pages/pages-build-deployment' &&
+      run.head_sha === commit && Date.parse(run.created_at) >= requestedAt - 5000);
+    if(build?.status === 'completed') {
+      if(build.conclusion !== 'success') throw Error('Ошибка публикации GitHub Pages: '+build.conclusion+'. '+build.html_url);
+      console.log('GitHub Pages опубликовал '+commit);return;
+    }
+    if(i % 6 === 0) console.log('GitHub Pages: '+(build?.status || 'ожидание запуска'));
     await new Promise(r=>setTimeout(r,10000));
   }
   throw Error('GitHub Pages пока не подтвердил публикацию. Проверьте статус сборки.');

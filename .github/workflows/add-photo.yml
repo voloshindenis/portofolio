@@ -26,6 +26,7 @@ on:
 permissions:
   contents: write
   pages: write
+  actions: read
 concurrency:
   group: portfolio-add-photo
   cancel-in-progress: false
