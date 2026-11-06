@@ -19,7 +19,8 @@ a{color:inherit}
 #grid{z-index:15}
 .gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding:80px 72px 100px;max-width:1600px;margin:0 auto}
 .gi{display:block;aspect-ratio:16/10;overflow:hidden}.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}.gi:hover img{transform:scale(1.04)}
-@media(max-width:768px){.gg{padding:70px 20px 90px;gap:8px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
+@media(max-width:1300px){#grid{top:56px;bottom:56px}.gg{padding-top:24px;padding-bottom:44px}}
+@media(max-width:768px){.gg{padding:14px 20px 34px;gap:8px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
 /* фиксированный интерфейс */
 .fx{position:fixed;z-index:31}
 #logo,#mt{top:12px;left:10px;font:700 16px/1.2 Unbounded,sans-serif;letter-spacing:.03em;border-bottom:1px dotted var(--line);padding-bottom:2px}
@@ -61,7 +62,7 @@ body[data-mode=main]:not([data-ov]) #copy{display:block}
 #modal{position:fixed;inset:0;z-index:200;display:flex;overflow-y:auto;padding:70px 20px 40px;background:rgba(0,0,0,.6);backdrop-filter:blur(20px);opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}
 :root.light #modal{background:rgba(255,255,255,.6)}
 #modal.on{opacity:1;visibility:visible;transition:opacity .35s}
-#mbox{max-width:800px;width:100%;margin:0 auto;align-self:center}
+#mbox{max-width:800px;width:100%;margin:auto}
 .mt{font:700 16px/1.2 Unbounded,sans-serif;display:inline-block;border-bottom:1px dotted var(--line);padding-bottom:2px;margin-bottom:28px}
 .tx{font-weight:200}.tx p{margin-bottom:1.3rem}.tx b{font-weight:700}
 .it{font-style:italic;color:var(--mut)}.dis{font-size:12px;font-weight:200;color:var(--mut)}
@@ -74,5 +75,6 @@ body[data-mode=main]:not([data-ov]) #copy{display:block}
 #lbtop{position:fixed;top:12px;right:10px;display:flex;gap:12px}
 #lbc{position:fixed;top:12px;left:10px;line-height:32px;font-size:18px;pointer-events:none}
 #lbn{position:fixed;bottom:20px;right:20px;display:flex;gap:1rem}#lbn button{width:48px;height:48px;font:200 2rem monospace}
+@media(max-height:500px) and (orientation:landscape){#lb{padding:56px 0 80px}#lbimg{max-height:calc(100vh - 136px);max-height:calc(100dvh - 136px)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

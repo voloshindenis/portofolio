@@ -76,7 +76,7 @@ function render(){
 }
 function modalHtml(k){const p=PROJ[k];
  return`<h2 class="mt">${p.name.toUpperCase()}</h2><div class="tx"><p>${p.text}</p></div><div class="row"><span class="it">${p.loc}</span><a class="lnk" href="${PATHS[k]}#mini" data-act="mini" data-v="${k}">перейти в галерею →</a></div>`}
-function openModal(k){prevFocus=document.activeElement;S={...S,modal:k};render();$('#mbox').focus()}
+function openModal(k){prevFocus=document.activeElement;S={...S,modal:k};render();modal.scrollTop=0;$('#mbox').focus({preventScroll:true})}
 
 function closeTop(){
  if(lbOn)return lbClose();
@@ -180,7 +180,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');
   if(t.matches('a[href]')){if(e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||t.hasAttribute('download')||t.target==='_blank')return;e.preventDefault()}
   A[t.dataset.act]&&A[t.dataset.act](t.dataset.v);return
  }
- if(menu.classList.contains('open')&&!e.target.closest('#menu'))menu.classList.remove('open')});
+ if(menu.classList.contains('open')&&!e.target.closest('#menu')){menu.classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false')}});
 modal.addEventListener('click',e=>{if(e.target===modal)closeTop()});
 document.addEventListener('keydown',e=>{const k=e.key;
  if(lbOn){if(k==='ArrowLeft')lbGo(-1);else if(k==='ArrowRight')lbGo(1);else if(k==='Escape')lbClose();else return;e.preventDefault();return}
