@@ -141,3 +141,5 @@ html:not(.js) .js-control{display:none!important}html:not(.js) #menu{position:st
 html:not(.js) #menu[inert]{interactivity:auto}
 @media(max-width:1300px){#menuBtn{display:inline-flex!important}}
 @media(min-width:1301px){#pagecontent{max-width:900px;padding-left:40px;padding-right:40px}}
+
+body[data-grid] #gridBtn,body[data-grid] #about{display:none!important}

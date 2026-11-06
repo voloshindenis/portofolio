@@ -2,8 +2,8 @@
 document.documentElement.classList.add('js');
 const $=s=>document.querySelector(s),page=document.body.dataset.page,photos=JSON.parse($('#gallery-data').textContent);
 const routes={main:'/',vnevremeni:'/vnevremeni/',vglubine:'/vglubine/',info:'/about/'};
-const legacy=location.hash.slice(1),legacyKey=legacy.replace(/-min$/,'');
-if(routes[legacyKey]&&routes[legacyKey]!==location.pathname){location.replace(routes[legacyKey]+(legacy.endsWith('-min')?'#photos':''));return}
+function legacyRoute(){const legacy=location.hash.slice(1),key=legacy.replace(/-min$/,'');if(routes[key]&&routes[key]!==location.pathname){location.replace(routes[key]+(legacy.endsWith('-min')?'#photos':''));return true}return false}
+if(legacyRoute())return;addEventListener('hashchange',legacyRoute);
 document.querySelectorAll('#nav a,#menu a').forEach(a=>{if(a.pathname===location.pathname)a.setAttribute('aria-current','page')});
 const menu=$('#menu'),menuBtn=$('#menuBtn');menu.inert=true;
 menuBtn.onclick=()=>{const open=menu.classList.toggle('open');menu.inert=!open;menuBtn.setAttribute('aria-expanded',String(open))};
@@ -20,7 +20,7 @@ if($('#gridBtn')){$('#gridBtn').onclick=()=>{location.hash='photos'};$('#close')
 function lbShow(i){li=(i+photos.length)%photos.length;lbimg.src=photos[li];lbimg.alt=(page==='vglubine'?'В глубине':'Вне времени')+', фотография '+(li+1)+' — Денис Волошин';$('#lbc').textContent=(li+1)+' / '+photos.length}
 document.querySelectorAll('[data-photo]').forEach(a=>a.onclick=e=>{e.preventDefault();lbShow(+a.dataset.photo);lb.showModal()});
 function close(){if(document.fullscreenElement)document.exitFullscreen();lb.close()}
-$('#lbclose').onclick=close;$('#lbprev').onclick=()=>lbShow(li-1);$('#lbnext').onclick=()=>lbShow(li+1);
+$('#share').onclick=()=>window.open('https://pinterest.com/pin/create/button/?url='+encodeURIComponent(location.href)+'&media='+encodeURIComponent(photos[li])+'&description='+encodeURIComponent('Фотография Дениса Волошина'),'_blank','noopener');$('#lbclose').onclick=close;$('#lbprev').onclick=()=>lbShow(li-1);$('#lbnext').onclick=()=>lbShow(li+1);
 $('#lbfs').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen();else lb.requestFullscreen?.().catch(()=>{})};
 if(!lb.requestFullscreen)$('#lbfs').hidden=true;
 lb.onclick=e=>{if(!e.target.closest('button'))lbShow(li+(e.clientX<innerWidth/2?-1:1))};
