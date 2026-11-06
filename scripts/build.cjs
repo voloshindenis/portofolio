@@ -8,7 +8,7 @@ const contentScript='window.PORTFOLIO='+JSON.stringify(content).replaceAll('<','
 const versions=Object.fromEntries(['content.js','metadata.js','site.js','site.css'].map(name=>[name,crypto.createHash('sha256').update(name==='content.js'?contentScript:fs.readFileSync(path.join(root,'assets',name))).digest('hex').slice(0,16)]));
 const sizes=js.match(/const THUMB_SIZES='([^']+)'/)[1];
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
-const grid=k=>content.projects[k].data.map((x,i)=>`<a class="gi" href="${meta.photoPath(k,x.id)}" data-act="mph" data-v="${i}" data-project="${k}"><img src="${x.thumb}-800.jpg" srcset="${x.thumb}-400.jpg 400w, ${x.thumb}-800.jpg 800w" sizes="${sizes}" width="${x.width}" height="${x.height}" alt="${esc(x.alt||content.projects[k].name+', фото '+(i+1))}" loading="lazy" decoding="async"></a>`).join('');
+const grid=k=>content.projects[k].data.map((x,i)=>`<a class="gi" href="${meta.photoPath(k,x.id)}" data-act="mph"><img src="${x.thumb}-800.jpg" srcset="${x.thumb}-400.jpg 400w, ${x.thumb}-800.jpg 800w" sizes="${sizes}" width="${x.width}" height="${x.height}" alt="${esc(x.alt||content.projects[k].name+', фото '+(i+1))}" loading="lazy" decoding="async"></a>`).join('');
 const nav=Object.entries(content.projects).map(([k,p])=>`<a href="/${k}/" data-k="${k}" data-act="go" data-v="${k}"><span>${esc(p.name)}</span></a>`).join('')+'<button data-k="info" data-act="info" data-v="info"><span>Инфо</span></button>';
 let pages=0;
 function writePage(key,id){

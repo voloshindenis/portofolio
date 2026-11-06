@@ -2,7 +2,7 @@
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],sleep=ms=>new Promise(r=>setTimeout(r,ms));
 
 /* ================= ДАННЫЕ ================= */
-const {projects:PROJ,info:INFO,seo:SEO}=window.PORTFOLIO;
+const {projects:PROJ,info:INFO}=window.PORTFOLIO;
 const vnevremeniDataFull=PROJ.vnevremeni.data,vglubineDataFull=PROJ.vglubine.data;
 
 /* ================= ХЕЛПЕРЫ ================= */
@@ -14,7 +14,7 @@ const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 /* ================= СОСТОЯНИЕ И РОУТЕР ================= */
 /* Build-time and client metadata use the same photo URL and preview image. */
-const META=window.PortfolioMetadata,{SITE,photoPath}=META;
+const META=window.PortfolioMetadata,{photoPath}=META;
 let seoKey=null;
 function updateSeo(key,id){
  const p=META.page(window.PORTFOLIO,key,id);if(seoKey===p.path)return;seoKey=p.path;
@@ -102,7 +102,7 @@ function photoAlt(url){
 }
 function gridHtml(k){const p=PROJ[k];
  const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
- return p.data.map((x,i)=>`<a class="gi" href="${photoPath(k,x.id)}" data-act="mph" data-v="${i}" data-project="${k}"><img src="${x.thumb}-800.jpg" srcset="${x.thumb}-400.jpg 400w, ${x.thumb}-800.jpg 800w" sizes="${THUMB_SIZES}" width="${x.width}" height="${x.height}" alt="${esc(x.alt||p.name+', фото '+(i+1))}" loading="lazy" decoding="async"></a>`).join('');
+ return p.data.map((x,i)=>`<a class="gi" href="${photoPath(k,x.id)}" data-act="mph"><img src="${x.thumb}-800.jpg" srcset="${x.thumb}-400.jpg 400w, ${x.thumb}-800.jpg 800w" sizes="${THUMB_SIZES}" width="${x.width}" height="${x.height}" alt="${esc(x.alt||p.name+', фото '+(i+1))}" loading="lazy" decoding="async"></a>`).join('');
 }
 function buildGrid(k){gridFor=k;$('#gg').dataset.project=k;$('#gg').innerHTML=gridHtml(k);grid.scrollTop=0}
 
@@ -164,8 +164,6 @@ function setTheme(light,save){document.documentElement.classList.toggle('light',
 const A={
  go:v=>nav({mode:v}),info:()=>openModal('info'),about:()=>openModal(S.mode==='mini'?S.from:S.mode),
  grid:()=>nav({mode:'mini',from:S.mode}),mini:v=>nav({mode:'mini',from:v}),
-
- mph:v=>{const x=PROJ[S.from]?.data[+v];if(x)nav({mode:'mini',from:S.from,photo:x.id})},
  theme:()=>{const r=document.documentElement;r.classList.add('tt');setTheme(!r.classList.contains('light'),true);setTimeout(()=>r.classList.remove('tt'),400)},
  menu:()=>{const o=menu.classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',o)},
  close:closeTop,lbclose:lbClose,lbprev:()=>lbGo(-1),lbnext:()=>lbGo(1),
