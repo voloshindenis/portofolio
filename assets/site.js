@@ -99,7 +99,7 @@ const gimg=$('#gimg'),gbg=$('#gbg');let G={mode:null,list:[],i:0},gBusy=false,au
 const pre=d=>{const u=G.list[(G.i+d+G.list.length)%G.list.length];u&&load(u)};
 function setGal(mode){if(G.mode===mode)return;
  G={mode,list:mode==='main'?shuffle(allUrls()):urls(PROJ[mode].data),i:0};autoOn=!reduce;
- gimg.src=G.list[0]||'';gimg.alt=photoAlt(G.list[0]);gbg.style.backgroundImage=`url('${G.list[0]}')`;gimg.style.opacity=1;pre(1);pre(-1)}
+ gimg.src=G.list[0]||'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';gimg.alt=photoAlt(G.list[0]);gbg.style.backgroundImage=G.list[0]?`url('${G.list[0]}')`:'';gimg.style.opacity=1;pre(1);pre(-1)}
 async function galGo(d){if(gBusy||!G.list.length)return;gBusy=true;
  const i=(G.i+d+G.list.length)%G.list.length,u=G.list[i];gimg.style.opacity=0;await sleep(150);await load(u);
  gimg.src=u;gimg.alt=photoAlt(u);gbg.style.backgroundImage=`url('${u}')`;gimg.style.opacity=1;G.i=i;gBusy=false;pre(1);pre(-1)}
@@ -209,6 +209,12 @@ const A={
  share:sharePhoto};
 document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');
  if(t){
+  if(t.dataset.act==='mph'&&t.matches('a[href]')){
+   if(e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||t.target==='_blank')return;
+   const [project,id]=new URL(t.href,location.href).pathname.split('/').filter(Boolean);
+   if(!PROJ[project]?.data.some(photo=>photo.id===id))return;
+   e.preventDefault();nav({mode:'mini',from:project,photo:id});return;
+  }
   if(t.matches('a[href]')){if(e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||t.hasAttribute('download')||t.target==='_blank')return;e.preventDefault()}
   A[t.dataset.act]&&A[t.dataset.act](t.dataset.v);return
  }

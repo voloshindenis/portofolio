@@ -1,0 +1,82 @@
+name: Remove portfolio photo
+run-name: 'Remove photo ${{ inputs.request_id }}'
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: Project
+        required: true
+        type: choice
+        options: [vnevremeni, vglubine]
+      photo_id:
+        description: Exact photo ID
+        required: true
+        type: string
+      photo_url:
+        description: Expected original image URL
+        required: true
+        type: string
+      request_id:
+        description: Removal request ID
+        required: true
+        type: string
+      dry_run:
+        description: Validate removal and build without publishing
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  pages: write
+  actions: read
+concurrency:
+  group: portfolio-add-photo
+  cancel-in-progress: false
+jobs:
+  remove:
+    if: github.ref == 'refs/heads/main' && github.actor == 'voloshindenis'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm test
+      - name: Remove selected photograph
+        id: photo
+        run: node scripts/remove-photo.cjs
+        env:
+          PHOTO_PROJECT: ${{ inputs.project }}
+          PHOTO_ID: ${{ inputs.photo_id }}
+          PHOTO_URL: ${{ inputs.photo_url }}
+      - run: npm run build
+      - name: Validate generated pages
+        run: node scripts/check-site.cjs
+      - name: Save all changes together
+        if: ${{ !inputs.dry_run && steps.photo.outputs.already_removed != 'true' }}
+        run: |
+          git config user.name 'Portfolio publisher'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- src/content.json assets/content.js assets/thumbs index.html vnevremeni vglubine sitemap.xml
+          git commit -m "Remove portfolio photograph"
+          git push origin HEAD:main
+      - name: Publish GitHub Pages
+        if: ${{ !inputs.dry_run }}
+        run: node scripts/request-pages-build.cjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Check public removal
+        if: ${{ !inputs.dry_run }}
+        run: node scripts/check-removed.cjs
+      - name: Removal result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: removal-result
+          path: .photo-import/removed.json
+          if-no-files-found: ignore
+          retention-days: 7
