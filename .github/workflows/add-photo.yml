@@ -1,0 +1,80 @@
+name: Add portfolio photo
+run-name: 'Photo ${{ inputs.request_id }}'
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: Project
+        required: true
+        type: choice
+        options: [vnevremeni, vglubine]
+      photo_url:
+        description: Direct HTTPS image URL
+        required: true
+        type: string
+      alt:
+        description: Image description
+        type: string
+      request_id:
+        description: Publication request ID
+        required: true
+        type: string
+      dry_run:
+        description: Validate and build without publishing
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: portfolio-add-photo
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main' && github.actor == 'voloshindenis'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm test
+      - name: Prepare photograph
+        id: photo
+        run: node scripts/import-photo.cjs
+        env:
+          PHOTO_PROJECT: ${{ inputs.project }}
+          PHOTO_URL: ${{ inputs.photo_url }}
+          PHOTO_ALT: ${{ inputs.alt }}
+      - run: npm run build
+      - name: Validate generated pages
+        run: node scripts/check-site.cjs
+      - name: Save all changes together
+        if: ${{ !inputs.dry_run && steps.photo.outputs.existing != 'true' }}
+        run: |
+          git config user.name 'Portfolio publisher'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/content.json assets/content.js assets/thumbs index.html vnevremeni vglubine sitemap.xml
+          git commit -m "Add portfolio photograph"
+          git push origin HEAD:main
+      - name: Publish GitHub Pages
+        if: ${{ !inputs.dry_run }}
+        run: node scripts/request-pages-build.cjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Check public photo page
+        if: ${{ !inputs.dry_run }}
+        run: node scripts/check-published.cjs
+      - name: Publication result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: photo-result
+          path: .photo-import/result.json
+          if-no-files-found: ignore
+          retention-days: 7

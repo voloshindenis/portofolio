@@ -1,0 +1,6 @@
+node_modules/
+.photo-import/
+.env
+.env.*
+!.env.example
+

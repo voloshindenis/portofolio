@@ -111,7 +111,8 @@ function photoAlt(url){
  return 'Фотография Дениса Волошина';
 }
 function gridHtml(k){const p=PROJ[k];
- return p.data.map((x,i)=>`<a class="gi" href="${photoPath(k,x.id)}" data-act="mph" data-v="${i}" data-project="${k}"><img src="${x.thumb}-800.jpg" srcset="${x.thumb}-400.jpg 400w, ${x.thumb}-800.jpg 800w" sizes="${THUMB_SIZES}" width="${x.width}" height="${x.height}" alt="${p.name}, фото ${i+1}" loading="lazy" decoding="async"></a>`).join('');
+ const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+ return p.data.map((x,i)=>`<a class="gi" href="${photoPath(k,x.id)}" data-act="mph" data-v="${i}" data-project="${k}"><img src="${x.thumb}-800.jpg" srcset="${x.thumb}-400.jpg 400w, ${x.thumb}-800.jpg 800w" sizes="${THUMB_SIZES}" width="${x.width}" height="${x.height}" alt="${esc(x.alt||p.name+', фото '+(i+1))}" loading="lazy" decoding="async"></a>`).join('');
 }
 function buildGrid(k){gridFor=k;$('#gg').dataset.project=k;$('#gg').innerHTML=gridHtml(k);grid.scrollTop=0}
 

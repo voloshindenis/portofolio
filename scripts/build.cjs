@@ -6,7 +6,7 @@ const template=fs.readFileSync(path.join(root,'src/template.html'),'utf8');
 const js=fs.readFileSync(path.join(root,'assets/site.js'),'utf8');
 const sizes=js.match(/const THUMB_SIZES='([^']+)'/)[1];
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
-const grid=k=>content.projects[k].data.map((x,i)=>`<a class="gi" href="${meta.photoPath(k,x.id)}" data-act="mph" data-v="${i}" data-project="${k}"><img src="${x.thumb}-800.jpg" srcset="${x.thumb}-400.jpg 400w, ${x.thumb}-800.jpg 800w" sizes="${sizes}" width="${x.width}" height="${x.height}" alt="${esc(content.projects[k].name)}, фото ${i+1}" loading="lazy" decoding="async"></a>`).join('');
+const grid=k=>content.projects[k].data.map((x,i)=>`<a class="gi" href="${meta.photoPath(k,x.id)}" data-act="mph" data-v="${i}" data-project="${k}"><img src="${x.thumb}-800.jpg" srcset="${x.thumb}-400.jpg 400w, ${x.thumb}-800.jpg 800w" sizes="${sizes}" width="${x.width}" height="${x.height}" alt="${esc(x.alt||content.projects[k].name+', фото '+(i+1))}" loading="lazy" decoding="async"></a>`).join('');
 const nav=Object.entries(content.projects).map(([k,p])=>`<a href="/${k}/" data-k="${k}" data-act="go" data-v="${k}"><span>${esc(p.name)}</span></a>`).join('')+'<button data-k="info" data-act="info" data-v="info"><span>Инфо</span></button>';
 let pages=0;
 function writePage(key,id){
@@ -34,5 +34,11 @@ for(const [key,project] of Object.entries(content.projects)){
  }
 }
 fs.writeFileSync(path.join(root,'assets/content.js'),'window.PORTFOLIO='+JSON.stringify(content).replaceAll('<','\\u003c')+';\n');
+const sitemapEntries=[`  <url><loc>${meta.SITE}/</loc></url>`];
+for(const [key,project] of Object.entries(content.projects)){
+ sitemapEntries.push(`  <url><loc>${meta.SITE}/${key}/</loc>${project.data.map(x=>`<image:image><image:loc>${esc(x.url)}</image:loc></image:image>`).join('')}</url>`);
+ for(const photo of project.data)sitemapEntries.push(`  <url><loc>${meta.SITE}${meta.photoPath(key,photo.id)}</loc><image:image><image:loc>${esc(photo.url)}</image:loc></image:image></url>`);
+}
+fs.writeFileSync(path.join(root,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n'+sitemapEntries.join('\n')+'\n</urlset>\n');
 console.log('Built '+pages+' pages with static metadata and existing gallery UI.');
 })();
