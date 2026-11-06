@@ -57,7 +57,6 @@ body:is([data-mode=vnevremeni],[data-mode=vglubine],[data-mode=mini]):not([data-
 body:is([data-mode=vnevremeni],[data-mode=vglubine]):not([data-ov]) #gridBtn{display:inline-flex}
 #copy{bottom:12px;left:0;right:0;z-index:20;display:none;text-align:center;font-size:12px;letter-spacing:.03em;color:var(--mut);pointer-events:none}
 body[data-mode=main]:not([data-ov]) #copy{display:block}
-@media(max-width:768px){#copy{left:10px;right:auto;text-align:left}}
 /* модалка */
 #modal{position:fixed;inset:0;z-index:200;display:flex;overflow-y:auto;padding:70px 20px 40px;background:rgba(0,0,0,.6);backdrop-filter:blur(20px);opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}
 :root.light #modal{background:rgba(255,255,255,.6)}
