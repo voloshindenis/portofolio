@@ -16,7 +16,7 @@ const image=$('#gimg'),bg=$('#gbg'),gal=$('#gal'),lb=$('#lb'),lbimg=$('#lbimg');
 function show(i){if(!photos.length)return;index=(i+photos.length)%photos.length;image.src=photos[index];image.alt=(page==='main'?'Уличная фотография':page==='vglubine'?'В глубине':'Вне времени')+', фотография '+(index+1)+' — Денис Волошин';bg.style.backgroundImage='url("'+photos[index]+'")'}
 if(gal){show(0);gal.onclick=e=>{if(e.target.closest('a,button'))return;auto=false;show(index+(e.clientX<innerWidth/2?-1:1))};setInterval(()=>{if(auto&&!document.hidden&&!lb.open&&!document.body.hasAttribute('data-grid')&&scrollY<innerHeight/2)show(index+1)},5000)}
 function gridState(){const open=location.hash==='#photos'||location.hash.endsWith('-min');document.body.toggleAttribute('data-grid',open);if(open)scrollTo(0,0)}
-if($('#gridBtn')){$('#gridBtn').onclick=()=>{location.hash='photos'};$('#close').onclick=()=>{history.replaceState(null,'',location.pathname);gridState()};gridState();addEventListener('hashchange',gridState)}
+if($('#gridBtn')){$('#gridBtn').onclick=()=>{location.hash='photos'};$('#close').onclick=()=>{history.replaceState(null,'',location.pathname);gridState();scrollTo(0,0)};gridState();addEventListener('hashchange',gridState)}
 function lbShow(i){li=(i+photos.length)%photos.length;lbimg.src=photos[li];lbimg.alt=(page==='vglubine'?'В глубине':'Вне времени')+', фотография '+(li+1)+' — Денис Волошин';$('#lbc').textContent=(li+1)+' / '+photos.length}
 document.querySelectorAll('[data-photo]').forEach(a=>a.onclick=e=>{e.preventDefault();lbShow(+a.dataset.photo);lb.showModal()});
 function close(){if(document.fullscreenElement)document.exitFullscreen();lb.close()}
