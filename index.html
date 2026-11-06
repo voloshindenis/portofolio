@@ -8,8 +8,9 @@
 <meta property="og:title" content="Денис Волошин – фотограф">
 <meta property="og:description" content="Уличная фотография, Санкт-Петербург">
 <meta property="og:type" content="website">
+<link id="canonical" rel="canonical" href="https://denisvoloshin.ru/">
 <meta name="theme-color" content="#000">
-<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/png" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..700&family=Unbounded:wght@600..700&display=swap" rel="stylesheet">
@@ -299,17 +300,22 @@ const ch=id=>chapters.find(c=>c.id===id),curCh=chapters.find(c=>c.st==='current'
 */
 
 /* ================= СОСТОЯНИЕ И РОУТЕР ================= */
+const PATHS={main:'/',vnevremeni:'/vnevremeni/',vglubine:'/vglubine/'};
 const mk=s=>({mode:'main',from:null,chapter:null,modal:null,...s});
 let S=mk({}),prevFocus=null/* [ГБЗ] ,chapterPushed=false */;
-function parse(hash){const h=hash.slice(1);
- /* [ГБЗ] let m; if(m=h.match(/^godbezzerkal-(\d+)$/)){const c=ch(+m[1]);return c&&c.st==='completed'?{mode:'godbezzerkal',chapter:c.id}:{mode:'godbezzerkal'}} */
+function parse(path=location.pathname,hash=location.hash){
+ const h=hash.slice(1),segment=path.split('/').filter(Boolean)[0],mode=PROJ[segment]?segment:'main';
+ // Keep links shared before the move to separate pages working.
  if(h.endsWith('-min')&&PROJ[h.slice(0,-4)])return{mode:'mini',from:h.slice(0,-4)};
- /* [ГБЗ] return h==='godbezzerkal'||PROJ[h]?{mode:h}:{mode:'main'} */
- return PROJ[h]?{mode:h}:{mode:'main'}}
-const ser=s=>s.mode==='main'?'':s.mode==='mini'?'#'+s.from+'-min':s.chapter?'#godbezzerkal-'+s.chapter:'#'+s.mode;
-function nav(s,o={}){S=mk(s);const h=ser(S);
- if(h!==location.hash)history[o.replace?'replaceState':'pushState'](null,'',h||location.pathname+location.search);render()}
-addEventListener('popstate',()=>{S=mk(parse(location.hash));render()});
+ if(PROJ[h])return{mode:h};
+ if(h==='mini'&&PROJ[mode])return{mode:'mini',from:mode};
+ return{mode};
+}
+const ser=s=>(PATHS[s.mode==='mini'?s.from:s.mode]||'/')+location.search+(s.mode==='mini'?'#mini':'');
+function nav(s,o={}){S=mk(s);const url=ser(S);
+ if(url!==location.pathname+location.search+location.hash)history[o.replace?'replaceState':'pushState'](null,'',url);render()}
+addEventListener('popstate',()=>nav(parse(),{replace:true}));
+addEventListener('hashchange',()=>nav(parse(),{replace:true}));
 
 const gal=$('#gal'),grid=$('#grid'),modal=$('#modal'),menu=$('#menu');
 /* [ГБЗ] const proj=$('#proj'),chap=$('#chap'); */
@@ -318,6 +324,7 @@ const LBL={/* [ГБЗ] godbezzerkal:'Год без зеркал', */vnevremeni:'
 function render(){
  const d=document.body.dataset,ov=S.modal||S.chapter,on=(el,v)=>el.classList.toggle('on',!!v);
  d.mode=S.mode;ov?d.ov='1':delete d.ov;
+ $('#canonical').href='https://denisvoloshin.ru'+(PATHS[S.mode==='mini'?S.from:S.mode]||'/');
  on(gal,GALMODES.includes(S.mode));on(grid,S.mode==='mini');on(modal,S.modal);
  /* [ГБЗ] on(proj,S.mode==='godbezzerkal');on(chap,S.chapter); */
  if(GALMODES.includes(S.mode))setGal(S.mode);else G.mode=null;
@@ -425,7 +432,7 @@ const NAV=[/* [ГБЗ] ['godbezzerkal','Год без зеркал'], */['vnevre
 const navHtml=NAV.map(([k,l])=>`<button data-k="${k}" data-act="${k==='info'?'info':'go'}" data-v="${k}"><span>${l}</span></button>`).join('');
 $('#nav').innerHTML=navHtml;menu.innerHTML=navHtml;
 setTheme(document.documentElement.classList.contains('light'));
-S=mk(parse(location.hash));render();
+nav(parse(),{replace:true});
 })();
 </script>
 </body>
