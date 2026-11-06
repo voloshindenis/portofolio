@@ -165,18 +165,18 @@
       "name": "В глубине",
       "data": [
         {
-          "url": "https://static.tildacdn.com/tild6663-3364-4531-b066-626132656465/5_2.jpg",
-          "id": "p-0eb20c6688a8",
-          "width": 1680,
-          "height": 1120,
-          "thumb": "/assets/thumbs/p-0eb20c6688a8"
-        },
-        {
           "url": "https://static.tildacdn.com/tild3062-3732-4638-b332-316565396631/1783233295000_R00031.jpg",
           "id": "p-1dbe34f1592a",
           "width": 1680,
           "height": 1120,
           "thumb": "/assets/thumbs/p-1dbe34f1592a"
+        },
+        {
+          "url": "https://static.tildacdn.com/tild6663-3364-4531-b066-626132656465/5_2.jpg",
+          "id": "p-0eb20c6688a8",
+          "width": 1680,
+          "height": 1120,
+          "thumb": "/assets/thumbs/p-0eb20c6688a8"
         },
         {
           "url": "https://static.tildacdn.com/tild6464-6237-4337-b332-613435386363/1781590015000_R00025.JPG",
@@ -207,18 +207,18 @@
           "thumb": "/assets/thumbs/p-101ce3f45858"
         },
         {
-          "url": "https://static.tildacdn.com/tild3962-3935-4365-a233-653336373865/1781283949000_R00021.jpg",
-          "id": "p-bc41698434b4",
-          "width": 1680,
-          "height": 1120,
-          "thumb": "/assets/thumbs/p-bc41698434b4"
-        },
-        {
           "url": "https://static.tildacdn.com/tild6161-6162-4438-b365-306534303435/1785825549000_R00043.jpg",
           "id": "p-10f41aa18627",
           "width": 1680,
           "height": 1120,
           "thumb": "/assets/thumbs/p-10f41aa18627"
+        },
+        {
+          "url": "https://static.tildacdn.com/tild3962-3935-4365-a233-653336373865/1781283949000_R00021.jpg",
+          "id": "p-bc41698434b4",
+          "width": 1680,
+          "height": 1120,
+          "thumb": "/assets/thumbs/p-bc41698434b4"
         },
         {
           "url": "https://static.tildacdn.com/tild6439-3831-4666-b364-346137343532/1783519374000_R00032.jpg",
