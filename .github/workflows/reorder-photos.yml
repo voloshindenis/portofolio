@@ -1,0 +1,82 @@
+name: Reorder portfolio photos
+run-name: 'Reorder photos ${{ inputs.request_id }}'
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: Project
+        required: true
+        type: choice
+        options: [vnevremeni, vglubine]
+      photo_ids:
+        description: Photo IDs in the new order (JSON array)
+        required: true
+        type: string
+      expected_ids:
+        description: Original photo IDs in order (JSON array)
+        required: true
+        type: string
+      request_id:
+        description: Reorder request ID
+        required: true
+        type: string
+      dry_run:
+        description: Validate order and build without publishing
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  pages: write
+  actions: read
+concurrency:
+  group: portfolio-add-photo
+  cancel-in-progress: false
+jobs:
+  reorder:
+    if: github.ref == 'refs/heads/main' && github.actor == 'voloshindenis'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm test
+      - name: Apply requested photo order
+        id: photos
+        run: node scripts/reorder-photos.cjs
+        env:
+          PHOTO_PROJECT: ${{ inputs.project }}
+          PHOTO_IDS: ${{ inputs.photo_ids }}
+          EXPECTED_IDS: ${{ inputs.expected_ids }}
+      - run: npm run build
+      - name: Validate generated pages
+        run: node scripts/check-site.cjs
+      - name: Save all changes together
+        if: ${{ !inputs.dry_run && steps.photos.outputs.unchanged != 'true' }}
+        run: |
+          git config user.name 'Portfolio publisher'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- src/content.json assets/content.js index.html vnevremeni vglubine sitemap.xml
+          git commit -m "Reorder portfolio photographs"
+          git push origin HEAD:main
+      - name: Publish GitHub Pages
+        if: ${{ !inputs.dry_run }}
+        run: node scripts/request-pages-build.cjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Check published photo order
+        if: ${{ !inputs.dry_run }}
+        run: node scripts/check-reordered.cjs
+      - name: Reorder result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reorder-result
+          path: .photo-import/reordered.json
+          if-no-files-found: ignore
+          retention-days: 7
