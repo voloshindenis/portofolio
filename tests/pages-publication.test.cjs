@@ -29,3 +29,23 @@ test('does not report success when the requested Pages deployment fails',async()
   assert.equal(result.exitCode,1);
   assert.match(result.errors[0],/failure/);
 });
+test('a cancelled duplicate must not hide the successful deployment of the same commit', async () => {
+  const result = await runWith(() => [build({conclusion:'cancelled'}), build()]);
+  assert.equal(result.exitCode, 0);
+  assert.match(result.messages.at(-1), /current-commit/);
+});
+test('waits for a replacement that becomes visible after cancellation', async () => {
+  const cancelled = build({conclusion:'cancelled'});
+  const result = await runWith(i => {
+    if (i === 0) return [cancelled];
+    if (i === 1) return [cancelled, build({status:'in_progress', conclusion:null})];
+    return [cancelled, build()];
+  });
+  assert.equal(result.exitCode, 0);
+  assert.equal(result.poll, 3);
+});
+test('a cancelled build alone cannot confirm publication', async () => {
+  const result = await runWith(() => [build({conclusion:'cancelled'}), build({head_sha:'different'})]);
+  assert.equal(result.exitCode, 1);
+  assert.match(result.errors[0], /cancelled/);
+});

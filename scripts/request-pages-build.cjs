@@ -12,16 +12,25 @@ async function api(route,method='GET') {
   const commit = execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
   const requestedAt = Date.now();
   await api('/pages/builds','POST');
+  let cancelledOnlyPolls = 0;
   for(let i=0;i<60;i++){
     const result = await api('/actions/runs?event=dynamic&head_sha='+commit+'&per_page=30');
-    const build = (result.workflow_runs || []).find(run =>
+    const builds = (result.workflow_runs || []).filter(run =>
       run.path === 'dynamic/pages/pages-build-deployment' &&
       run.head_sha === commit && Date.parse(run.created_at) >= requestedAt - 5000);
-    if(build?.status === 'completed') {
-      if(build.conclusion !== 'success') throw Error('Ошибка публикации GitHub Pages: '+build.conclusion+'. '+build.html_url);
+    if(builds.some(run => run.status === 'completed' && run.conclusion === 'success')) {
       console.log('GitHub Pages опубликовал '+commit);return;
     }
-    if(i % 6 === 0) console.log('GitHub Pages: '+(build?.status || 'ожидание запуска'));
+    const active = builds.find(run => run.status !== 'completed');
+    if (builds.length && !active) {
+      const failed = builds.find(run => run.conclusion !== 'cancelled');
+      if (failed) throw Error('Ошибка публикации GitHub Pages: '+failed.conclusion+'. '+failed.html_url);
+      // A cancelled duplicate can appear before GitHub lists its replacement.
+      if (++cancelledOnlyPolls >= 4) throw Error('Публикация GitHub Pages отменена (cancelled). '+builds[0].html_url);
+    } else {
+      cancelledOnlyPolls = 0;
+    }
+    if(i % 6 === 0) console.log('GitHub Pages: '+(active?.status || 'ожидание публикации'));
     await new Promise(r=>setTimeout(r,10000));
   }
   throw Error('GitHub Pages пока не подтвердил публикацию. Проверьте статус сборки.');
