@@ -107,11 +107,12 @@ function gridHtml(k){const p=PROJ[k];
 function buildGrid(k){gridFor=k;$('#gg').dataset.project=k;$('#gg').innerHTML=gridHtml(k);grid.scrollTop=0}
 
 /* ================= ЛАЙТБОКС ================= */
-const lbE=$('#lb'),lbImg=$('#lbimg');let lb={list:[],i:0},lbOn=false,lbBusy=false,sx=null,swiped=false,lbVersion=0,lbFocus=null,shareTimer;
+const lbE=$('#lb'),lbImg=$('#lbimg');let lb={list:[],i:0},lbOn=false,lbBusy=false,lbVersion=0,lbFocus=null,shareTimer;
+const resetViewerGesture=bindViewerGestures(lbE,lbImg,lbGo);
 const lbCnt=()=>{$('#lbc').textContent=`${lb.i+1} / ${lb.list.length}`};
 function syncLb(){
  if(!S.photo||!PROJ[S.from]){
-  if(lbOn){lbE.classList.remove('on');lbOn=false;lbBusy=false;lbVersion++;clearTimeout(shareTimer);
+  if(lbOn){resetViewerGesture();lbE.classList.remove('on');lbOn=false;lbBusy=false;lbVersion++;clearTimeout(shareTimer);
    if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
    if(lbFocus?.isConnected)lbFocus.focus();
   }
@@ -119,6 +120,7 @@ function syncLb(){
  }
  const p=PROJ[S.from],i=p.data.findIndex(x=>x.id===S.photo);if(i<0)return;
  if(lbOn&&lb.project===S.from&&lb.i===i)return;
+ resetViewerGesture();
  const opening=!lbOn;if(opening)lbFocus=document.activeElement;
  lbVersion++;clearTimeout(shareTimer);lb={project:S.from,list:urls(p.data),i};lbImg.src=lb.list[i];lbImg.alt=p.data[i].alt||p.name+', фото '+(i+1);lbImg.style.opacity=1;
  lbCnt();lbE.classList.add('on');lbOn=true;if(opening)lbE.focus();
@@ -133,9 +135,96 @@ async function lbGo(d){if(lbBusy||!lb.list.length)return;lbBusy=true;
  await load(u);if(!lbOn||lbVersion!==version){lbBusy=false;return}
  nav({...S,photo:PROJ[S.from].data[i].id},{replace:true});lbBusy=false;load(lb.list[(i+d+lb.list.length)%lb.list.length]);
 }
-lbE.addEventListener('pointerdown',e=>{sx=e.clientX;swiped=false});
-lbE.addEventListener('pointerup',e=>{if(sx===null)return;const dx=e.clientX-sx;sx=null;if(Math.abs(dx)>50){swiped=true;lbGo(dx<0?1:-1)}});
-lbE.addEventListener('click',e=>{if(swiped){swiped=false;return}if(e.target.closest('button'))return;lbGo(e.clientX<innerWidth/2?-1:1)});
+function bindViewerGestures(viewer,image,step){
+ const touches=new Map();
+ const clamp=(value,min,max)=>Math.min(max,Math.max(min,value));
+ let scale=1,offsetX=0,offsetY=0,start=null,pinchStart=null,suppressClick=false;
+
+ function reset(){
+  scale=1;offsetX=0;offsetY=0;
+  image.style.removeProperty('transform');
+  if(touches.size)suppressClick=true;
+  touches.clear();start=null;pinchStart=null;
+ }
+ function setView(nextScale,x,y){
+  const frame=viewer.getBoundingClientRect(),rect=image.getBoundingClientRect();
+  if(!rect.width||!rect.height)return;
+  const ratio=nextScale/scale;
+  // The untransformed image can sit off-centre in landscape to clear the controls.
+  function bound(value,centre,extent,low,high){
+   if(extent<=high-low)return 0;
+   return clamp(value,high-centre-extent/2,low-centre+extent/2);
+  }
+  offsetX=bound(x,rect.left+rect.width/2-offsetX,rect.width*ratio,frame.left,frame.right);
+  offsetY=bound(y,rect.top+rect.height/2-offsetY,rect.height*ratio,frame.top,frame.bottom);
+  scale=nextScale;
+  image.style.transform=scale===1?'':`translate(${offsetX}px,${offsetY}px) scale(${scale})`;
+ }
+ function pair(){
+  const [a,b]=touches.values();
+  return {x:(a.x+b.x)/2,y:(a.y+b.y)/2,distance:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y))};
+ }
+ function beginPinch(){
+  pinchStart=null;
+  if(touches.size!==2)return;
+  const mid=pair(),rect=image.getBoundingClientRect();
+  pinchStart={mid,scale,offsetX,offsetY,anchorX:mid.x-rect.left-rect.width/2,anchorY:mid.y-rect.top-rect.height/2};
+ }
+ function updatePinch(){
+  const mid=pair(),base=pinchStart;
+  const nextScale=clamp(base.scale*mid.distance/base.mid.distance,1,4);
+  const ratio=nextScale/base.scale;
+  setView(nextScale,base.offsetX+mid.x-base.mid.x+base.anchorX*(1-ratio),
+                    base.offsetY+mid.y-base.mid.y+base.anchorY*(1-ratio));
+ }
+ viewer.addEventListener('pointerdown',event=>{
+  if(event.button!==0)return;
+  if(!touches.size){
+   suppressClick=false;
+   if(event.target.closest('button'))return;
+   start={id:event.pointerId,x:event.clientX,y:event.clientY};
+  }
+  if(event.pointerType!=='touch')return;
+  touches.set(event.pointerId,{x:event.clientX,y:event.clientY});
+  viewer.setPointerCapture(event.pointerId);
+  beginPinch();
+  if(touches.size>1||scale>1)suppressClick=true;
+ });
+ viewer.addEventListener('pointermove',event=>{
+  const previous=touches.get(event.pointerId);
+  if(!previous)return;
+  const current={x:event.clientX,y:event.clientY};
+  touches.set(event.pointerId,current);
+  if(pinchStart){
+   updatePinch();
+  }else if(touches.size===1&&scale>1){
+   setView(scale,offsetX+current.x-previous.x,offsetY+current.y-previous.y);
+  }
+ });
+ viewer.addEventListener('pointerup',event=>{
+  if(touches.delete(event.pointerId))beginPinch();
+  if(start?.id!==event.pointerId)return;
+  const dx=event.clientX-start.x,dy=event.clientY-start.y;
+  start=null;
+  if(suppressClick)return;
+  if(Math.abs(dx)>50&&(event.pointerType!=='touch'||Math.abs(dx)>Math.abs(dy))){
+   suppressClick=true;step(dx<0?1:-1);
+  }else if(event.pointerType==='touch'&&Math.hypot(dx,dy)>12)suppressClick=true;
+ });
+ function cancel(event){
+  if(touches.delete(event.pointerId)||start?.id===event.pointerId){
+   beginPinch();start=null;suppressClick=true;
+  }
+ }
+ viewer.addEventListener('pointercancel',cancel);
+ viewer.addEventListener('lostpointercapture',cancel);
+ viewer.addEventListener('click',event=>{
+  if(suppressClick&&event.detail){event.stopPropagation();return;}
+  if(scale===1&&!event.target.closest('button'))step(event.clientX<innerWidth/2?-1:1);
+ });
+ window.addEventListener('resize',reset);
+ return reset;
+}
 if(!document.documentElement.requestFullscreen)$('#lbfs').hidden=true;
 
 function shareFeedback(text){

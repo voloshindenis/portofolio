@@ -69,7 +69,7 @@ body[data-mode=main]:not([data-ov]) #copy{display:block}
 .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;margin-top:1.8rem}
 .lnk{border-bottom:1px dotted var(--line);font-weight:500;line-height:1.2}
 /* лайтбокс */
-#lb{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .25s;cursor:ew-resize;touch-action:pan-y}
+#lb{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .25s;cursor:ew-resize;touch-action:none}
 #lb.on{opacity:1;visibility:visible}
 #lbimg{max-width:90vw;max-height:80vh;object-fit:contain;transition:opacity .2s}
 #lbtop{position:fixed;top:12px;right:10px;display:flex;gap:12px}
