@@ -89,15 +89,15 @@ const gimg=$('#gimg'),gbg=$('#gbg');let G={mode:null,list:[],i:0},gBusy=false,au
 const pre=d=>{const u=G.list[(G.i+d+G.list.length)%G.list.length];u&&load(u)};
 function setGal(mode){if(G.mode===mode)return;
  G={mode,list:mode==='main'?shuffle(allUrls()):urls(PROJ[mode].data),i:0};autoOn=!reduce;
- gimg.src=G.list[0]||'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';gimg.alt=photoAlt(G.list[0]);gbg.style.backgroundImage=G.list[0]?`url('${G.list[0]}')`:'';gimg.style.opacity=1;pre(1);pre(-1)}
+ gimg.src=G.list[0]||'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';gimg.alt=photoAlt(G.list[0],mode);gbg.style.backgroundImage=G.list[0]?`url('${G.list[0]}')`:'';gimg.style.opacity=1;pre(1);pre(-1)}
 async function galGo(d){if(gBusy||!G.list.length)return;gBusy=true;
  const i=(G.i+d+G.list.length)%G.list.length,u=G.list[i];gimg.style.opacity=0;await sleep(150);await load(u);
- gimg.src=u;gimg.alt=photoAlt(u);gbg.style.backgroundImage=`url('${u}')`;gimg.style.opacity=1;G.i=i;gBusy=false;pre(1);pre(-1)}
+ gimg.src=u;gimg.alt=photoAlt(u,G.mode);gbg.style.backgroundImage=`url('${u}')`;gimg.style.opacity=1;G.i=i;gBusy=false;pre(1);pre(-1)}
 gal.addEventListener('click',e=>{autoOn=false;galGo(e.clientX<innerWidth/2?-1:1)});
 setInterval(()=>{if(autoOn&&GALMODES.includes(S.mode)&&!S.modal&&!lbOn&&!document.hidden)galGo(1)},5000);
 const THUMB_SIZES='(max-width:347px) calc(100vw - 40px), (max-width:505px) calc((100vw - 48px)/2), (max-width:663px) calc((100vw - 56px)/3), (max-width:768px) calc((100vw - 64px)/4), (max-width:955px) calc((100vw - 160px)/2), (max-width:1231px) calc((100vw - 176px)/3), (max-width:1507px) calc((100vw - 192px)/4), (max-width:1600px) calc((100vw - 208px)/5), 278.4px';
-function photoAlt(url){
- for(const p of Object.values(PROJ)){const i=p.data.findIndex(x=>x.url===url);if(i>=0)return p.data[i].alt||p.name+', фото '+(i+1)}
+function photoAlt(url,projectKey){
+ for(const p of (PROJ[projectKey]?[PROJ[projectKey]]:Object.values(PROJ))){const i=p.data.findIndex(x=>x.url===url);if(i>=0)return p.data[i].alt||p.name+', фото '+(i+1)}
  return 'Фотография Дениса Волошина';
 }
 function gridHtml(k){const p=PROJ[k];
@@ -118,9 +118,9 @@ function syncLb(){
   return;
  }
  const p=PROJ[S.from],i=p.data.findIndex(x=>x.id===S.photo);if(i<0)return;
- if(lbOn&&lb.list[lb.i]===p.data[i].url)return;
+ if(lbOn&&lb.project===S.from&&lb.i===i)return;
  const opening=!lbOn;if(opening)lbFocus=document.activeElement;
- lbVersion++;clearTimeout(shareTimer);lb={list:urls(p.data),i};lbImg.src=lb.list[i];lbImg.alt=photoAlt(lb.list[i]);lbImg.style.opacity=1;
+ lbVersion++;clearTimeout(shareTimer);lb={project:S.from,list:urls(p.data),i};lbImg.src=lb.list[i];lbImg.alt=p.data[i].alt||p.name+', фото '+(i+1);lbImg.style.opacity=1;
  lbCnt();lbE.classList.add('on');lbOn=true;if(opening)lbE.focus();
 }
 function lbClose(){

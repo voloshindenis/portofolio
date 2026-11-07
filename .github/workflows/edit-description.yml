@@ -1,0 +1,72 @@
+name: Edit photo description
+run-name: 'Edit description ${{ inputs.request_id }}'
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: Project
+        required: true
+        type: choice
+        options: [vnevremeni, vglubine]
+      photo_id:
+        description: Permanent photo ID
+        required: true
+        type: string
+      description_change:
+        description: JSON object with expectedAlt and alt
+        required: true
+        type: string
+      request_id:
+        description: Publication request ID
+        required: true
+        type: string
+      dry_run:
+        description: Build and check without publishing
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  pages: write
+  actions: read
+concurrency:
+  group: portfolio-add-photo
+  cancel-in-progress: false
+jobs:
+  edit:
+    if: github.ref == 'refs/heads/main' && github.actor == 'voloshindenis'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    env:
+      PHOTO_PROJECT: ${{ inputs.project }}
+      PHOTO_ID: ${{ inputs.photo_id }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - run: node --test tests/description.test.cjs
+      - name: Update description in the catalog
+        id: edit
+        run: node scripts/edit-description.cjs
+        env:
+          DESCRIPTION_CHANGE: ${{ inputs.description_change }}
+      - run: node scripts/build.cjs
+      - run: node scripts/check-site.cjs
+      - name: Commit catalog and generated pages
+        if: ${{ !inputs.dry_run && steps.edit.outputs.changed == 'true' }}
+        run: |
+          git config user.name 'Portfolio publisher'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- src/content.json assets/content.js index.html vnevremeni vglubine
+          git commit -m "Update photo description"
+          git push origin HEAD:main
+      - name: Publish site
+        if: ${{ !inputs.dry_run }}
+        run: node scripts/request-pages-build.cjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Verify description at the public photo URL
+        if: ${{ !inputs.dry_run }}
+        run: node scripts/edit-description.cjs --check-published
