@@ -1,20 +1,30 @@
 (function(){'use strict';
 const SITE='https://denisvoloshin.ru';
 const photoPath=(key,id)=>'/'+key+'/'+encodeURIComponent(id)+'/';
+function seriesCover(content, key) {
+ const project = content.projects[key];
+ if (!project) return null;
+ return project.data.find(photo => photo.id === project.coverId)
+     || project.data.find(photo => photo.url === content.seo[key]?.image)
+     || project.data[0] || null;
+}
 function page(content,key,id){
  key=Object.hasOwn(content.seo,key)?key:'main';
  const project=content.projects[key],index=project?project.data.findIndex(x=>x.id===id):-1;
  const photo=index<0?null:project.data[index],base=content.seo[key];
  const photos=Object.values(content.projects).flatMap(p=>p.data);
- const source=photo||photos.find(x=>x.url===base.image)||project?.data[0]||photos[0]||{url:SITE+'/favicon.png',width:512,height:512};
+ const cover=seriesCover(content,key);
+ const source=photo||cover||photos.find(x=>x.url===base.image)||photos[0]||{url:SITE+'/favicon.png',width:512,height:512};
  const path=photo?photoPath(key,photo.id):base.path;
- const image=photo?SITE+photo.thumb+'-800.jpg':source.url;
- const imageAlt=photo?(photo.alt||project.name+', фото '+(index+1)):base.imageAlt;
+ const preview=photo || (cover && project.coverId===cover.id ? cover : null);
+ const image=preview?SITE+preview.thumb+'-800.jpg':source.url;
+ const imageAlt=photo?(photo.alt||project.name+', фото '+(index+1)):
+   (cover?.alt || (preview ? 'Фотография Дениса Волошина из проекта «'+project.name+'»' : base.imageAlt));
  return {key,photo,path,url:SITE+path,image,imageAlt,
   title:photo?project.name+' — фото '+(index+1)+' | Денис Волошин':base.title,
   description:photo?'Фотография '+(index+1)+' из проекта «'+project.name+'» Дениса Волошина. '+base.description:base.description,
   heading:photo?imageAlt:(project?project.name:'Денис Волошин — уличный фотограф'),
-  imageType:image.endsWith('/favicon.png')?'image/png':'image/jpeg',imageWidth:photo?800:source.width,imageHeight:photo?Math.round(source.height*800/source.width):source.height};
+  imageType:image.endsWith('/favicon.png')?'image/png':'image/jpeg',imageWidth:preview?800:source.width,imageHeight:preview?Math.round(source.height*800/source.width):source.height};
 }
 function tags(p){return {
  description:p.description,'og:title':p.title,'og:description':p.description,'og:url':p.url,
@@ -36,7 +46,7 @@ function schema(p){
  }
  return {'@context':'https://schema.org','@graph':graph};
 }
-const api={SITE,photoPath,page,tags,schema};
+const api={SITE,photoPath,seriesCover,page,tags,schema};
 if(typeof module==='object'&&module.exports)module.exports=api;
 else window.PortfolioMetadata=api;
 })();

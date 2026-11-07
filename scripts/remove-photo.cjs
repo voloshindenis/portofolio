@@ -1,6 +1,7 @@
 'use strict';
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const {seriesCover} = require('../assets/metadata.js');
 function prepareRemoval(input,content) {
   if (!['vnevremeni','vglubine'].includes(input.project) || !content.projects[input.project]) throw Error('Выберите проект.');
   if (!/^p-[a-f0-9]{12}$/.test(input.photoId || '')) throw Error('Некорректный идентификатор кадра.');
@@ -12,7 +13,12 @@ function prepareRemoval(input,content) {
 async function applyRemoval(root,prepared,content) {
   if(prepared.alreadyRemoved)return;
   const project=content.projects[prepared.project];
+  const wasCover = seriesCover(content, prepared.project)?.id === prepared.id;
   project.data=project.data.filter(p=>p.id!==prepared.id);
+  if (wasCover) {
+    if (project.data.length) project.coverId = project.data[0].id;
+    else delete project.coverId;
+  }
   const remaining=Object.values(content.projects).flatMap(p=>p.data);
   for(const [key,seo] of Object.entries(content.seo || {})) {
     if(seo.image===prepared.photo.url && !remaining.some(p=>p.url===seo.image)) {

@@ -36,7 +36,9 @@ async function applyPhoto(root,prepared,content) {
   const target = path.join(root,'assets','thumbs');
   await fs.mkdir(target,{recursive:true});
   for (const size of [400,800]) await fs.writeFile(path.join(target,prepared.photo.id+'-'+size+'.jpg'),prepared.thumbnails[size],{flag:'wx'});
-  content.projects[prepared.project].data.push(prepared.photo);
+  const project = content.projects[prepared.project];
+  if (!project.data.length) project.coverId = prepared.photo.id;
+  project.data.push(prepared.photo);
   const file = path.join(root,'src','content.json');
   await fs.writeFile(file+'.tmp',JSON.stringify(content,null,2)+'\n');
   await fs.rename(file+'.tmp',file);
