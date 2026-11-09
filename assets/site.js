@@ -69,7 +69,8 @@ function render(){
 
  if(S.modal){$('#mbox').innerHTML=S.modal==='info'?INFO:modalHtml(S.modal)}
  const mt=$('#mt');mt.textContent=S.mode==='mini'?PROJ[S.from].name.toUpperCase():'';mt.dataset.v=S.from||'';mt.href=PATHS[S.from]||'/';
- $$('#nav [data-k],#menu [data-k]').forEach(b=>b.classList.toggle('act',b.dataset.k===S.mode||(S.mode==='mini'&&b.dataset.k===S.from)));
+ const activeSection=S.modal==='info'?'info':S.mode==='mini'?S.from:S.mode;
+ $$('#nav [data-k],#menu [data-k]').forEach(b=>b.classList.toggle('act',b.dataset.k===activeSection));
  menu.classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');
  $('#gridBtn').href=(PATHS[S.mode]||'/')+'#mini';
  syncLb();
