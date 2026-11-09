@@ -34,10 +34,9 @@ a{color:inherit}
 @media(max-width:768px){.gg{padding:14px 20px 34px;gap:8px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
 /* фиксированный интерфейс */
 .fx{position:fixed;z-index:31}
-#logo,#mt{top:var(--ui-edge);left:var(--ui-edge);font:700 16px/1.2 Unbounded,sans-serif;letter-spacing:.03em;border-bottom:1px solid transparent;padding-bottom:2px}
-#logo{top:16px;left:16px}
-@media(min-width:1301px){#logo{font-size:18px}}
-@media(max-width:1300px){#logo{top:12px;left:12px}}
+#logo,#mt{top:16px;left:16px;font:700 16px/1.2 Unbounded,sans-serif;letter-spacing:.03em;border-bottom:1px solid transparent;padding-bottom:2px}
+@media(min-width:1301px){#logo,#mt{font-size:18px}}
+@media(max-width:1300px){#logo,#mt{top:12px;left:12px}}
 body[data-ov] #logo,body[data-mode=mini] #logo,#mt:empty{display:none}
 #mt{display:block}
 #nav{top:50%;left:var(--ui-edge);transform:translateY(-50%);display:flex;flex-direction:column;align-items:flex-start}
