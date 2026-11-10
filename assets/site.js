@@ -9,7 +9,17 @@ const vnevremeniDataFull=PROJ.vnevremeni.data,vglubineDataFull=PROJ.vglubine.dat
 const GALMODES=['main','vnevremeni','vglubine'],urls=a=>a.map(x=>x.url);
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 const allUrls=()=>[...new Set([...urls(vnevremeniDataFull),...urls(vglubineDataFull)])];
-const load=u=>new Promise(r=>{const m=new Image();m.onload=m.onerror=r;m.src=u});
+// Preloads never reject: speculative neighbour loads must not produce unhandled errors.
+const load=u=>new Promise(resolve=>{
+ const image=new Image();let settled=false;
+ const finish=ok=>{if(settled)return;settled=true;clearTimeout(timer);image.onload=image.onerror=null;resolve(ok)};
+ const timer=setTimeout(()=>finish(false),20000);
+ image.onerror=()=>finish(false);
+ image.onload=async()=>{
+  try{if(image.decode)await image.decode();finish(image.naturalWidth>0)}catch(e){finish(false)}
+ };
+ image.src=u;
+});
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 /* ================= СОСТОЯНИЕ И РОУТЕР ================= */
@@ -109,14 +119,26 @@ function closeTop(){
  if(S.mode==='mini')nav({mode:S.from})}
 
 /* ================= ГАЛЕРЕЯ ================= */
-const gimg=$('#gimg'),gbg=$('#gbg');let G={mode:null,list:[],i:0},gBusy=false,autoOn=!reduce;
+const gimg=$('#gimg'),gbg=$('#gbg');let G={mode:null,list:[],i:0},gRequest=null,autoOn=!reduce;
 const pre=d=>{const u=G.list[(G.i+d+G.list.length)%G.list.length];u&&load(u)};
-function setGal(mode){if(G.mode===mode)return;
- G={mode,list:mode==='main'?shuffle(allUrls()):urls(PROJ[mode].data),i:0};autoOn=!reduce;
- gimg.src=G.list[0]||'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';gimg.alt=photoAlt(G.list[0],mode);gbg.style.backgroundImage=G.list[0]?`url('${G.list[0]}')`:'';gimg.style.opacity=1;pre(1);pre(-1)}
-async function galGo(d){if(gBusy||!G.list.length)return;gBusy=true;
- const i=(G.i+d+G.list.length)%G.list.length,u=G.list[i];gimg.style.opacity=0;await sleep(150);await load(u);
- gimg.src=u;gimg.alt=photoAlt(u,G.mode);gbg.style.backgroundImage=`url('${u}')`;gimg.style.opacity=1;G.i=i;gBusy=false;pre(1);pre(-1)}
+async function setGal(mode){if(G.mode===mode)return;
+ const state=G={mode,list:mode==='main'?shuffle(allUrls()):urls(PROJ[mode].data),i:0};autoOn=!reduce;
+ const request=gRequest={};gimg.style.opacity=1;
+ try{
+  const u=state.list[0];
+  if(!u||!await load(u)||G!==state||gRequest!==request||S.mode!==mode)return;
+  gimg.src=u;gimg.alt=photoAlt(u,mode);gbg.style.backgroundImage=`url('${u}')`;pre(1);pre(-1);
+ }finally{if(gRequest===request)gRequest=null}
+}
+async function galGo(d){if(gRequest||!G.list.length)return;
+ const state=G,request=gRequest={},i=(state.i+d+state.list.length)%state.list.length,u=state.list[i];
+ const current=()=>G===state&&gRequest===request&&S.mode===state.mode;
+ try{
+  if(!await load(u)||!current())return;
+  gimg.style.opacity=0;await sleep(150);if(!current())return;
+  gimg.src=u;gimg.alt=photoAlt(u,state.mode);gbg.style.backgroundImage=`url('${u}')`;state.i=i;pre(1);pre(-1);
+ }finally{if(gRequest===request){gimg.style.opacity=1;gRequest=null}}
+}
 gal.addEventListener('click',e=>{autoOn=false;galGo(e.clientX<innerWidth/2?-1:1)});
 setInterval(()=>{if(autoOn&&GALMODES.includes(S.mode)&&!S.modal&&!lbOn&&!document.hidden)galGo(1)},5000);
 const THUMB_SIZES='(max-width:347px) calc(100vw - 40px), (max-width:505px) calc((100vw - 48px)/2), (max-width:663px) calc((100vw - 56px)/3), (max-width:768px) calc((100vw - 64px)/4), (max-width:955px) calc((100vw - 160px)/2), (max-width:1231px) calc((100vw - 176px)/3), (max-width:1507px) calc((100vw - 192px)/4), (max-width:1600px) calc((100vw - 208px)/5), 278.4px';
@@ -146,7 +168,7 @@ function syncLb(){
  if(lbOn&&lb.project===S.from&&lb.i===i)return;
  resetViewerGesture();
  const opening=!lbOn;if(opening)lbFocus=document.activeElement;
- lbVersion++;clearTimeout(shareTimer);lb={project:S.from,list:urls(p.data),i};lbImg.src=lb.list[i];lbImg.alt=p.data[i].alt||p.name+', фото '+(i+1);lbImg.style.opacity=1;
+ lbVersion++;lbBusy=false;clearTimeout(shareTimer);lb={project:S.from,list:urls(p.data),i};lbImg.src=lb.list[i];lbImg.alt=p.data[i].alt||p.name+', фото '+(i+1);lbImg.style.opacity=1;
  lbCnt();lbE.classList.add('on');lbOn=true;if(opening)lbE.focus();
 }
 function lbClose(){
@@ -155,9 +177,14 @@ function lbClose(){
  else nav({mode:'mini',from:S.from},{replace:true});
 }
 async function lbGo(d){if(lbBusy||!lb.list.length)return;lbBusy=true;
- const version=lbVersion,i=(lb.i+d+lb.list.length)%lb.list.length,u=lb.list[i];lbImg.style.opacity=0;await sleep(150);
- await load(u);if(!lbOn||lbVersion!==version){lbBusy=false;return}
- nav({...S,photo:PROJ[S.from].data[i].id},{replace:true});lbBusy=false;load(lb.list[(i+d+lb.list.length)%lb.list.length]);
+ const version=lbVersion,project=S.from,i=(lb.i+d+lb.list.length)%lb.list.length,u=lb.list[i];
+ const current=()=>lbOn&&lbVersion===version&&S.from===project;
+ try{
+  if(!await load(u)||!current())return;
+  lbImg.style.opacity=0;await sleep(150);if(!current())return;
+  nav({...S,photo:PROJ[project].data[i].id},{replace:true});
+  load(PROJ[project].data[(i+d+PROJ[project].data.length)%PROJ[project].data.length].url);
+ }finally{if(lbVersion===version){lbImg.style.opacity=1;lbBusy=false}}
 }
 function bindViewerGestures(viewer,image,step){
  const touches=new Map();
