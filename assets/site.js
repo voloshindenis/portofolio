@@ -57,6 +57,27 @@ addEventListener('hashchange',()=>nav(parse(),{replace:true}));
 
 const gal=$('#gal'),grid=$('#grid'),modal=$('#modal'),menu=$('#menu');
 
+// Isolate overlays without changing their layout or transition animations.
+function syncFocusScope(){
+ const viewer=!!S.photo,info=!!S.modal;
+ const allowed=viewer?[lbE]:info?[modal,$('#top')]:null;
+ for(const el of document.body.children){
+  if(el.matches('script'))continue;
+  el.inert=allowed?!allowed.includes(el):el===menu&&!menu.classList.contains('open');
+ }
+}
+function trapOverlayTab(event){
+ if(event.key!=='Tab'||(!lbOn&&!S.modal))return;
+ const roots=lbOn?[lbE]:[modal,$('#top')];
+ const items=$$('a[href],button,[tabindex]')
+  .filter(el=>roots.some(root=>root.contains(el))&&!el.disabled&&el.tabIndex>=0&&!el.closest('[inert]')&&el.getClientRects().length&&getComputedStyle(el).visibility==='visible');
+ if(!items.length){event.preventDefault();return}
+ const index=items.indexOf(document.activeElement);
+ if(index<0||event.shiftKey&&index===0||!event.shiftKey&&index===items.length-1){
+  event.preventDefault();items[event.shiftKey?items.length-1:0].focus();
+ }
+}
+
 let gridFor=$('#gg').dataset.project||null;
 function render(){
  const d=document.body.dataset,ov=S.modal,on=(el,v)=>el.classList.toggle('on',!!v);
@@ -73,14 +94,16 @@ function render(){
  $$('#nav [data-k],#menu [data-k]').forEach(b=>b.classList.toggle('act',b.dataset.k===activeSection));
  menu.classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');
  $('#gridBtn').href=(PATHS[S.mode]||'/')+'#mini';
+ syncFocusScope();
  syncLb();
 }
 function modalHtml(k){const p=PROJ[k];
  return`<h2 class="mt">${p.name.toUpperCase()}</h2><div class="tx"><p>${p.text}</p></div><div class="row"><span class="it">${p.loc}</span><a class="lnk" href="${PATHS[k]}#mini" data-act="mini" data-v="${k}">перейти в галерею →</a></div>`}
-function openModal(k){prevFocus=document.activeElement;S={...S,modal:k};render();modal.scrollTop=0;$('#mbox').focus({preventScroll:true})}
+function openModal(k){prevFocus=menu.contains(document.activeElement)?$('#menuBtn'):document.activeElement;S={...S,modal:k};render();modal.scrollTop=0;$('#mbox').focus({preventScroll:true})}
 
 function closeTop(){
  if(lbOn)return lbClose();
+ if(menu.classList.contains('open')){menu.classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');syncFocusScope();$('#menuBtn').focus();return}
  if(S.modal){S={...S,modal:null};render();prevFocus&&prevFocus.focus&&prevFocus.focus();return}
 
  if(S.mode==='mini')nav({mode:S.from})}
@@ -255,7 +278,7 @@ const A={
  go:v=>nav({mode:v}),info:()=>openModal('info'),about:()=>openModal(S.mode==='mini'?S.from:S.mode),
  grid:()=>nav({mode:'mini',from:S.mode}),mini:v=>nav({mode:'mini',from:v}),
  theme:()=>{const r=document.documentElement;r.classList.add('tt');setTheme(!r.classList.contains('light'),true);setTimeout(()=>r.classList.remove('tt'),400)},
- menu:()=>{const o=menu.classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',o)},
+ menu:()=>{const o=menu.classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',o);syncFocusScope()},
  close:closeTop,lbclose:lbClose,lbprev:()=>lbGo(-1),lbnext:()=>lbGo(1),
  lbfs:()=>{document.fullscreenElement?document.exitFullscreen():lbE.requestFullscreen&&lbE.requestFullscreen().catch(()=>{})},
  share:sharePhoto};
@@ -270,9 +293,10 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');
   if(t.matches('a[href]')){if(e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||t.hasAttribute('download')||t.target==='_blank')return;e.preventDefault()}
   A[t.dataset.act]&&A[t.dataset.act](t.dataset.v);return
  }
- if(menu.classList.contains('open')&&!e.target.closest('#menu')){menu.classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false')}});
+ if(menu.classList.contains('open')&&!e.target.closest('#menu')){menu.classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');syncFocusScope()}});
 modal.addEventListener('click',e=>{if(e.target===modal)closeTop()});
 document.addEventListener('keydown',e=>{const k=e.key;
+ if(k==='Tab'){trapOverlayTab(e);return}
  if(lbOn){if(k==='ArrowLeft')lbGo(-1);else if(k==='ArrowRight')lbGo(1);else if(k==='Escape')lbClose();else return;e.preventDefault();return}
  if(k==='Escape'){closeTop();return}
  const step=k==='ArrowLeft'||k==='ArrowRight'||(k===' '&&!e.target.closest('button,a'));
