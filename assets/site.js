@@ -100,6 +100,11 @@ function render(){
 
  if(S.modal){$('#mbox').innerHTML=S.modal==='info'?INFO:modalHtml(S.modal)}
  const mt=$('#mt');mt.textContent=S.mode==='mini'?PROJ[S.from].name.toUpperCase():'';mt.dataset.v=S.from||'';mt.href=PATHS[S.from]||'/';
+ for(const link of menu.querySelectorAll('a[data-v]')){
+   const mini=S.mode==='mini';
+   link.dataset.act=mini?'mini':'go';
+   link.href=PATHS[link.dataset.v]+(mini?'#mini':'');
+ }
  const activeSection=S.modal==='info'?'info':S.mode==='mini'?S.from:S.mode;
  $$('#nav [data-k],#menu [data-k]').forEach(b=>b.classList.toggle('act',b.dataset.k===activeSection));
  menu.classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');

@@ -108,3 +108,12 @@ body[data-mode=main]:not([data-ov]) #copy{display:block}
 body[data-mode=mini]:not([data-ov]) #mt[href="/vglubine/"]~.note-metro,body[data-mode=mini]:not([data-ov]) #mt[href="/vnevremeni/"]~.note-street{display:block}
 #grid{top:82px}
 @media(max-width:480px){#grid{top:92px}.series-note{top:calc(var(--ui-edge) + 30px)}}
+
+@media(max-width:1300px){
+ body[data-mode=mini]:not([data-ov]) #menuBtn{display:inline-flex}
+ #menu{width:240px;padding-inline:16px}
+ #menu [data-k=info]{margin-top:20px}
+ #menuBtn{width:44px;height:44px;margin:-6px}
+ body[data-mode=mini] #close{order:-1}
+ body[data-mode=mini]:has(#menu.open) #close{display:none}
+}
