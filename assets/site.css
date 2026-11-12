@@ -142,4 +142,4 @@ body[data-mode=mini] #gal:not(.on){visibility:hidden}
 .series-essay footer span{color:var(--mut)}
 @media(max-width:500px){.series-essay h2{margin-bottom:22px}.series-essay footer{margin-top:24px}}
 #lb{transition:opacity 222ms cubic-bezier(.4,0,.22,1),visibility 0s 222ms}#lb.on{transition:opacity 222ms cubic-bezier(.4,0,.22,1)}
-#lb:not(.on){transition:opacity 222ms cubic-bezier(.215,.61,.355,1),visibility 0s 222ms}
+#lb:not(.on){transition:opacity 180ms ease-out,visibility 0s 180ms}

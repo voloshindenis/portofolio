@@ -49,7 +49,7 @@ function viewer(){
  const elements=new Map();const element=()=>({style:{opacity:1},classList:{add(){},remove(){}},focus(){}});
  for(const key of ['#lb','#lbimg','#lbc'])elements.set(key,element());elements.get('#lbimg').src='a';
  const requests=[],fades=[],navigations=[];
- const context=vm.createContext({$:s=>elements.get(s),matchMedia:()=>({matches:true}),bindViewerGestures:()=>()=>{},urls:a=>a.map(x=>x.url),PROJ:{vnevremeni:{name:'Series',data:[{id:'a',url:'a'},{id:'b',url:'b'}]}},S:{mode:'mini',from:'vnevremeni',photo:'a'},clearTimeout(){},document:{activeElement:null},history:{state:null},
+ const context=vm.createContext({$:s=>elements.get(s),grid:{querySelectorAll:()=>[]},matchMedia:()=>({matches:true}),bindViewerGestures:()=>()=>{},urls:a=>a.map(x=>x.url),PROJ:{vnevremeni:{name:'Series',data:[{id:'a',url:'a'},{id:'b',url:'b'}]}},S:{mode:'mini',from:'vnevremeni',photo:'a'},clearTimeout(){},document:{activeElement:null},history:{state:null},
   load:u=>{const d=deferred();requests.push(d);return d.promise},sleep:()=>{const d=deferred();fades.push(d);return d.promise}});
  context.nav=s=>{navigations.push(s.photo);context.S=s;context.api.syncLb()};
  vm.runInContext(part("const lbE=$('#lb')",'function bindViewerGestures')+`
