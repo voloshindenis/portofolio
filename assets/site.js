@@ -118,8 +118,12 @@ function render(){
  syncFocusScope();
  syncLb();
 }
+ const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 function modalHtml(k){const p=PROJ[k];
- return`<h2 class="mt">${p.name.toUpperCase()}</h2><div class="tx"><p>${p.text}</p></div><div class="row"><span class="it">${p.loc}</span><a class="lnk" href="${PATHS[k]}#mini" data-act="mini" data-v="${k}">перейти в галерею →</a></div>`}
+ const split=p.text.indexOf('. ')+1;
+ const lead=split?p.text.slice(0,split):p.text;
+ const body=split?p.text.slice(split).trim():'';
+ return `<article class="series-essay"><h2>${esc(p.name)}</h2><p class="essay-lead">${esc(lead)}</p>${body?`<p class="essay-body">${esc(body)}</p>`:''}<footer><span>${esc(p.loc)}</span><a class="lnk" href="${PATHS[k]}#mini" data-act="mini" data-v="${k}">перейти в галерею →</a></footer></article>`;}
 function openModal(k){prevFocus=menu.contains(document.activeElement)?$('#menuBtn'):document.activeElement;S={...S,modal:k};render();modal.scrollTop=0;$('#mbox').focus({preventScroll:true})}
 
 function closeTop(){
@@ -158,7 +162,7 @@ function photoAlt(url,projectKey){
  return 'Фотография Дениса Волошина';
 }
 function gridHtml(k){const p=PROJ[k];
- const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+
  return p.data.map((x,i)=>`<a class="gi" href="${photoPath(k,x.id)}" data-act="mph"><img src="${x.thumb}-800.jpg" srcset="${x.thumb}-400.jpg 400w, ${x.thumb}-800.jpg 800w" sizes="${THUMB_SIZES}" width="${x.width}" height="${x.height}" alt="${esc(x.alt||p.name+', фото '+(i+1))}" loading="lazy" decoding="async"></a>`).join('');
 }
 function buildGrid(k){gridFor=k;$('#gg').dataset.project=k;$('#gg').innerHTML=gridHtml(k);grid.scrollTop=0}
