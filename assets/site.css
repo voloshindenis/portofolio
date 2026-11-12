@@ -90,5 +90,15 @@ body[data-mode=main]:not([data-ov]) #copy{display:block}
 #lbc{position:fixed;top:calc(var(--ui-edge) - 6px);left:var(--ui-edge);line-height:32px;font-size:18px;pointer-events:none}
 #lbn{position:fixed;bottom:var(--ui-edge);right:var(--ui-edge);display:flex;gap:1rem}#lbn button{width:48px;height:48px;font:200 2rem monospace}
 @media(max-height:500px) and (orientation:landscape){#lb{padding:56px 0 80px}#lbimg{max-height:calc(100vh - 136px);max-height:calc(100dvh - 136px)}}
+/* Компактные поля на компьютере */
+@media (min-width: 992px) and (hover: hover) and (pointer: fine) {
+  :root { --ui-edge: 16px; }
+  .gg { max-width: none; padding: 8px 24px; }
+  #grid { top: 56px; bottom: 56px; }
+  #gridBtn { bottom: 24px; }
+  #copy { bottom: 8px; }
+  #menu { padding: 64px var(--ui-edge); }
+  #modal { padding: 56px var(--ui-edge) 32px; }
+}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

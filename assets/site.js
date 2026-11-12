@@ -141,7 +141,7 @@ async function galGo(d){if(gRequest||!G.list.length)return;
 }
 gal.addEventListener('click',e=>{autoOn=false;galGo(e.clientX<innerWidth/2?-1:1)});
 setInterval(()=>{if(autoOn&&GALMODES.includes(S.mode)&&!S.modal&&!lbOn&&!document.hidden)galGo(1)},5000);
-const THUMB_SIZES='(max-width:347px) calc(100vw - 40px), (max-width:505px) calc((100vw - 48px)/2), (max-width:663px) calc((100vw - 56px)/3), (max-width:768px) calc((100vw - 64px)/4), (max-width:955px) calc((100vw - 160px)/2), (max-width:1231px) calc((100vw - 176px)/3), (max-width:1507px) calc((100vw - 192px)/4), (max-width:1600px) calc((100vw - 208px)/5), 278.4px';
+const THUMB_SIZES='auto, (max-width:347px) calc(100vw - 40px), (max-width:505px) calc((100vw - 48px)/2), (max-width:663px) calc((100vw - 56px)/3), (max-width:768px) calc((100vw - 64px)/4), (max-width:955px) calc((100vw - 160px)/2), (max-width:1231px) calc((100vw - 176px)/3), (max-width:1507px) calc((100vw - 192px)/4), (max-width:1600px) calc((100vw - 208px)/5), 278.4px';
 function photoAlt(url,projectKey){
  for(const p of (PROJ[projectKey]?[PROJ[projectKey]]:Object.values(PROJ))){const i=p.data.findIndex(x=>x.url===url);if(i>=0)return p.data[i].alt||p.name+', фото '+(i+1)}
  return 'Фотография Дениса Волошина';
