@@ -141,3 +141,5 @@ body[data-mode=mini] #gal:not(.on){visibility:hidden}
 .series-essay footer{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px 24px;margin-top:32px;font-size:14px}
 .series-essay footer span{color:var(--mut)}
 @media(max-width:500px){.series-essay h2{margin-bottom:22px}.series-essay footer{margin-top:24px}}
+#lb{transition:opacity 222ms cubic-bezier(.4,0,.22,1),visibility 0s 222ms}#lb.on{transition:opacity 222ms cubic-bezier(.4,0,.22,1)}
+#lb:not(.on){transition:opacity 222ms cubic-bezier(.215,.61,.355,1),visibility 0s 222ms}
