@@ -13,7 +13,7 @@ a{color:inherit}
  text-decoration-style:dotted;
  text-decoration-color:var(--line);
  text-decoration-thickness:1px;
- text-underline-offset:8px;
+ text-underline-offset:6px;
  text-decoration-skip-ink:none;
 }
 :focus-visible{outline:2px solid var(--fg);outline-offset:3px}
