@@ -334,3 +334,51 @@ document.addEventListener('keydown',e=>{const k=e.key;
 setTheme(document.documentElement.classList.contains('light'));
 nav(parse(),{replace:true});
 })();
+;(() => {
+  const grid = document.getElementById('gg');
+  grid.classList.add('packed');
+  const gap = 6;
+  function layout() {
+    const tiles = [...grid.children];
+    const css = getComputedStyle(grid);
+    const rightScrollbar = grid.parentElement.offsetWidth - grid.parentElement.clientWidth;
+    const width = grid.clientWidth - parseFloat(css.paddingLeft) - Math.max(0,parseFloat(css.paddingRight) - rightScrollbar);
+    if (!width || !tiles.length) return;
+    let top = parseFloat(css.paddingTop), index = 0;
+    let seed = grid.dataset.project === 'vglubine' ? 3 : 19;
+    const random = () => (seed = (Math.imul(seed,1664525)+1013904223)>>>0)/4294967296;
+    const ratio = tile => {const img=tile.firstElementChild;return Number(img.getAttribute('width'))/Number(img.getAttribute('height')) || 1.5};
+    function place(tile,x,y,w,h) {
+      Object.assign(tile.style,{position:'absolute',left:(parseFloat(css.paddingLeft)+x)+'px',top:y+'px',width:w+'px',height:h+'px'});
+    }
+    while(index<tiles.length){
+      const remaining=tiles.length-index;
+      const stacked=remaining>=3 && (index===0 || random()<0.59);
+      if(stacked){
+        const left=random()<0.5;
+        const [a,b,c]=tiles.slice(index,index+3);
+        const big=left?a:b,upper=left?b:a;
+        const combined=1/ratio(upper)+1/ratio(c);
+        const smallWidth=(width-gap-ratio(big)*gap)/(1+ratio(big)*combined);
+        const height=smallWidth*combined+gap,bigWidth=width-gap-smallWidth;
+        const x=left?bigWidth+gap:0;
+        place(big,left?0:smallWidth+gap,top,bigWidth,height);
+        place(upper,x,top,smallWidth,smallWidth/ratio(upper));
+        place(c,x,top+smallWidth/ratio(upper)+gap,smallWidth,smallWidth/ratio(c));
+        index+=3;top+=height+gap;
+      } else {
+        const count=Math.min(remaining,width<600? (remaining===1?1:2) : (random()<0.5?2:3));
+        const row=tiles.slice(index,index+count);
+        const height=(width-gap*(count-1))/row.reduce((sum,t)=>sum+ratio(t),0);
+        let x=0;
+        for(const tile of row){const w=ratio(tile)*height;place(tile,x,top,w,height);x+=w+gap}
+        index+=count;top+=height+gap;
+      }
+    }
+    grid.style.height=(top-gap+parseFloat(css.paddingBottom))+'px';
+  }
+  new MutationObserver(layout).observe(grid,{childList:true});
+  let lastWidth;
+  new ResizeObserver(([entry])=>{if(entry.contentRect.width!==lastWidth){lastWidth=entry.contentRect.width;layout()}}).observe(grid);
+  layout();
+})();

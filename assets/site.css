@@ -102,3 +102,5 @@ body[data-mode=main]:not([data-ov]) #copy{display:block}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#gg.packed{position:relative;display:block;max-width:none;padding-inline:var(--ui-edge)}
+#gg.packed .gi img{object-fit:contain;transform:none}
