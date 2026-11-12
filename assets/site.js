@@ -372,8 +372,8 @@ nav(parse(),{replace:true});
 ;(() => {
   const grid = document.getElementById('gg');
   grid.classList.add('packed');
-  const gap = 6;
   function layout() {
+    const gap = innerWidth >= 768 ? 12 : 6;
     const tiles = [...grid.children];
     const css = getComputedStyle(grid);
     const rightScrollbar = grid.parentElement.offsetWidth - grid.parentElement.clientWidth;
