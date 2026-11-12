@@ -386,7 +386,10 @@ nav(parse(),{replace:true});
       } else {
         const count=Math.min(remaining,width<600? (remaining===1?1:2) : (random()<0.5?2:3));
         const row=tiles.slice(index,index+count);
-        const height=(width-gap*(count-1))/row.reduce((sum,t)=>sum+ratio(t),0);
+        // A lone last photo keeps the first slot of a two-photo row.
+        const height = count === 1
+          ? (width - gap) / (2 * ratio(row[0]))
+          : (width - gap * (count - 1)) / row.reduce((sum,t)=>sum+ratio(t),0);
         let x=0;
         for(const tile of row){const w=ratio(tile)*height;place(tile,x,top,w,height);x+=w+gap}
         index+=count;top+=height+gap;
