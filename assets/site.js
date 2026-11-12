@@ -90,6 +90,12 @@ function trapOverlayTab(event){
 
 let gridFor=$('#gg').dataset.project||null;
 function render(){
+ if(S.mode==='mini'){
+   const back=$('#home');
+   back.textContent='← к серии';
+   back.href=PATHS[S.from];
+   back.dataset.v=S.from;
+ }
  const d=document.body.dataset,ov=S.modal,on=(el,v)=>el.classList.toggle('on',!!v);
  d.mode=S.mode;ov?d.ov='1':delete d.ov;
  updateSeo(S.mode==='mini'?S.from:S.mode,S.photo);

@@ -117,3 +117,8 @@ body[data-mode=mini]:not([data-ov]) #mt[href="/vglubine/"]~.note-metro,body[data
  body[data-mode=mini] #close{order:-1}
  body[data-mode=mini]:has(#menu.open) #close{display:none}
 }
+
+body[data-mode=mini]:not([data-ov]) #close{display:none}
+body[data-mode=mini]:not([data-ov]) #menuBtn{display:inline-flex;width:44px;height:44px;margin:-6px}
+body[data-mode=mini] #menu{width:240px;padding-inline:16px}
+body[data-mode=mini] #menu [data-k=info]{margin-top:20px}
