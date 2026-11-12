@@ -122,3 +122,13 @@ body[data-mode=mini]:not([data-ov]) #close{display:none}
 body[data-mode=mini]:not([data-ov]) #menuBtn{display:inline-flex;width:44px;height:44px;margin:-6px}
 body[data-mode=mini] #menu{width:240px;padding-inline:16px}
 body[data-mode=mini] #menu [data-k=info]{margin-top:20px}
+
+/* Share the page background under the gallery and its header. */
+body[data-mode=mini] #grid{background:transparent}
+body[data-mode=mini] #gal:not(.on){visibility:hidden}
+#theme{display:inline-grid;place-items:center}
+#theme svg{grid-area:1/1}
+#theme svg:last-child,:root.light #theme svg:first-child{opacity:0}
+:root.light #theme svg:last-child{opacity:1}
+.tt #theme svg{transition:opacity .35s ease!important}
+@media(prefers-reduced-motion:reduce){.tt #theme svg{transition:none!important}}
