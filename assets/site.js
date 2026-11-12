@@ -353,6 +353,23 @@ nav(parse(),{replace:true});
     }
     while(index<tiles.length){
       const remaining=tiles.length-index;
+      if (remaining >= 6 && matchMedia('(min-width:992px) and (hover:hover) and (pointer:fine)').matches) {
+        const counts = random() < .5 ? [1,2,3] : [2,1,3];
+        const slots = counts.flatMap((n,col)=>Array.from({length:n},(_,row)=>({col,row,level:row/n})));
+        slots.sort((a,b)=>a.level-b.level || a.col-b.col);
+        slots.forEach((slot,i)=>slot.tile=tiles[index+i]);
+        const columns=counts.map((n,col)=>slots.filter(s=>s.col===col));
+        const weights=columns.map(group=>1/group.reduce((sum,s)=>sum+1/ratio(s.tile),0));
+        const height=(width-2*gap+weights.reduce((sum,w,c)=>sum+w*(counts[c]-1)*gap,0))/weights.reduce((a,b)=>a+b,0);
+        let x=0;
+        columns.forEach((group,c)=>{
+          const w=weights[c]*(height-(group.length-1)*gap);
+          let y=top;
+          for(const {tile} of group){const h=w/ratio(tile);place(tile,x,y,w,h);y+=h+gap}
+          x+=w+gap;
+        });
+        index+=6;top+=height+gap;continue;
+      }
       const stacked=remaining>=3 && (index===0 || random()<0.59);
       if(stacked){
         const left=random()<0.5;
