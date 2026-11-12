@@ -191,7 +191,7 @@ function animateReturn(){
  if(landing){
    const large = Math.min(1, Math.max(0, (end.width - 300) / 450));
    const strength = 3 - 2.35 * large;
-   landing.animate([
+   if (end.width < 750) landing.animate([
      {filter:'blur(0px)',offset:0},
      {filter:'blur(0px)',offset:.46},
      {filter:'blur('+strength+'px)',offset:.73},
