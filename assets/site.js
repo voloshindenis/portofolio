@@ -351,6 +351,21 @@ nav(parse(),{replace:true});
     function place(tile,x,y,w,h) {
       Object.assign(tile.style,{position:'absolute',left:(parseFloat(css.paddingLeft)+x)+'px',top:y+'px',width:w+'px',height:h+'px'});
     }
+    if (width < 600) {
+      const cellWidth = (width - gap) / 2;
+      for (let i = 0; i < tiles.length; i += 2) {
+        const pair = tiles.slice(i, i + 2);
+        let rowHeight = 0;
+        pair.forEach((tile, column) => {
+          const height = cellWidth / ratio(tile);
+          place(tile, column * (cellWidth + gap), top, cellWidth, height);
+          rowHeight = Math.max(rowHeight, height);
+        });
+        top += rowHeight + gap;
+      }
+      grid.style.height = (top - gap + parseFloat(css.paddingBottom)) + 'px';
+      return;
+    }
     while(index<tiles.length){
       const remaining=tiles.length-index;
       if (remaining >= 6 && matchMedia('(min-width:992px) and (hover:hover) and (pointer:fine)').matches) {
