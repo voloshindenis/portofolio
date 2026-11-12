@@ -24,7 +24,9 @@ a{color:inherit}
 /* галерея */
 #gal{z-index:15;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:ew-resize;touch-action:none}
 #gbg{position:absolute;inset:-60px;background:center/cover;filter:blur(40px);opacity:.55}
-:root.light #gbg{display:none}
+:root.light #gbg{opacity:0}
+:root.tt #gbg{transition:opacity .35s ease!important}
+@media(prefers-reduced-motion:reduce){:root.tt #gbg{transition:none!important}}
 #gimg{position:relative;max-width:90%;max-height:72vh;object-fit:contain;transition:opacity .2s}
 #grid{z-index:15}
 #grid,#modal{overflow-x:hidden;overscroll-behavior:none;touch-action:pan-y}
