@@ -164,3 +164,8 @@ body:is([data-mode=vnevremeni],[data-mode=vglubine]) #gimg{
 
 #menu a[data-k]{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
 #menu .frame-count{font:400 14px/1.2 Manrope,sans-serif;color:var(--mut);text-decoration:none}
+
+@supports (backdrop-filter:blur(12px)) or (-webkit-backdrop-filter:blur(12px)){
+  #menu{background-color:rgb(20 20 20 / 88%);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+  :root.light #menu{background-color:rgb(245 245 245 / 78%)}
+}
