@@ -9,13 +9,13 @@ const versions=Object.fromEntries(['content.js','metadata.js','site.js','site.cs
 const sizes=js.match(/const THUMB_SIZES='([^']+)'/)[1];
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 const grid=k=>content.projects[k].data.map((x,i)=>`<a class="gi" href="${meta.photoPath(k,x.id)}" data-act="mph"><img src="${x.thumb}-800.jpg" srcset="${x.thumb}-400.jpg 400w, ${x.thumb}-800.jpg 800w" sizes="${sizes}" width="${x.width}" height="${x.height}" alt="${esc(x.alt||content.projects[k].name+', фото '+(i+1))}" loading="lazy" decoding="async"></a>`).join('');
-const nav=Object.entries(content.projects).map(([k,p])=>`<a href="/${k}/" data-k="${k}" data-act="go" data-v="${k}"><span>${esc(p.name)}</span></a>`).join('')+'<button data-k="info" data-act="info" data-v="info"><span>Инфо</span></button>';
+const nav=(showCounts)=>Object.entries(content.projects).map(([k,p])=>`<a href="/${k}/" data-k="${k}" data-act="go" data-v="${k}"><span>${esc(p.name)}</span>${showCounts?`<small class="frame-count">${p.data.length}</small>`:""}</a>`).join('')+'<button data-k="info" data-act="info" data-v="info"><span>Инфо</span></button>';
 let pages=0;
 function writePage(key,id){
  const p=content.projects[key],seo=meta.page(content,key,id);
  const first=seo.photo||(p?p.data[0]:Object.values(content.projects).flatMap(x=>x.data)[0])||{url:'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='};
  const description=p?`<h2 class="mt">${esc(p.name.toUpperCase())}</h2><div class="tx"><p>${esc(p.text)}</p></div><div class="row"><span class="it">${esc(p.loc)}</span><a class="lnk" href="/${key}/#mini" data-act="mini" data-v="${key}">перейти в галерею →</a></div>`:content.info;
- const slots={FRAME_COUNT:p?" ("+p.data.length+")":"",MODE:key,PAGE_TITLE:esc(seo.heading),FIRST_PHOTO:esc(first.url),FIRST_ALT:esc(first.alt || (seo.photo?seo.imageAlt:(p?p.name:'Вне времени')+', фото 1')),GRID_PROJECT:p?key:'',GRID:p?grid(key):Object.keys(content.projects).map(grid).join(''),NAV:nav,DESCRIPTION:description,PROJECT_PATH:p?'/'+key+'/':'/',LIGHTBOX_IMAGE:seo.photo?`src="${esc(seo.photo.url)}" alt="${esc(seo.imageAlt)}"`:'alt=""'};
+ const slots={FRAME_COUNT:p?" ("+p.data.length+")":"",MODE:key,PAGE_TITLE:esc(seo.heading),FIRST_PHOTO:esc(first.url),FIRST_ALT:esc(first.alt || (seo.photo?seo.imageAlt:(p?p.name:'Вне времени')+', фото 1')),GRID_PROJECT:p?key:'',GRID:p?grid(key):Object.keys(content.projects).map(grid).join(''),NAV:nav(false),BURGER_NAV:nav(true),DESCRIPTION:description,PROJECT_PATH:p?'/'+key+'/':'/',LIGHTBOX_IMAGE:seo.photo?`src="${esc(seo.photo.url)}" alt="${esc(seo.imageAlt)}"`:'alt=""'};
  let html=template.replace(/\{\{([A-Z_]+)\}\}/g,(_,name)=>{if(!(name in slots))throw Error('Unknown placeholder '+name);return slots[name];});
  html=html.replace(/(src|href)="\/assets\/(content\.js|metadata\.js|site\.js|site\.css)(?:\?[^"]*)?"/g,(_,attr,name)=>`${attr}="/assets/${name}?v=${versions[name]}"`);
  html=html.replace(/<title>[^<]+<\/title>/,()=>`<title>${esc(seo.title)}</title>`).replace(/(<link id="canonical" rel="canonical" href=")[^"]+"/,(_,a)=>a+seo.url+'"');

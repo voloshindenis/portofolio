@@ -161,3 +161,6 @@ body:is([data-mode=vnevremeni],[data-mode=vglubine]) #gimg{
 .bio .essay-lead,.bio .tx{font-size:16px}
 @media(min-width:1301px){.bio h2{font-size:18px}}
 @media(max-width:991px){.bio .tx{font-size:14px}}
+
+#menu a[data-k]{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+#menu .frame-count{font:400 14px/1.2 Manrope,sans-serif;color:var(--mut);text-decoration:none}
