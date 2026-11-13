@@ -157,3 +157,8 @@ body:is([data-mode=vnevremeni],[data-mode=vglubine]) #gimg{
 .bio .tx{font-weight:300}
 .bio .tx a{font-weight:400}
 .bio .dis{line-height:1.5}
+
+.bio h2{font:700 16px/1.2 Unbounded,sans-serif;letter-spacing:.03em}
+.bio .essay-lead,.bio .tx{font-size:16px}
+@media(min-width:1301px){.bio h2{font-size:18px}}
+@media(max-width:991px){.bio .tx{font-size:14px}}
