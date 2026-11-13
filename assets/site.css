@@ -69,7 +69,7 @@ body[data-mode=mini] #about{top:auto;bottom:var(--ui-edge);transform:none}
 @media(max-width:1300px){#about{top:auto;bottom:var(--ui-edge);transform:none}}
 @media(max-width:991px){#about,#home,#gridBtn{font-size:14px}}
 body:is([data-mode=vnevremeni],[data-mode=vglubine],[data-mode=mini]):not([data-ov]) #about,body[data-mode=mini]:not([data-ov]) #home{display:block}
-#gridBtn{height:44px;padding:0 10px;align-items:center;justify-content:center;font-weight:400;white-space:nowrap;--grid-button-inset:50px;bottom:clamp(var(--grid-button-floor),calc(14% - 58px),var(--grid-button-inset));left:50%;transform:translateX(-50%);display:none}
+#gridBtn{height:44px;padding:0 10px;align-items:center;justify-content:center;font-weight:400;white-space:nowrap;bottom:calc((100% - var(--series-photo-height,72vh)) / 4 - 22px);left:50%;transform:translateX(-50%);display:none}
 body:is([data-mode=vnevremeni],[data-mode=vglubine]):not([data-ov]) #gridBtn{display:inline-flex}
 #copy{bottom:12px;left:0;right:0;z-index:20;display:none;text-align:center;font-size:12px;letter-spacing:.03em;color:var(--mut);pointer-events:none}
 body[data-mode=main]:not([data-ov]) #copy{display:block}
@@ -96,7 +96,6 @@ body[data-mode=main]:not([data-ov]) #copy{display:block}
   :root { --ui-edge: 16px; }
   .gg { max-width: none; padding: 8px 24px; }
   #grid { top: 56px; bottom: 56px; }
-  #gridBtn { --grid-button-inset:24px; }
   #copy { bottom: 8px; }
   #menu { padding: 64px var(--ui-edge); }
   #modal { padding: 56px var(--ui-edge) 32px; }
@@ -143,10 +142,10 @@ body[data-mode=mini] #gal:not(.on){visibility:hidden}
 #lb{transition:opacity 222ms cubic-bezier(.4,0,.22,1),visibility 0s 222ms}#lb.on{transition:opacity 222ms cubic-bezier(.4,0,.22,1)}
 #lb:not(.on){transition:opacity 180ms ease-out,visibility 0s 180ms}
 
-/* Reserve 44px for the button and 14px for clearance. */
-body{--grid-button-floor:max(8px,env(safe-area-inset-bottom,0px))}
+/* Keep a 44px control and equal clearances within the space below the centered photo. */
+body{--grid-button-floor:max(14px,env(safe-area-inset-bottom,0px))}
 body:is([data-mode=vnevremeni],[data-mode=vglubine]) #gimg{
-  max-height:min(72%,calc(100% - 116px - var(--grid-button-floor) - var(--grid-button-floor)));
+  max-height:min(72%,calc(100% - 88px - 4 * var(--grid-button-floor)));
 }
 
 @media (min-width:992px) and (hover:hover) and (pointer:fine){

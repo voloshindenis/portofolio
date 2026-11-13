@@ -366,6 +366,11 @@ document.addEventListener('keydown',e=>{const k=e.key;
  if(!step||S.modal)return;const d=k==='ArrowLeft'?-1:1;
  if(GALMODES.includes(S.mode)){e.preventDefault();autoOn=false;galGo(d)}});
 
+// A centered image leaves half the remaining viewport height below it.
+new ResizeObserver(([entry])=>{
+ $('#gridBtn').style.setProperty('--series-photo-height',entry.contentRect.height+'px');
+}).observe(gimg);
+
 /* ================= ЗАПУСК ================= */
 setTheme(document.documentElement.classList.contains('light'));
 nav(parse(),{replace:true});
