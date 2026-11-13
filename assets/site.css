@@ -8,7 +8,7 @@ body{background:var(--bg);color:var(--fg);font:300 1rem/1.6 Manrope,sans-serif;o
 button,:where(a[data-act]){font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 a{color:inherit}
 :where(a[data-act]){text-decoration:none}
-#logo,#mt,.cn,.lnk,.mt,#modal .tx a,#nav :is(button,a) span,#menu :is(button,a) span{
+#logo,#mt,.cn,#gridBtn span,.lnk,.mt,#modal .tx a,#nav :is(button,a) span,#menu :is(button,a) span{
  text-decoration-line:underline;
  text-decoration-style:dotted;
  text-decoration-color:var(--line);
@@ -51,7 +51,6 @@ body[data-mode=mini] #nav,body[data-ov] #nav{display:none}
 .ic{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center}.ic[hidden]{display:none}
 .ic svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2}
 .ic{transition:transform .2s ease}.ic:hover{transform:scale(1.1)}
-#gridBtn:hover{transform:translateX(-50%) scale(1.1)}
 #close,[data-act=lbclose]{transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
 #close:hover,[data-act=lbclose]:hover{transform:rotate(90deg) scale(1.1)}
 #menuBtn path{transform-box:fill-box;transform-origin:center;transition:transform .25s ease,opacity .25s ease}
@@ -63,14 +62,14 @@ body[data-ov] #close,body[data-mode=mini] #close{display:inline-flex}
 #menu{position:fixed;top:0;right:0;bottom:0;width:280px;max-width:80vw;z-index:250;background:var(--menu-bg);padding:80px 20px;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s;box-shadow:-2px 0 12px rgba(0,0,0,.25)}
 #menu.open{transform:none}#menu :is(button,a){font-size:18px;padding:12px 0;border-bottom:1px solid transparent}
 @media(max-width:1300px){#nav{display:none}body:not([data-mode=mini]):not([data-ov]) #menuBtn{display:inline-flex}}
-.cn{bottom:var(--ui-edge);font-weight:500;border-bottom:1px solid transparent;padding:4px 0;display:none}
+.cn{bottom:var(--ui-edge);font-weight:400;border-bottom:1px solid transparent;padding:4px 0;display:none}
 #home{left:var(--ui-edge)}
 #about{right:var(--ui-edge);top:50%;bottom:auto;transform:translateY(-50%)}
 body[data-mode=mini] #about{top:auto;bottom:var(--ui-edge);transform:none}
 @media(max-width:1300px){#about{top:auto;bottom:var(--ui-edge);transform:none}}
-@media(max-width:991px){#about,#home{font-size:14px}}
+@media(max-width:991px){#about,#home,#gridBtn{font-size:14px}}
 body:is([data-mode=vnevremeni],[data-mode=vglubine],[data-mode=mini]):not([data-ov]) #about,body[data-mode=mini]:not([data-ov]) #home{display:block}
-#gridBtn{--grid-button-inset:50px;bottom:clamp(var(--grid-button-floor),calc(14% - 46px),var(--grid-button-inset));left:50%;transform:translateX(-50%);display:none}
+#gridBtn{height:44px;padding:0 10px;align-items:center;justify-content:center;font-weight:400;white-space:nowrap;--grid-button-inset:50px;bottom:clamp(var(--grid-button-floor),calc(14% - 58px),var(--grid-button-inset));left:50%;transform:translateX(-50%);display:none}
 body:is([data-mode=vnevremeni],[data-mode=vglubine]):not([data-ov]) #gridBtn{display:inline-flex}
 #copy{bottom:12px;left:0;right:0;z-index:20;display:none;text-align:center;font-size:12px;letter-spacing:.03em;color:var(--mut);pointer-events:none}
 body[data-mode=main]:not([data-ov]) #copy{display:block}
@@ -144,8 +143,8 @@ body[data-mode=mini] #gal:not(.on){visibility:hidden}
 #lb{transition:opacity 222ms cubic-bezier(.4,0,.22,1),visibility 0s 222ms}#lb.on{transition:opacity 222ms cubic-bezier(.4,0,.22,1)}
 #lb:not(.on){transition:opacity 180ms ease-out,visibility 0s 180ms}
 
-/* Reserve 32px for the button and 14px for clearance, including its hover scale. */
+/* Reserve 44px for the button and 14px for clearance. */
 body{--grid-button-floor:max(8px,env(safe-area-inset-bottom,0px))}
 body:is([data-mode=vnevremeni],[data-mode=vglubine]) #gimg{
-  max-height:min(72%,calc(100% - 92px - var(--grid-button-floor) - var(--grid-button-floor)));
+  max-height:min(72%,calc(100% - 116px - var(--grid-button-floor) - var(--grid-button-floor)));
 }
