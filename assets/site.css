@@ -127,8 +127,9 @@ body[data-mode=mini] #menu [data-k=info]{margin-top:20px}
 body[data-mode=mini] #grid{background:transparent}
 body[data-mode=mini] #gal:not(.on){visibility:hidden}
 #theme{display:inline-grid;place-items:center}
-#theme svg{grid-area:1/1;width:16px;height:16px;stroke-width:2.5}
-#theme svg:first-child{width:14px;height:14px;stroke-width:2.8}
+#theme svg{grid-area:1/1;width:19px;height:19px;stroke-width:2.2}
+#theme svg:first-child{width:17px;height:17px;stroke-width:2.4}
+@media(pointer:coarse){#theme{width:44px;height:44px;margin:-6px}}
 #theme svg:last-child,:root.light #theme svg:first-child{opacity:0}
 :root.light #theme svg:last-child{opacity:1}
 .tt #theme svg{transition:opacity .35s ease!important}
