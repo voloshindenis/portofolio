@@ -402,10 +402,11 @@ nav(parse(),{replace:true});
       grid.style.height = (top - gap + parseFloat(css.paddingBottom)) + 'px';
       return;
     }
+    const desktopGrid=matchMedia('(min-width:992px) and (hover:hover) and (pointer:fine)').matches;
     while(index<tiles.length){
       const remaining=tiles.length-index;
-      if (remaining >= 6 && matchMedia('(min-width:992px) and (hover:hover) and (pointer:fine)').matches) {
-        const counts = random() < .5 ? [1,2,3] : [2,1,3];
+      if (remaining >= 5 && desktopGrid) {
+        const counts = random() < .5 ? [1,2,2] : [2,1,2];
         const slots = counts.flatMap((n,col)=>Array.from({length:n},(_,row)=>({col,row,level:row/n})));
         slots.sort((a,b)=>a.level-b.level || a.col-b.col);
         slots.forEach((slot,i)=>slot.tile=tiles[index+i]);
@@ -419,9 +420,9 @@ nav(parse(),{replace:true});
           for(const {tile} of group){const h=w/ratio(tile);place(tile,x,y,w,h);y+=h+gap}
           x+=w+gap;
         });
-        index+=6;top+=height+gap;continue;
+        index+=5;top+=height+gap;continue;
       }
-      const stacked=remaining>=3 && (index===0 || random()<0.59);
+      const stacked=!desktopGrid && remaining>=3 && (index===0 || random()<0.59);
       if(stacked){
         const left=random()<0.5;
         const [a,b,c]=tiles.slice(index,index+3);

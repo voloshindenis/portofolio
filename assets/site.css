@@ -148,3 +148,7 @@ body{--grid-button-floor:max(8px,env(safe-area-inset-bottom,0px))}
 body:is([data-mode=vnevremeni],[data-mode=vglubine]) #gimg{
   max-height:min(72%,calc(100% - 116px - var(--grid-button-floor) - var(--grid-button-floor)));
 }
+
+@media (min-width:992px) and (hover:hover) and (pointer:fine){
+  #gg.packed{padding-inline:calc(var(--ui-edge) + (100% - 2 * var(--ui-edge)) * .0425)}
+}
