@@ -171,3 +171,11 @@ body:is([data-mode=vnevremeni],[data-mode=vglubine]) #gimg{
   #menu{background-color:rgb(20 20 20 / 88%);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
   :root.light #menu{background-color:rgb(245 245 245 / 78%)}
 }
+
+/* Consistent, slightly larger controls with stable centers. */
+#top .ic,#lbtop .ic{width:44px;height:44px;margin:-6px}
+.ic svg{width:22px;height:22px}
+#theme svg{width:21px;height:21px;stroke-width:2.2}
+#theme svg:first-child{width:19px;height:19px;stroke-width:2.4}
+#close svg,[data-act=lbclose] svg{width:24px;height:24px}
+#menuBtn svg{width:23px;height:23px}
