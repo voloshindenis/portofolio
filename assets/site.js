@@ -114,7 +114,7 @@ function render(){
  const activeSection=S.modal==='info'?'info':S.mode==='mini'?S.from:S.mode;
  $$('#nav [data-k],#menu [data-k]').forEach(b=>b.classList.toggle('act',b.dataset.k===activeSection));
  menu.classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');
- if(PROJ[S.mode]) $('#gridBtn span').textContent='все кадры ('+PROJ[S.mode].data.length+')';
+ if(PROJ[S.mode]) $('#gridBtn span').textContent='все кадры ['+PROJ[S.mode].data.length+']';
  $('#gridBtn').href=(PATHS[S.mode]||'/')+'#mini';
  syncFocusScope();
  syncLb();
