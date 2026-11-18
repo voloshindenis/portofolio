@@ -37,7 +37,7 @@ function updateSeo(key,id){
 
 const PATHS={main:'/',vnevremeni:'/vnevremeni/',vglubine:'/vglubine/'};
 const mk=s=>({mode:'main',from:null,modal:null,photo:null,...s});
-let S=mk({}),prevFocus=null;
+let S=mk({}),prevFocus=null,modalClosing=false;
 function parse(path=location.pathname,hash=location.hash,search=location.search){
  const h=hash.slice(1),segments=path.split('/').filter(Boolean),segment=segments[0];
  let mode=Object.hasOwn(PROJ,segment)?segment:'main',state;
@@ -55,15 +55,35 @@ const ser=s=>{
  return path+(query.size?'?'+query:'')+(s.mode==='mini'&&!s.photo?'#mini':'');
 };
 function nav(s,o={}){
+ if(modalClosing&&!o.fromHistory)return;
  const previous=S;S=mk(s);const url=ser(S);
- if(url!==location.pathname+location.search+location.hash){
-  const state=o.replace?history.state:{photoOverlay:!!(S.photo&&!previous.photo&&previous.mode==='mini'&&previous.from===S.from)};
-  history[o.replace?'replaceState':'pushState'](state,'',url);
+ // A link out of an info window replaces its temporary entry, not its parent page.
+ const leavingModal=!!(previous.modal&&!S.modal&&!o.fromHistory);
+ if(url!==location.pathname+location.search+location.hash||leavingModal){
+  const state=o.replace&&!leavingModal?history.state:{photoOverlay:!!(S.photo&&!previous.photo&&previous.mode==='mini'&&previous.from===S.from)};
+  history[o.replace||leavingModal?'replaceState':'pushState'](state,'',url);
  }
  render();
 }
-addEventListener('popstate',()=>nav(parse(),{replace:true}));
-addEventListener('hashchange',()=>nav(parse(),{replace:true}));
+function historyRoute(){
+ const route=parse(),entry=history.state?.infoOverlay,key=route.from||route.mode;
+ if(!route.photo&&entry?.url===ser(route)&&(entry.key==='info'||entry.key===key&&Object.hasOwn(PROJ,key)))route.modal=entry.key;
+ return route;
+}
+function restoreModalFocus(){
+ const target=prevFocus?.isConnected&&prevFocus.getClientRects().length?prevFocus:$('#logo');
+ target?.focus({preventScroll:true});
+}
+function syncHistoryRoute(){
+ const wasModal=S.modal;modalClosing=false;
+ nav(historyRoute(),{replace:true,fromHistory:true});
+ if(S.modal&&!wasModal){
+  if(!prevFocus?.isConnected){const info=$('#nav [data-act=info]');prevFocus=S.modal==='info'?(info?.getClientRects().length?info:$('#menuBtn')):$('#about')}
+  modal.scrollTop=0;$('#mbox').focus({preventScroll:true});
+ }else if(wasModal&&!S.modal)restoreModalFocus();
+}
+addEventListener('popstate',syncHistoryRoute);
+addEventListener('hashchange',syncHistoryRoute);
 
 const gal=$('#gal'),grid=$('#grid'),modal=$('#modal'),menu=$('#menu');
 
@@ -130,12 +150,22 @@ function modalHtml(k){const p=PROJ[k];
   ?'<button class="lnk" data-act="close">вернуться к кадрам →</button>'
   :`<a class="lnk" href="${PATHS[k]}#mini" data-act="mini" data-v="${k}">все кадры [${p.data.length}] →</a>`;
  return `<article class="series-essay project-essay"><h2>${esc(p.name)}</h2><p class="essay-meta">${esc(p.loc)}</p><p class="essay-lead">${esc(lead)}</p>${body?`<p class="essay-body">${esc(body)}</p>`:''}<footer>${action}</footer></article>`;}
-function openModal(k){prevFocus=menu.contains(document.activeElement)?$('#menuBtn'):document.activeElement;S={...S,modal:k};render();modal.scrollTop=0;$('#mbox').focus({preventScroll:true})}
+function openModal(k){
+ if(modalClosing)return;
+ if(!S.modal)prevFocus=menu.contains(document.activeElement)?$('#menuBtn'):document.activeElement;
+ history[S.modal?'replaceState':'pushState']({...history.state,infoOverlay:{key:k,url:ser(S)}},'',location.href);
+ S={...S,modal:k};render();modal.scrollTop=0;$('#mbox').focus({preventScroll:true});
+}
 
 function closeTop(){
  if(lbOn)return lbClose();
  if(menu.classList.contains('open')){menu.classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');syncFocusScope();$('#menuBtn').focus();return}
- if(S.modal){S={...S,modal:null};render();prevFocus&&prevFocus.focus&&prevFocus.focus();return}
+ if(S.modal){
+  if(modalClosing)return;
+  if(historyRoute().modal===S.modal){modalClosing=true;history.back()}
+  else{S={...S,modal:null};render();restoreModalFocus()}
+  return;
+ }
 
  if(S.mode==='mini')nav({mode:S.from})}
 
@@ -440,7 +470,7 @@ new ResizeObserver(([entry])=>{
 
 /* ================= ЗАПУСК ================= */
 setTheme(document.documentElement.classList.contains('light'));
-nav(parse(),{replace:true});
+syncHistoryRoute();
 })();
 ;(() => {
   const grid = document.getElementById('gg');
