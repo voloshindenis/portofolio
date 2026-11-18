@@ -179,3 +179,16 @@ body:is([data-mode=vnevremeni],[data-mode=vglubine]) #gimg{
 #theme svg:first-child{width:19px;height:19px;stroke-width:2.4}
 #close svg,[data-act=lbclose] svg{width:24px;height:24px}
 #menuBtn svg{width:23px;height:23px}
+
+/* Project note: keep the biography and other overlays unchanged. */
+.project-essay h2{font-size:36px;margin-bottom:12px}
+.project-essay .essay-meta{font:300 14px/1.5 Manrope,sans-serif;color:var(--mut);margin-bottom:24px}
+.project-essay .essay-lead{font-size:20px}
+.project-essay footer{margin-top:24px}
+.project-essay footer .lnk{display:inline-flex;align-items:center;min-height:44px;font-weight:400}
+@media(max-width:767px){
+ #modal:has(.project-essay){padding-top:88px;padding-bottom:40px}
+ #mbox:has(>.project-essay){margin:0 auto}
+ .project-essay h2{font-size:29px}
+ .project-essay .essay-lead{font-size:19px}
+}

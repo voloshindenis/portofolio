@@ -124,7 +124,10 @@ function modalHtml(k){const p=PROJ[k];
  const split=p.text.indexOf('. ')+1;
  const lead=split?p.text.slice(0,split):p.text;
  const body=split?p.text.slice(split).trim():'';
- return `<article class="series-essay"><h2>${esc(p.name)}</h2><p class="essay-lead">${esc(lead)}</p>${body?`<p class="essay-body">${esc(body)}</p>`:''}<footer><span>${esc(p.loc)}</span><a class="lnk" href="${PATHS[k]}#mini" data-act="mini" data-v="${k}">перейти в галерею →</a></footer></article>`;}
+ const action=S.mode==='mini'
+  ?'<button class="lnk" data-act="close">вернуться к кадрам →</button>'
+  :`<a class="lnk" href="${PATHS[k]}#mini" data-act="mini" data-v="${k}">все кадры [${p.data.length}] →</a>`;
+ return `<article class="series-essay project-essay"><h2>${esc(p.name)}</h2><p class="essay-meta">${esc(p.loc)}</p><p class="essay-lead">${esc(lead)}</p>${body?`<p class="essay-body">${esc(body)}</p>`:''}<footer>${action}</footer></article>`;}
 function openModal(k){prevFocus=menu.contains(document.activeElement)?$('#menuBtn'):document.activeElement;S={...S,modal:k};render();modal.scrollTop=0;$('#mbox').focus({preventScroll:true})}
 
 function closeTop(){
