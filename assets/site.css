@@ -192,3 +192,12 @@ body:is([data-mode=vnevremeni],[data-mode=vglubine]) #gimg{
  .project-essay h2{font-size:29px}
  .project-essay .essay-lead{font-size:19px}
 }
+
+/* Loading feedback appears only while waiting or after a failed request. */
+.photo-feedback{position:absolute;z-index:3;left:50%;transform:translateX(-50%);bottom:84px;max-width:calc(100% - 32px);width:max-content;padding:4px 12px;background:var(--bg);font:400 14px/1.5 Manrope,sans-serif;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0 12px;cursor:default}
+.photo-feedback[hidden],.photo-feedback button[hidden]{display:none}
+.photo-feedback .lnk{min-height:44px;font-size:14px}
+#gal .photo-feedback{top:64px;bottom:auto}
+@media(min-width:768px){#lb .photo-feedback{bottom:var(--ui-edge)}}
+#lbimg{--viewer-height:80vh;width:min(90vw,calc(var(--viewer-height) * var(--photo-ratio,1.5)),var(--photo-width,100vw));height:auto}
+@media(max-height:500px) and (orientation:landscape){#lbimg{--viewer-height:calc(100dvh - 136px)}}
