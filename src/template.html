@@ -33,7 +33,7 @@
 <script>try{var t=localStorage.getItem('dv_theme');if(t?t==='light':matchMedia('(prefers-color-scheme:light)').matches)document.documentElement.classList.add('light')}catch(e){}</script>
 <link rel="stylesheet" href="/assets/site.css?v=20261106-frames">
 <link rel="preconnect" href="https://static.tildacdn.com">
-<noscript><style>#gal,#top,#about,#mt,#home,#copy,#logo{display:none!important}html{overflow:auto}body{position:static;overflow:auto}#grid{position:relative;opacity:1;visibility:visible}.gg{padding-top:32px}#nav{position:relative;display:flex;top:auto;left:auto;transform:none;padding:20px}#nav button{display:none}#modal{position:relative;visibility:visible;opacity:1;background:var(--bg);backdrop-filter:none;padding-top:30px}</style></noscript>
+<noscript><style>#gal,#seriesControls,#top,#about,#mt,#home,#copy,#logo{display:none!important}html{overflow:auto}body{position:static;overflow:auto}#grid{position:relative;opacity:1;visibility:visible}.gg{padding-top:32px}#nav{position:relative;display:flex;top:auto;left:auto;transform:none;padding:20px}#nav button{display:none}#modal{position:relative;visibility:visible;opacity:1;background:var(--bg);backdrop-filter:none;padding-top:30px}</style></noscript>
 </head>
 <body data-mode="{{MODE}}">
 <main>
@@ -54,7 +54,10 @@
 </div>
 <div id="menu" aria-label="Меню">{{BURGER_NAV}}</div>
 <div id="copy" class="fx">© Денис Волошин</div>
-<a id="gridBtn" href="{{PROJECT_PATH}}#mini" class="fx" data-act="grid"><span>все кадры{{FRAME_COUNT}}</span></a>
+<div id="seriesControls" class="fx">
+<p id="seriesStatus" role="status" aria-live="polite" aria-atomic="true"></p>
+<a id="gridBtn" href="{{PROJECT_PATH}}#mini" data-act="grid"><span>все кадры</span></a>
+</div>
 <a id="home" href="/" class="fx cn" data-act="go" data-v="main">← на главную</a>
 <button id="about" class="fx cn" data-act="about">о проекте</button>
 

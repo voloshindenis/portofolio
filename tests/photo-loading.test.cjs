@@ -22,9 +22,9 @@ test('preloader distinguishes decoded success, network failure, decode failure a
 });
 
 function gallery(){
- const elements={'#gimg':{src:'a',alt:'a',style:{opacity:1}},'#gbg':{style:{backgroundImage:'a'}}};
+ const elements={'#gimg':{src:'a',alt:'a',style:{opacity:1}},'#gbg':{style:{backgroundImage:'a'}},'#seriesStatus':{textContent:'Вне времени · 01 / 03'}};
  const requests=[],fades=[],status=feedback();
- const context=vm.createContext({$:s=>elements[s],galFeedback:status,reduce:false,S:{mode:'vnevremeni'},PROJ:{vnevremeni:{data:[{url:'a'},{url:'b'},{url:'c'}]},vglubine:{data:[{url:'x'},{url:'y'}]}},urls:a=>a.map(x=>x.url),photoAlt:u=>u,
+ const context=vm.createContext({$:s=>elements[s],galFeedback:status,reduce:false,S:{mode:'vnevremeni'},PROJ:{vnevremeni:{name:'Вне времени',data:[{url:'a'},{url:'b'},{url:'c'}]},vglubine:{name:'В глубине',data:[{url:'x'},{url:'y'}]}},urls:a=>a.map(x=>x.url),photoAlt:u=>u,
   load:u=>{const d=deferred();requests.push({url:u,...d});return d.promise},sleep:()=>{const d=deferred();fades.push(d);return d.promise}});
  vm.runInContext(part("const gimg=$('#gimg')",'gal.addEventListener')+`
  G={mode:'vnevremeni',list:['a','b','c'],i:0};this.api={galGo,setGal,state:()=>G,busy:()=>!!gRequest};`,context);
@@ -33,18 +33,22 @@ function gallery(){
 test('gallery keeps current photo until ready, then uses the existing fade',async()=>{
  const h=gallery(),pending=h.api.galGo(1);
  assert.equal(h.elements['#gimg'].src,'a');assert.equal(h.elements['#gimg'].style.opacity,1);assert.equal(h.fades.length,0);
+ assert.equal(h.elements['#seriesStatus'].textContent,'Вне времени · 01 / 03');
  h.requests[0].resolve(true);await tick();assert.equal(h.elements['#gimg'].style.opacity,0);assert.equal(h.elements['#gimg'].src,'a');
  h.fades[0].resolve();await pending;assert.equal(h.elements['#gimg'].src,'b');assert.equal(h.elements['#gimg'].style.opacity,1);assert.equal(h.api.state().i,1);assert.equal(h.api.busy(),false);
+ assert.equal(h.elements['#seriesStatus'].textContent,'Вне времени · 02 / 03');
 });
 test('failed gallery loads keep the frame and release the lock for retry',async()=>{
  const h=gallery(),pending=h.api.galGo(1);h.requests[0].resolve(false);await pending;
  assert.equal(h.elements['#gimg'].src,'a');assert.equal(h.elements['#gimg'].style.opacity,1);assert.equal(h.api.state().i,0);assert.equal(h.api.busy(),false);
+ assert.equal(h.elements['#seriesStatus'].textContent,'Вне времени · 01 / 03');
  const retry=h.api.galGo(1);assert.equal(h.requests.length,2);h.requests[1].resolve(false);await retry;
 });
 test('late gallery loads cannot replace a new project or release its active request',async()=>{
  const h=gallery(),old=h.api.galGo(1);h.context.S.mode='vglubine';const next=h.api.setGal('vglubine');
  h.requests[0].resolve(true);await old;assert.equal(h.api.busy(),true);assert.equal(h.elements['#gimg'].src,'a');
  h.requests[1].resolve(true);await next;assert.equal(h.elements['#gimg'].src,'x');assert.equal(h.api.busy(),false);
+ assert.equal(h.elements['#seriesStatus'].textContent,'В глубине · 01 / 02');
 });
 function viewer(){
  const elements=new Map();const element=()=>({style:{opacity:1},classList:{add(){},remove(){}},focus(){}});

@@ -69,8 +69,12 @@ body[data-mode=mini] #about{top:auto;bottom:var(--ui-edge);transform:none}
 @media(max-width:1300px){#about{top:auto;bottom:var(--ui-edge);transform:none}}
 @media(max-width:991px){#about,#home,#gridBtn{font-size:14px}}
 body:is([data-mode=vnevremeni],[data-mode=vglubine],[data-mode=mini]):not([data-ov]) #about,body[data-mode=mini]:not([data-ov]) #home{display:block}
-#gridBtn{height:44px;padding:0 10px;align-items:center;justify-content:center;font-weight:400;white-space:nowrap;bottom:calc((100% - var(--series-photo-height,72vh)) / 4 - 22px);left:50%;transform:translateX(-50%);display:none}
+#seriesControls{bottom:calc((100% - var(--series-photo-height,72vh)) / 4 - var(--series-controls-height) / 2);left:50%;transform:translateX(-50%);max-width:calc(100% - 2 * var(--ui-edge));display:none;flex-direction:column;align-items:center}
+body:is([data-mode=vnevremeni],[data-mode=vglubine]):not([data-ov]) #seriesControls{display:flex}
+#gridBtn{height:44px;padding:0 10px;align-items:center;justify-content:center;font-weight:400;white-space:nowrap;display:none}
 body:is([data-mode=vnevremeni],[data-mode=vglubine]):not([data-ov]) #gridBtn{display:inline-flex}
+#seriesStatus{display:none;height:20px;font:400 12px/20px Manrope,sans-serif;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--mut);pointer-events:none}
+body:is([data-mode=vnevremeni],[data-mode=vglubine]):not([data-ov]) #seriesStatus{display:block}
 #copy{bottom:12px;left:0;right:0;z-index:20;display:none;text-align:center;font-size:12px;letter-spacing:.03em;color:var(--mut);pointer-events:none}
 body[data-mode=main]:not([data-ov]) #copy{display:block}
 /* модалка */
@@ -144,10 +148,10 @@ body[data-mode=mini] #gal:not(.on){visibility:hidden}
 #lb{transition:opacity 222ms cubic-bezier(.4,0,.22,1),visibility 0s 222ms}#lb.on{transition:opacity 222ms cubic-bezier(.4,0,.22,1)}
 #lb:not(.on){transition:opacity 180ms ease-out,visibility 0s 180ms}
 
-/* Keep a 44px control and equal clearances within the space below the centered photo. */
-body{--grid-button-floor:max(14px,env(safe-area-inset-bottom,0px))}
+/* Center the caption and 44px link together in the space below the photo. */
+body{--grid-button-floor:max(14px,env(safe-area-inset-bottom,0px));--series-controls-height:64px}
 body:is([data-mode=vnevremeni],[data-mode=vglubine]) #gimg{
-  max-height:min(72%,calc(100% - 88px - 4 * var(--grid-button-floor)));
+  max-height:min(72%,calc(100% - 2 * var(--series-controls-height) - 4 * var(--grid-button-floor)));
 }
 
 @media (min-width:992px) and (hover:hover) and (pointer:fine){

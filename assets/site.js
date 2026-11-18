@@ -136,7 +136,6 @@ function render(){
  const activeSection=S.modal==='info'?'info':S.mode==='mini'?S.from:S.mode;
  $$('#nav [data-k],#menu [data-k]').forEach(b=>b.classList.toggle('act',b.dataset.k===activeSection));
  menu.classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');
- if(PROJ[S.mode]) $('#gridBtn span').textContent='все кадры ['+PROJ[S.mode].data.length+']';
  $('#gridBtn').href=(PATHS[S.mode]||'/')+'#mini';
  syncFocusScope();
  syncLb();
@@ -183,16 +182,21 @@ function createPhotoFeedback(container,focusTarget){
 const galFeedback=createPhotoFeedback(gal,()=>PROJ[S.mode]?$('#gridBtn'):$('#logo'));
 const lbFeedback=createPhotoFeedback($('#lb'),()=>$('#lb'));
 const gimg=$('#gimg'),gbg=$('#gbg');let G={mode:null,list:[],i:0},gRequest=null,autoOn=!reduce;
+function syncSeriesStatus(){
+ const p=PROJ[G.mode],total=G.list.length;
+ $('#seriesStatus').textContent=p&&total?`${p.name} · ${String(G.i+1).padStart(2,'0')} / ${String(total).padStart(2,'0')}`:'';
+}
 const pre=d=>{const u=G.list[(G.i+d+G.list.length)%G.list.length];u&&load(u)};
 async function setGal(mode,retry=false){if(G.mode===mode&&!retry)return;
  const state=G={mode,list:mode==='main'?shuffle(allUrls()):urls(PROJ[mode].data),i:0};autoOn=mode==='main'&&!reduce;
+ $('#seriesStatus').textContent='';
  const request=gRequest={};gimg.style.opacity=1;galFeedback.begin();
  try{
   const u=state.list[0];
   const ok=u&&await load(u);
   if(G!==state||gRequest!==request||S.mode!==mode)return;
   if(!ok){autoOn=false;galFeedback.error(()=>{if(G===state&&S.mode===mode)setGal(mode,true)});return}
-  gimg.src=u;gimg.alt=photoAlt(u,mode);gbg.style.backgroundImage=`url('${u}')`;pre(1);pre(-1);
+  gimg.src=u;gimg.alt=photoAlt(u,mode);gbg.style.backgroundImage=`url('${u}')`;syncSeriesStatus();pre(1);pre(-1);
   galFeedback.clear();
  }finally{if(gRequest===request)gRequest=null}
 }
@@ -204,7 +208,7 @@ async function galGo(d){if(gRequest||!G.list.length)return;
   const ok=await load(u);if(!current())return;
   if(!ok){autoOn=false;galFeedback.error(()=>{if(G===state&&S.mode===state.mode)galGo(d)});return}
   gimg.style.opacity=0;await sleep(150);if(!current())return;
-  gimg.src=u;gimg.alt=photoAlt(u,state.mode);gbg.style.backgroundImage=`url('${u}')`;state.i=i;pre(1);pre(-1);
+  gimg.src=u;gimg.alt=photoAlt(u,state.mode);gbg.style.backgroundImage=`url('${u}')`;state.i=i;syncSeriesStatus();pre(1);pre(-1);
   galFeedback.clear();
  }finally{if(gRequest===request){gimg.style.opacity=1;gRequest=null}}
 }
@@ -465,7 +469,7 @@ document.addEventListener('keydown',e=>{const k=e.key;
 
 // A centered image leaves half the remaining viewport height below it.
 new ResizeObserver(([entry])=>{
- $('#gridBtn').style.setProperty('--series-photo-height',entry.contentRect.height+'px');
+ $('#seriesControls').style.setProperty('--series-photo-height',entry.contentRect.height+'px');
 }).observe(gimg);
 
 /* ================= ЗАПУСК ================= */
