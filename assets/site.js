@@ -89,6 +89,7 @@ const gal=$('#gal'),grid=$('#grid'),modal=$('#modal'),menu=$('#menu');
 
 // Isolate overlays without changing their layout or transition animations.
 function syncFocusScope(){
+ $('#projectsBtn').setAttribute('aria-expanded',String(menu.classList.contains('open')));
  const viewer=!!S.photo,info=!!S.modal;
  const allowed=viewer?[lbE]:info?[modal,$('#top')]:menu.classList.contains('open')?[menu,$('#top')]:null;
  for(const el of document.body.children){
@@ -470,6 +471,7 @@ document.addEventListener('keydown',e=>{const k=e.key;
 // A centered image leaves half the remaining viewport height below it.
 new ResizeObserver(([entry])=>{
  $('#seriesControls').style.setProperty('--series-photo-height',entry.contentRect.height+'px');
+ $('#projectsBtn').style.setProperty('--series-photo-height',entry.contentRect.height+'px');
 }).observe(gimg);
 
 /* ================= ЗАПУСК ================= */
