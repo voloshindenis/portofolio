@@ -155,7 +155,7 @@ const lbFeedback=createPhotoFeedback($('#lb'),()=>$('#lb'));
 const gimg=$('#gimg'),gbg=$('#gbg');let G={mode:null,list:[],i:0},gRequest=null,autoOn=!reduce;
 const pre=d=>{const u=G.list[(G.i+d+G.list.length)%G.list.length];u&&load(u)};
 async function setGal(mode,retry=false){if(G.mode===mode&&!retry)return;
- const state=G={mode,list:mode==='main'?shuffle(allUrls()):urls(PROJ[mode].data),i:0};autoOn=!reduce;
+ const state=G={mode,list:mode==='main'?shuffle(allUrls()):urls(PROJ[mode].data),i:0};autoOn=mode==='main'&&!reduce;
  const request=gRequest={};gimg.style.opacity=1;galFeedback.begin();
  try{
   const u=state.list[0];
@@ -200,7 +200,7 @@ function bindSeriesSwipes(element){
  window.addEventListener('resize',reset);return reset;
 }
 const resetSeriesSwipes=bindSeriesSwipes(gal);
-setInterval(()=>{if(autoOn&&GALMODES.includes(S.mode)&&!S.modal&&!lbOn&&!document.hidden)galGo(1)},5000);
+setInterval(()=>{if(autoOn&&S.mode==='main'&&!S.modal&&!lbOn&&!document.hidden)galGo(1)},5000);
 const THUMB_SIZES='auto, (max-width:347px) calc(100vw - 40px), (max-width:505px) calc((100vw - 48px)/2), (max-width:663px) calc((100vw - 56px)/3), (max-width:768px) calc((100vw - 64px)/4), (max-width:955px) calc((100vw - 160px)/2), (max-width:1231px) calc((100vw - 176px)/3), (max-width:1507px) calc((100vw - 192px)/4), (max-width:1600px) calc((100vw - 208px)/5), 278.4px';
 function photoAlt(url,projectKey){
  for(const p of (PROJ[projectKey]?[PROJ[projectKey]]:Object.values(PROJ))){const i=p.data.findIndex(x=>x.url===url);if(i>=0)return p.data[i].alt||p.name+', фото '+(i+1)}
