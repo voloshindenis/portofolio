@@ -185,12 +185,13 @@ const lbFeedback=createPhotoFeedback($('#lb'),()=>$('#lb'));
 const gimg=$('#gimg'),gbg=$('#gbg');let G={mode:null,list:[],i:0},gRequest=null,autoOn=!reduce;
 function syncSeriesStatus(){
  const p=PROJ[G.mode],total=G.list.length;
- $('#seriesStatus').textContent=p&&total?`${p.name} · ${String(G.i+1).padStart(2,'0')} / ${String(total).padStart(2,'0')}`:'';
+ $('#seriesName').textContent=p&&total?p.name:'';
+ $('#seriesCount').textContent=p&&total?`${String(G.i+1).padStart(2,'0')} / ${String(total).padStart(2,'0')}`:'';
 }
 const pre=d=>{const u=G.list[(G.i+d+G.list.length)%G.list.length];u&&load(u)};
 async function setGal(mode,retry=false){if(G.mode===mode&&!retry)return;
  const state=G={mode,list:mode==='main'?shuffle(allUrls()):urls(PROJ[mode].data),i:0};autoOn=mode==='main'&&!reduce;
- $('#seriesStatus').textContent='';
+ $('#seriesName').textContent='';$('#seriesCount').textContent='';
  const request=gRequest={};gimg.style.opacity=1;galFeedback.begin();
  try{
   const u=state.list[0];
