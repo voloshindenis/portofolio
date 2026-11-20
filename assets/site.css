@@ -73,9 +73,8 @@ body:is([data-mode=vnevremeni],[data-mode=vglubine],[data-mode=mini]):not([data-
 body:is([data-mode=vnevremeni],[data-mode=vglubine]):not([data-ov]) #seriesControls{display:flex}
 #gridBtn{height:44px;padding:0 10px;align-items:center;justify-content:center;font-weight:400;white-space:nowrap;display:none}
 body:is([data-mode=vnevremeni],[data-mode=vglubine]):not([data-ov]) #gridBtn{display:inline-flex}
-#seriesStatus{position:fixed;top:calc((100% - var(--series-photo-height,72vh)) / 4 - 10px);left:0;right:0;text-align:center;display:none;height:20px;font:400 1rem/20px Manrope,sans-serif;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--fg);pointer-events:none;text-decoration:none}
+#seriesStatus{position:fixed;inset:0;display:none;text-align:center;pointer-events:none}
 body:is([data-mode=vnevremeni],[data-mode=vglubine]):not([data-ov]) #seriesStatus{display:block}
-@media(max-width:991px){#seriesStatus{font-size:14px}}
 #copy{bottom:12px;left:0;right:0;z-index:20;display:none;text-align:center;font-size:12px;letter-spacing:.03em;color:var(--mut);pointer-events:none}
 body[data-mode=main]:not([data-ov]) #copy{display:block}
 #projectsBtn{display:none;left:50%;transform:translateX(-50%);bottom:max(52px,calc((100% - var(--series-photo-height,72vh)) / 4 - 22px));height:44px;padding:0 10px;align-items:center;font-size:14px}
@@ -215,7 +214,4 @@ body:is([data-mode=vnevremeni],[data-mode=vglubine]) #gimg{
 #seriesCount{position:fixed;top:calc((100% + var(--series-photo-height,72vh)) / 2 + 6px);left:0;right:0;font:400 12px/18px Manrope,sans-serif;color:var(--mut);font-variant-numeric:tabular-nums}
 body:is([data-mode=vnevremeni],[data-mode=vglubine]) #gimg{max-height:min(72%,calc(100% - 192px))}
 
-#seriesName{font:400 12px/18px Manrope,sans-serif;color:var(--mut)}
-
-#seriesStatus{top:calc((100% - var(--series-photo-height,72vh)) / 2 - 24px);height:18px;line-height:18px}
-#seriesName{display:block}
+#seriesName{position:absolute;left:0;right:0;top:calc((100% - var(--series-photo-height,72vh)) / 4);transform:translateY(-50%);font:600 clamp(16px,1.6vw,20px)/1.15 Unbounded,sans-serif;letter-spacing:-.04em;color:var(--fg)}
